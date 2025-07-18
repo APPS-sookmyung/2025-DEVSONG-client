@@ -1,11 +1,8 @@
 import './App.css';
+import Header from './components/common/Header';
 
 function App() {
-  return (
-    <>
-      <div className='font-extrabold text-3xl text-red-400'>hello world!</div>
-    </>
-  );
+  return <Header />;
 }
 
 export default App;
