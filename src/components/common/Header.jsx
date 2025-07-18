@@ -9,7 +9,7 @@ import HeaderItem from './HeaderItem';
 
 const Header = () => {
   return (
-    <header className='flex w-100% bg-white items-center px-32 py-4 gap-12'>
+    <header className='flex bg-white items-center px-32 h-14 gap-12'>
       <img src={logo} alt='logo' />
       <nav className='flex flex-1 justify-between'>
         <ul className='flex gap-8 text-xs'>
