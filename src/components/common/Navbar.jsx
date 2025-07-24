@@ -1,4 +1,4 @@
-import {Link, useLocation} from 'react-router-dom';
+import {NavLink, useLocation} from 'react-router-dom';
 import Icon from '../icon/Icon';
 
 const navItems = [
@@ -45,21 +45,27 @@ const Navbar = () => {
   return (
     <div className='sm:hidden'>
       <ul className='width-full flex flex-nowrap justify-around pb-8 pt-3'>
-        {navItems.map((item) => (
-          <Link key={item.path} to={item.path}>
-            <li className='flex flex-col items-center gap-1'>
-              <Icon
-                id={currentPath == item.path ? item.active_id : item.icon_id}
-              />
-              <span
-                className={`text-[8px] ${
-                  currentPath == item.path ? 'text-[#5C5AEE]' : 'text-[#A3A3A4]'
-                }`}>
-                {item.label}
-              </span>
-            </li>
-          </Link>
-        ))}
+        {navItems.map(
+          ({
+            path,
+            label,
+            icon_id,
+            active_id,
+            isActive = path === currentPath,
+          }) => (
+            <NavLink key={path} to={path}>
+              <li className='flex flex-col items-center gap-1'>
+                <Icon id={isActive ? active_id : icon_id} />
+                <span
+                  className={`text-[8px] ${
+                    isActive ? 'text-[#5C5AEE]' : 'text-[#A3A3A4]'
+                  }`}>
+                  {label}
+                </span>
+              </li>
+            </NavLink>
+          )
+        )}
       </ul>
     </div>
   );
