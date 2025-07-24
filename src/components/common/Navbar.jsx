@@ -43,7 +43,7 @@ const Navbar = () => {
   const currentPath = useLocation().pathname;
 
   return (
-    <div className='sticky bottom-0'>
+    <div className='sm:hidden'>
       <ul className='width-full flex flex-nowrap justify-around pb-8 pt-3'>
         {navItems.map((item) => (
           <Link key={item.path} to={item.path}>
