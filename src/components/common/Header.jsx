@@ -2,7 +2,7 @@ import logo from '../../assets/images/logo.svg';
 import notification from '../../assets/icons/notificationIcon.svg';
 import signout from '../../assets/icons/signoutIcon.svg';
 import Icon from '../icon/Icon';
-import {menuItemsItems} from '.';
+import {menuItems} from '.';
 import {useLocation, NavLink} from 'react-router-dom';
 
 const Header = () => {
