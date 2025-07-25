@@ -11,6 +11,7 @@ import Chat from './pages/Chat';
 import MyPage from './pages/MyPage';
 import Home from './pages/Home';
 import Profile from './pages/Profile';
+import GithubRanking from './pages/GithubRanking';
 
 const App = () => {
   const router = createBrowserRouter(
@@ -21,6 +22,7 @@ const App = () => {
         <Route path='chat' element={<Chat />} />
         <Route path='profile' element={<Profile />} />
         <Route path='my' element={<MyPage />} />
+        <Route path='githubRanking' element={<GithubRanking />} />
       </Route>
     )
   );
