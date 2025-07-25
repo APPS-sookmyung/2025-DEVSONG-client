@@ -8,7 +8,7 @@ const RootLayout = () => {
   return (
     <div className='min-h-screen flex flex-col'>
       <Header />
-      <div className='flex-1 bg-[#F9FAFC]'>
+      <div className='flex-1'>
         <Outlet />
       </div>
       <Footer />

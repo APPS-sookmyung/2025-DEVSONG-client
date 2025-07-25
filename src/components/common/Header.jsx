@@ -27,7 +27,7 @@ const Header = () => {
                     <Icon id={isActive ? active_id : icon_id} />
                     <span
                       className={`text-xs font-semibold ${
-                        isActive ? 'text-[#5C5AEE]' : 'text-[#A3A3A4]'
+                        isActive ? 'text-main' : 'text-black-40'
                       }`}>
                       {label}
                     </span>
