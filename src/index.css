@@ -1,1 +1,33 @@
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css');
 @import 'tailwindcss';
+
+:root {
+  font-family: Pretendard;
+  background-color: #f9fafc;
+  box-sizing: border-box;
+  font-synthesis: none;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@theme {
+  --color-main: #5c5aee;
+  --color-main-60: #8b8aff;
+  --color-main-16: #e5e5fc;
+  --color-black-100: #18191c;
+  --color-black-80: #464749;
+  --color-black-60: #747577;
+  --color-black-40: #a3a3a4;
+  --color-black-20: #d1d1d2;
+  --color-grey-01: #f9f9f9;
+  --color-grey-02: #f2f2f2;
+  --color-background: #f9fafc;
+}
+
+@utility flex-center {
+  @apply flex justify-center items-center;
+}
+
+.label-style {
+  @apply px-2 py-[3px] rounded-sm text-[8px] font-semibold sm:py-0.5 sm:text-xs;
+}
