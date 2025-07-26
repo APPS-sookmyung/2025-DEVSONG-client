@@ -2,14 +2,14 @@ import logo from '../../assets/images/logo.svg';
 import notification from '../../assets/icons/notificationIcon.svg';
 import signout from '../../assets/icons/signoutIcon.svg';
 import Icon from '../icon/Icon';
-import {menuItemsItems} from '.';
+import {menuItems} from '.';
 import {useLocation, NavLink} from 'react-router-dom';
 
 const Header = () => {
   const currentPath = useLocation().pathname;
 
   return (
-    <header className=''>
+    <header>
       <div className='flex justify-between bg-white px-6 py-4 md:gap-9 lg:gap-12 lg:px-32'>
         <img src={logo} alt='logo' />
         <div className='md:flex md:items-center md:flex-1 md:justify-between'>
@@ -27,7 +27,7 @@ const Header = () => {
                     <Icon id={isActive ? active_id : icon_id} />
                     <span
                       className={`text-xs font-semibold ${
-                        isActive ? 'text-[#5C5AEE]' : 'text-[#A3A3A4]'
+                        isActive ? 'text-main' : 'text-black-40'
                       }`}>
                       {label}
                     </span>
