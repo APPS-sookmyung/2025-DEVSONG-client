@@ -4,7 +4,7 @@ import nextArrow from '../../assets/icons/nextArrow.svg';
 
 export default function Pagination({currentPage, totalPages, setCurrentPage}) {
   return (
-    <div className='flex justify-center space-x-2 mt-6 gap-[10px]'>
+    <div className='flex justify-center space-x-2 mt-6 gap-2'>
       <button
         onClick={() => setCurrentPage((prev) => Math.max(1, prev - 1))}
         disabled={currentPage === 1}
@@ -12,7 +12,7 @@ export default function Pagination({currentPage, totalPages, setCurrentPage}) {
         <img
           src={prevArrow}
           alt='이전'
-          className='w-8 h-8 bg-white rounded-[8px]'
+          className='w-6 h-6 sm:w-8 sm:h-8 bg-white rounded-md'
         />
       </button>
 
@@ -20,7 +20,7 @@ export default function Pagination({currentPage, totalPages, setCurrentPage}) {
         <button
           key={i + 1}
           onClick={() => setCurrentPage(i + 1)}
-          className={`px-3 py-1 rounded ${
+          className={`w-6 h-6 sm:w-8 sm:h-8 rounded ${
             currentPage === i + 1
               ? 'text-white'
               : 'bg-gray-200 hover:bg-gray-300'
@@ -37,7 +37,7 @@ export default function Pagination({currentPage, totalPages, setCurrentPage}) {
         <img
           src={nextArrow}
           alt='다음'
-          className='w-8 h-8 bg-white rounded-[8px]'
+          className='w-6 h-6 sm:w-8 sm:h-8 bg-white rounded-md'
         />
       </button>
     </div>
