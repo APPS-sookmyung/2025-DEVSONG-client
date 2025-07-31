@@ -123,11 +123,13 @@ export default function RankingList() {
 
   return (
     <div
-      className='flex flex-col items-center justify-center pt-15'
+      className='flex flex-col items-center justify-center pt-0 sm:pt-15'
       style={{backgroundColor: '#F9FAFC'}}>
-      <div className='items-center justify-center'>
+      <div className='w-full sm:w-auto sm:items-center sm:justify-center'>
         <RankingHeader />
-        <RankingTable pagedData={pagedData} startIndex={startIndex} />
+        <div className='flex justify-center'>
+          <RankingTable pagedData={pagedData} startIndex={startIndex} />
+        </div>
         <Pagination
           currentPage={currentPage}
           totalPages={totalPages}
