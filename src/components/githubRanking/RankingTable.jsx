@@ -9,15 +9,15 @@ export default function RankingTable({pagedData, startIndex}) {
             md:w-175 md:h-133 
             lg:w-210 lg:h-135'>
       <ul>
-        <li className='flex justify-between px-1 py-2 font-semibold text-gray-500 mt-3'>
-          <span className='w-11 text-sm' style={{color: '#A3A3A4'}}>
+        <li className='flex justify-between px-3 py-2 font-semibold text-gray-500 mt-3'>
+          <span className='w-10.5 text-sm' style={{color: '#A3A3A4'}}>
             순위
           </span>
           <span className='flex-1 text-sm' style={{color: '#A3A3A4'}}>
             이름
           </span>
           <span
-            className='w-22 text-right text-sm mr-1 sm:mr-3'
+            className='w-22 text-right text-sm mr-1 sm:mr-1'
             style={{color: '#A3A3A4'}}>
             Total
           </span>
