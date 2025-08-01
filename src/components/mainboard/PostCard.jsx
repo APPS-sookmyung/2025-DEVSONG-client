@@ -34,7 +34,7 @@ const PostCard = ({
     ? true
     : false;
   return (
-    <div className='flex flex-col bg-white max-w-86 min-h-32 px-4 py-3 rounded-xl gap-2 md:max-w-149 lg:max-w-212 lg:min-h-56'>
+    <div className='flex flex-col bg-white w-86 min-h-32 px-4 py-3 rounded-xl gap-2 md:w-149 lg:w-198 lg:h-56 lg:gap-4'>
       {/* 라벨 영역 */}
       <div>
         <div className='flex gap-1'>
@@ -44,14 +44,14 @@ const PostCard = ({
           )}
         </div>
       </div>
-      <div className='text-sm font-bold'>{title}</div>
-      <p className='text-[10px] text-black-60'>{content}</p>
+      <div className='text-sm font-bold lg:text-xl'>{title}</div>
+      <p className='text-[10px] text-black-60 lg:text-lg'>{content}</p>
       <div className='flex items-center justify-between'>
-        <div className='flex text-[8px] text-black-40 gap-1'>
+        <div className='flex text-[8px] text-black-40 gap-1 lg:text-base'>
           <span>{author}</span>
           <span>{formatDate(createdAt)}</span>
         </div>
-        <div className='flex text-[10px] gap-[6px]'>
+        <div className='flex text-[10px] gap-[6px] lg:text-base'>
           <span className='flex items-center'>
             <img src={heart} alt='좋아요' />
             {countLike}

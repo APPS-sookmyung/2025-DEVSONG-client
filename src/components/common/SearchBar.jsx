@@ -5,7 +5,7 @@ const SearchBar = () => {
   const handleSubmit = () => {};
   return (
     <form onSubmit={handleSubmit}>
-      <div className='w-82 flex gap-3 bg-white px-3 py-2 rounded-[8px]'>
+      <div className='w-82 flex gap-3 bg-white px-3 py-2 rounded-[8px] md:w-140 lg:w-159 lg:px-6 lg:py-3'>
         <img src={search} alt='검색창' />
         <input
           className='w-full text-black-40 font-medium text-sm focus:outline-none'
