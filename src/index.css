@@ -22,6 +22,8 @@
   --color-grey-01: #f9f9f9;
   --color-grey-02: #f2f2f2;
   --color-background: #f9fafc;
+
+  --shadow-box: 0 4px 40px 0 rgba(94, 94, 99, 0.1);
 }
 
 @utility flex-center {
@@ -29,5 +31,5 @@
 }
 
 .label-style {
-  @apply px-2 py-[3px] rounded-sm text-[8px] font-semibold sm:py-0.5 sm:text-xs;
+  @apply rounded-sm font-semibold px-2 py-[3px] text-[8px] md:text-xs;
 }
