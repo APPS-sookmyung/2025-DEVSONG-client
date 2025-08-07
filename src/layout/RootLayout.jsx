@@ -3,6 +3,7 @@ import Navbar from '../components/common/Navbar';
 import {Outlet} from 'react-router-dom';
 import Header from '../components/common/Header';
 import Footer from '../components/common/Footer';
+import Footer from '../components/common/Footer';
 
 const RootLayout = () => {
   return (
