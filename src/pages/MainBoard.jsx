@@ -14,7 +14,7 @@ const MainBoard = () => {
         <SearchBar />
         <CategorySelector />
       </div>
-      <div className='flex items-center gap-3 md:gap-7 mb-4 w-86 md:mb-6 lg:mb-8 md:w-149 lg:w-198'>
+      <div className='flex items-center gap-3 md:gap-7 mb-4 w-86 md:mb-6 lg:mb-8 md:w-149 lg:w-212'>
         <SortSelector />
         <RecruitmentStatusFilter />
         <WriteButton />
