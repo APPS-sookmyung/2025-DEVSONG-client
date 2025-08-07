@@ -3,6 +3,7 @@ import PostList from '../components/mainboard/PostList';
 import CategorySelector from '../components/mainboard/CategorySelector';
 import SortSelector from '../components/mainboard/SortSelector';
 import RecruitmentStatusFilter from '../components/mainboard/RecruitmentStatusFilter';
+import Pagination from '../components/githubRanking/Pagination';
 import {useState} from 'react';
 
 const MainBoard = () => {
@@ -18,6 +19,7 @@ const MainBoard = () => {
         <RecruitmentStatusFilter />
       </div>
       <PostList />
+      <Pagination currentPage={1} totalPages={1} setCurrentPage={() => {}} />
     </div>
   );
 };
