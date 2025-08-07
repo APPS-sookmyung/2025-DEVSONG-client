@@ -4,7 +4,7 @@ import CategorySelector from '../components/mainboard/CategorySelector';
 import SortSelector from '../components/mainboard/SortSelector';
 import RecruitmentStatusFilter from '../components/mainboard/RecruitmentStatusFilter';
 import Pagination from '../components/githubRanking/Pagination';
-import {useState} from 'react';
+import WriteButton from '../components/mainboard/WriteButton';
 
 const MainBoard = () => {
   return (
@@ -14,9 +14,10 @@ const MainBoard = () => {
         <SearchBar />
         <CategorySelector />
       </div>
-      <div className='flex justify-start items-center gap-3 md:gap-7 mb-4 w-86 md:mb-6 lg:mb-8 md:w-149 lg:w-198'>
+      <div className='flex items-center gap-3 md:gap-7 mb-4 w-86 md:mb-6 lg:mb-8 md:w-149 lg:w-198'>
         <SortSelector />
         <RecruitmentStatusFilter />
+        <WriteButton />
       </div>
       <PostList />
       <Pagination currentPage={1} totalPages={1} setCurrentPage={() => {}} />
