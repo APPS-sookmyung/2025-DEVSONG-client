@@ -6,20 +6,15 @@ import RecruitmentStatusFilter from '../components/mainboard/RecruitmentStatusFi
 import {useState} from 'react';
 
 const MainBoard = () => {
-  const [filters, setFilters] = useState({
-    category: '전체',
-    sort: '최신순',
-    status: '전체',
-  });
   return (
-    <div className='bg-linear-to-b from-[#A4B8FF] from-0% via-[#A8D4FF] via-20% to-[#D9F6FF] to-50% flex flex-col items-center gap-2 py-5'>
+    <div className='relative flex flex-col items-center gap-2'>
       <div>
-        <SearchBar filters={filters} setFilters={setFilters} />
-        <CategorySelector filters={filters} setFilters={setFilters} />
-        <div className='flex items-center gap-3 mt-5'>
-          <SortSelector />
-          <RecruitmentStatusFilter />
-        </div>
+        <SearchBar />
+        <CategorySelector />
+      </div>
+      <div className='flex justify-start items-center gap-3 md:gap-7 mb-4 w-86 md:mb-6 lg:mb-8 md:w-149 lg:w-198'>
+        <SortSelector />
+        <RecruitmentStatusFilter />
       </div>
       <PostList />
     </div>

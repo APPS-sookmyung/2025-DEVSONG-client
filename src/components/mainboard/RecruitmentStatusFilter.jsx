@@ -9,7 +9,7 @@ const status = [
 const RecruitmentStatusFilter = () => {
   return (
     <div>
-      <ul className='flex text-sm gap-5 text-black-80'>
+      <ul className='cursor-pointer flex text-sm gap-5 md:text-base lg:text-lg md:gap-9 text-black-80'>
         {status.map((item) => {
           return (
             <div key={item.id} className='flex-center gap-1.5'>
