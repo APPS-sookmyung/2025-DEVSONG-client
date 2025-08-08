@@ -15,7 +15,7 @@ const formatDate = (createdAt) => {
             day: '2-digit',
           })
           .replaceAll('.', '')
-          .replace(' ', '.');
+          .replace(' ', '/');
 
   return updated;
 };
