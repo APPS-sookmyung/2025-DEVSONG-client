@@ -30,7 +30,7 @@ export default function ProfileCardPC({setIsModalOpen}) {
       </div>
       <button
         onClick={() => setIsModalOpen(true)}
-        className='mt-4 sm:px-10 py-2 md:px-8 lg:px-20 text-white text-sm rounded-lg'
+        className='mt-4 sm:px-10 py-2 md:px-8 lg:px-20 text-white text-sm rounded-lg cursor-pointer'
         style={{backgroundColor: '#5C5AEE'}}>
         프로필 수정
       </button>
