@@ -12,6 +12,7 @@ import MyPage from './pages/MyPage';
 import Home from './pages/Home';
 import Profile from './pages/Profile';
 import GithubRanking from './pages/GithubRanking';
+import Resume from './pages/Resume';
 
 const App = () => {
   const router = createBrowserRouter(
@@ -23,6 +24,7 @@ const App = () => {
         <Route path='profile' element={<Profile />} />
         <Route path='my' element={<MyPage />} />
         <Route path='githubRanking' element={<GithubRanking />} />
+        <Route path='resume' element={<Resume />} />
       </Route>
     )
   );
