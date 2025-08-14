@@ -6,7 +6,7 @@ const Navbar = () => {
   const currentPath = useLocation().pathname;
 
   return (
-    <div className='md:hidden'>
+    <div className='w-full fixed bottom-0 md:hidden'>
       <ul className='width-full flex flex-nowrap justify-around bg-white pb-8 pt-3'>
         {menuItems.map(
           ({
