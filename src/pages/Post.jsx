@@ -1,11 +1,13 @@
-import PostHeader from '../components/post/PostHeader';
-import {postData} from '../components/post/dummy';
+
+import PostLayout from '../components/post/PostLayout';
+import PageHeader from '../components/common/PageHeader';
 
 const Post = () => {
   return (
-    <div>
-      <PostHeader title={postData.title} author={postData.username} />
-    </div>
+    <>
+      <PageHeader />
+      <PostLayout />
+    </>
   );
 };
 
