@@ -1,8 +1,16 @@
+import {useState} from 'react';
 import commentIcon from '../../assets/icons/comment.svg';
 import heartIcon from '../../assets/icons/heart.svg';
 import Button from '../common/Button';
+import Applicants from './Applicants';
 
 const PostActions = ({isAuthor, like, comment}) => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const onClick = () => {
+    setIsOpen(!isOpen);
+  };
+
   return (
     <div className='flex items-center justify-between mt-4 mb-3 md:my-5'>
       <div className='flex text-sm gap-3 md:text-base'>
@@ -15,11 +23,14 @@ const PostActions = ({isAuthor, like, comment}) => {
           {comment}
         </span>
       </div>
-      {isAuthor ? (
-        <Button label={'지원자 확인'} />
-      ) : (
-        <Button label={'지원하기'} />
-      )}
+      <div className='relative'>
+        {isAuthor ? (
+          <Button label={'지원자 확인'} onClick={onClick} />
+        ) : (
+          <Button label={'지원하기'} />
+        )}
+        {isOpen && <Applicants />}
+      </div>
     </div>
   );
 };
