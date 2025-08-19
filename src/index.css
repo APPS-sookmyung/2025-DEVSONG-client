@@ -4,6 +4,7 @@
 :root {
   font-family: Pretendard;
   background-color: #f9fafc;
+  box-sizing: border-box;
   font-synthesis: none;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -21,8 +22,14 @@
   --color-grey-01: #f9f9f9;
   --color-grey-02: #f2f2f2;
   --color-background: #f9fafc;
+
+  --shadow-box: 0 4px 40px 0 rgba(94, 94, 99, 0.1);
 }
 
 @utility flex-center {
   @apply flex justify-center items-center;
+}
+
+.label-style {
+  @apply rounded-sm font-semibold px-2 py-[3px] text-[8px] md:text-xs;
 }
