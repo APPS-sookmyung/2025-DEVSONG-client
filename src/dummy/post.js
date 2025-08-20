@@ -1,4 +1,4 @@
-export const postData = {
+export const post = {
   id: 1,
   authorId: 123,
   title: '프로젝트 팀원 모집',
