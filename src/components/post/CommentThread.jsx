@@ -2,7 +2,14 @@ import Comment from './Comment';
 import CommentHeader from './CommentHeader';
 import ReplyList from './ReplyList';
 
-const CommentThread = ({commentId, index, username, content, createdAt}) => {
+const CommentThread = ({
+  commentId,
+  index,
+  username,
+  content,
+  createdAt,
+  replies,
+}) => {
   return (
     <div
       className={`border-t-[1px] pt-4 pb-3 md:py-6 ${
@@ -10,7 +17,7 @@ const CommentThread = ({commentId, index, username, content, createdAt}) => {
       }`}>
       <CommentHeader username={username} createdAt={createdAt} />
       <Comment content={content} />
-      <ReplyList />
+      {replies.length !== 0 && <ReplyList replies={replies} />}
     </div>
   );
 };
