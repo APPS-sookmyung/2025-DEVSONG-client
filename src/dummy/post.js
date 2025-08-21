@@ -22,24 +22,55 @@ export const post = {
       username: '김눈송',
       content: '저 같이 하고 싶습니다!',
       createdAt: '08/12',
+      replies: [
+        {
+          replyId: 1,
+          username: '하송이',
+          content: '저 같이 하고 싶습니다!',
+          createdAt: '08/12',
+        },
+        {
+          replyId: 2,
+          username: '하송이',
+          content: '저 같이 하고 싶습니다!',
+          createdAt: '08/12',
+        },
+      ],
     },
     {
       commentId: 2,
       username: '박눈송',
       content: '저요!',
       createdAt: '08/12',
+      replies: [
+        {
+          replyId: 3,
+          username: '하송이',
+          content:
+            '현재 저 포함 2~3명 정도 이야기 중이고, 확정된 팀원은 아직 없습니다. 관심 있으시면 편하게 연락주세요! 연락 기다리고 있겠습니다.',
+          createdAt: '08/12',
+        },
+        {
+          replyId: 4,
+          username: '하송이',
+          content: '저 같이 하고 싶습니다!',
+          createdAt: '08/12',
+        },
+      ],
     },
     {
       commentId: 3,
       username: '박눈송',
       content: '저요!',
       createdAt: '08/12',
+      replies: [],
     },
     {
       commentId: 4,
       username: '박눈송',
       content: '저요!',
       createdAt: '08/12',
+      replies: [],
     },
   ],
   category: '프로젝트',
