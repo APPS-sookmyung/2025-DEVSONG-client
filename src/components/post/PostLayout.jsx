@@ -9,7 +9,7 @@ const PostLayout = () => {
   const userId = 123;
   const isAuthor = post.authorId === userId;
   return (
-    <div className='mx-auto md:bg-white md:shadow-box md:rounded-3xl md:w-180 lg:w-212.5 md:mt-10'>
+    <div className='mx-auto bg-white md:shadow-box md:rounded-3xl md:w-180 lg:w-212.5 md:mt-10'>
       <div className='w-full px-6 py-4 md:px-11 md:py-9'>
         <PostHeader
           title={post.title}
