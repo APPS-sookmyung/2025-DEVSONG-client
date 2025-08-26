@@ -1,7 +1,6 @@
 import {useState} from 'react';
-import commentIcon from '../../assets/icons/comment.svg';
+import commentIcon from '../../assets/icons/comment_grey.svg';
 import menuIcon from '../../assets/icons/verticalEllipsisIcon.svg';
-import ModalLayout from '../common/ModalLayout';
 import CommentActionsMenu from './CommentActionsMenu';
 
 const CommentActions = () => {
