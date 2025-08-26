@@ -4,7 +4,6 @@ import {
   createBrowserRouter,
   createRoutesFromElements,
   RouterProvider,
-  Navigate,
 } from 'react-router-dom';
 import RootLayout from './layout/RootLayout';
 import MainBoard from './pages/MainBoard';
