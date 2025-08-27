@@ -7,7 +7,7 @@ export const menuItems = [
     active_id: 'nav_home_active',
   },
   {
-    path: '/post',
+    path: '/posts',
     label: '게시판',
     alt: '게시판',
     icon_id: 'nav_post',
