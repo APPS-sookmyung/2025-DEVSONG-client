@@ -30,8 +30,9 @@ export default function InterestModal({
               <span
                 key={interest}
                 onClick={() => toggleInterest(interest)}
-                className='px-3 py-1 rounded-md text-xs cursor-pointer'
-                style={{backgroundColor: isSelected ? '#E5E5FC' : '#E5E5E5'}}>
+                className={`px-3 py-1 rounded-md text-xs cursor-pointer ${
+                  isSelected ? 'bg-main-16' : 'bg-grey-02'
+                }`}>
                 {interest}
               </span>
             );

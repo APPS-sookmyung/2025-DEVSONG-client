@@ -18,11 +18,11 @@ export default function ProfileCardPC({setIsModalOpen}) {
         <div className='text-sm mt-1'>23학번</div>
         <div className='text-sm mt-1'>컴퓨터과학전공</div>
         <div className='flex justify-center gap-10 mt-3 text-xs'>
-          <span style={{color: '#A3A3A4'}}>
+          <span className='text-black-40'>
             Github <br />
             <span className='font-medium text-black'>Dotori</span>
           </span>
-          <span style={{color: '#A3A3A4'}}>
+          <span className='text-black-40'>
             BOJ <br />
             <span className='font-medium text-black'>dotori0345</span>
           </span>
@@ -30,8 +30,7 @@ export default function ProfileCardPC({setIsModalOpen}) {
       </div>
       <button
         onClick={() => setIsModalOpen(true)}
-        className='mt-4 sm:px-10 py-2 md:px-8 lg:px-20 text-white text-sm rounded-lg cursor-pointer'
-        style={{backgroundColor: '#5C5AEE'}}>
+        className='mt-4 sm:px-10 py-2 md:px-8 lg:px-20 text-white text-sm rounded-lg cursor-pointer bg-main'>
         프로필 수정
       </button>
     </div>

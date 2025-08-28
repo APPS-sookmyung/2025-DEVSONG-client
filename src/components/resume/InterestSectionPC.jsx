@@ -18,10 +18,7 @@ export default function InterestSectionPC({
       </div>
       <div className='flex flex-wrap gap-2'>
         {selectedInterests.map((item) => (
-          <span
-            key={item}
-            className='px-3 py-1 rounded-md text-xs'
-            style={{backgroundColor: '#E5E5FC'}}>
+          <span key={item} className='px-3 py-1 rounded-md text-xs bg-main-16'>
             {item}
           </span>
         ))}

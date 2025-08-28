@@ -20,8 +20,7 @@ export default function ProfileEditModal({closeModal}) {
             <img
               src={whiteEditIcon}
               alt='프로필 편집'
-              className='absolute bottom-0 right-2 w-5 h-5 rounded-full'
-              style={{backgroundColor: '#5C5AEE'}}
+              className='absolute bottom-0 right-2 w-5 h-5 rounded-full bg-main'
             />
           </div>
         </div>
@@ -30,7 +29,7 @@ export default function ProfileEditModal({closeModal}) {
           <input
             type='text'
             defaultValue='Dotori'
-            className='w-full p-2 rounded bg-gray-100'
+            className='w-full p-2 rounded bg-grey-02'
           />
         </div>
         <div>
@@ -38,18 +37,18 @@ export default function ProfileEditModal({closeModal}) {
           <input
             type='text'
             defaultValue='dotori0345'
-            className='w-full p-2 rounded bg-gray-100'
+            className='w-full p-2 rounded bg-grey-02'
           />
         </div>
         <div className='flex justify-between mt-4'>
           <button
             onClick={closeModal}
-            className='w-1/2 p-2 bg-gray-200 rounded mr-2 cursor-pointer'>
+            className='w-1/2 p-2 bg-grey-02 rounded mr-2 cursor-pointer'>
             취소
           </button>
           <button
             onClick={closeModal}
-            className='w-1/2 p-2 bg-indigo-500 text-white rounded ml-2 cursor-pointer'>
+            className='w-1/2 p-2 bg-main text-white rounded ml-2 cursor-pointer'>
             저장
           </button>
         </div>

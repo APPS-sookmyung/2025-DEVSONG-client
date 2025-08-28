@@ -16,8 +16,7 @@ export default function ProfileCardMobile({setIsModalOpen}) {
             src={whiteEditIcon}
             alt='프로필 편집'
             onClick={() => setIsModalOpen(true)}
-            className='absolute bottom-0 right-0 w-4 h-4 rounded-full cursor-pointer'
-            style={{backgroundColor: '#5C5AEE'}}
+            className='absolute bottom-0 right-0 w-4 h-4 rounded-full cursor-pointer bg-main'
           />
         </div>
         <div className='ml-4'>
@@ -27,11 +26,11 @@ export default function ProfileCardMobile({setIsModalOpen}) {
             <span>23학번</span>
           </div>
           <div className='flex mt-1 text-xs space-x-2'>
-            <span style={{color: '#A3A3A4'}}>
+            <span className='text-black-40'>
               Github <br />
               <span className='font-medium text-black'>Dotori</span>
             </span>
-            <span style={{color: '#A3A3A4'}}>
+            <span className='text-black-40'>
               BOJ <br />
               <span className='font-medium text-black'>dotori0345</span>
             </span>
