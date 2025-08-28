@@ -7,7 +7,7 @@
       "author": "이눈송",
       "createdAt": "2025-07-27 21:53:24",
       "closed": true,
-      "category": "대외활동",
+      "category": "extra",
       "countLike": 10,
       "countComment": 5
     },
@@ -18,7 +18,7 @@
       "author": "김눈송",
       "createdAt": "2025-07-23 21:53:24",
       "closed": false,
-      "category": "스터디",
+      "category": "study",
       "countLike": 1,
       "countComment": 23
     },
@@ -29,7 +29,7 @@
       "author": "김눈송",
       "createdAt": "2025-07-23 21:53:24",
       "closed": false,
-      "category": "프로젝트",
+      "category": "project",
       "countLike": 3,
       "countComment": 4
     },
@@ -40,7 +40,7 @@
       "author": "김눈송",
       "createdAt": "2025-07-23 21:53:24",
       "closed": false,
-      "category": "정보",
+      "category": "info",
       "countLike": 400,
       "countComment": 50
     },
@@ -51,7 +51,7 @@
       "author": "김눈송",
       "createdAt": "2025-07-23 21:53:24",
       "closed": false,
-      "category": "정보",
+      "category": "info",
       "countLike": 0,
       "countComment": 10
     },
@@ -62,7 +62,7 @@
       "author": "김눈송",
       "createdAt": "2025-07-23 21:53:24",
       "closed": false,
-      "category": "정보",
+      "category": "info",
       "countLike": 2,
       "countComment": 5
     }
@@ -135,7 +135,57 @@
           "replies": []
         }
       ],
-      "category": "프로젝트",
+      "category": "project",
+      "closed": false
+    },
+    {
+      "id": 2,
+      "authorId": 3,
+      "title": "스터디 팀원 모집",
+      "username": "박눈송",
+      "major": "데이터사이언스전공",
+      "studentId": 2514565,
+      "content": "이번 OO 공모전에 도전해보고 싶어서 함께할 팀원을 모집합니다.",
+      "createdAt": "2025-08-03 19:41:41",
+      "like": 5,
+      "comment": 10,
+      "comments": [
+        {
+          "commentId": 11,
+          "username": "김눈송",
+          "content": "저 같이 하고 싶습니다!",
+          "createdAt": "08/12",
+          "replies": []
+        },
+        {
+          "commentId": 12,
+          "username": "박눈송",
+          "content": "저요!",
+          "createdAt": "08/12",
+          "replies": [
+            {
+              "replyId": 13,
+              "username": "하송이",
+              "content": "넹넹.",
+              "createdAt": "08/12"
+            },
+            {
+              "replyId": 14,
+              "username": "하송이",
+              "content": "저 같이 하고 싶습니다!",
+              "createdAt": "08/12"
+            }
+          ]
+        },
+        {
+          "commentId": 5,
+          "username": "박눈송",
+          "content": "저요!",
+          "createdAt": "08/12",
+          "replies": []
+        }
+      ],
+      "category": "free",
       "closed": false
     }
   ]
