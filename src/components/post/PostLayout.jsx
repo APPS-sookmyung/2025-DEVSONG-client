@@ -5,9 +5,10 @@ import CommentSection from '../../components/post/CommentSection';
 import CommentBar from '../../components/post/CommentBar';
 import {useEffect, useState} from 'react';
 import {getPostDetail} from '../../apis/posts';
+import {useParams} from 'react-router-dom';
 
 const PostLayout = () => {
-  const id = 1;
+  const {id} = useParams(); // post id 받아오기
   const userId = 123;
   const [postData, setPostData] = useState({});
 
