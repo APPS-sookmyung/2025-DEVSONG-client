@@ -4,6 +4,7 @@ import editIcon from '../../assets/icons/editIcon.svg';
 export default function InterestSectionMobile({
   selectedInterests,
   setIsInterestModalOpen,
+  user,
 }) {
   return (
     <div className='bg-white p-4 rounded-xl shadow m-4'>
@@ -17,7 +18,7 @@ export default function InterestSectionMobile({
         />
       </div>
       <div className='flex flex-wrap gap-2'>
-        {selectedInterests.map((item) => (
+        {user.selectedInterests.map((item) => (
           <span key={item} className='px-3 py-1 rounded-md text-xs bg-main-16'>
             {item}
           </span>

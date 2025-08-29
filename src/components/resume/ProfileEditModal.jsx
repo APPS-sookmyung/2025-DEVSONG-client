@@ -2,7 +2,7 @@ import React from 'react';
 import profil from '../../assets/image/profil.svg';
 import whiteEditIcon from '../../assets/icons/whiteEditIcon.svg';
 
-export default function ProfileEditModal({closeModal}) {
+export default function ProfileEditModal({closeModal, user}) {
   return (
     <div
       className='fixed inset-0 backdrop-blur-sm bg-white/30 flex justify-center items-center z-50'
@@ -28,7 +28,7 @@ export default function ProfileEditModal({closeModal}) {
           <label className='block text-sm font-medium mb-1'>Github ID</label>
           <input
             type='text'
-            defaultValue='Dotori'
+            defaultValue={user.githubId}
             className='w-full p-2 rounded bg-grey-02'
           />
         </div>
@@ -36,7 +36,7 @@ export default function ProfileEditModal({closeModal}) {
           <label className='block text-sm font-medium mb-1'>BOJ 핸들</label>
           <input
             type='text'
-            defaultValue='dotori0345'
+            defaultValue={user.bojId}
             className='w-full p-2 rounded bg-grey-02'
           />
         </div>

@@ -1,12 +1,60 @@
-import React from 'react';
+import React, {useState} from 'react';
 import editIcon from '../../assets/icons/editIcon.svg';
 
 export default function StackModal({
-  allStacks,
-  selectedStacks,
-  toggleStack,
+  selectedStacks: initialStacks,
   closeModal,
 }) {
+  const [selectedStacks, setSelectedStacks] = useState(initialStacks);
+
+  const allStacks = [
+    'Flutter',
+    'Python',
+    'Java Script',
+    'Java',
+    'C',
+    'C++',
+    'Android',
+    'IOS',
+    'Type Script',
+    'Kotlin',
+    'Swift',
+    'Go',
+    'Rust',
+    'HTML',
+    'CSS',
+    'React',
+    'Vue.js',
+    'Next.js',
+    'Node.js',
+    'Express',
+    'Spring',
+    'Spring Boot',
+    'Django',
+    'Flask',
+    'Tensor Flow',
+    'PyTorch',
+    'Git',
+    'Github',
+    'Firebase',
+    'AWS',
+    'Docker',
+    'DB',
+    'Figma',
+    'Postman',
+    'Notion',
+    'MySQL',
+    'PostgrSQL',
+    'MongoDB',
+    'VS Code',
+  ];
+
+  const toggleStack = (stack) => {
+    setSelectedStacks((prev) =>
+      prev.includes(stack) ? prev.filter((s) => s !== stack) : [...prev, stack]
+    );
+  };
+
   return (
     <div
       className='fixed inset-0 backdrop-blur-sm bg-white/30 flex justify-center items-center z-50'

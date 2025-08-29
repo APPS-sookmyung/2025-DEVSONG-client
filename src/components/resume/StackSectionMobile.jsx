@@ -1,10 +1,7 @@
 import React from 'react';
 import editIcon from '../../assets/icons/editIcon.svg';
 
-export default function StackSectionMobile({
-  selectedStacks,
-  setIsStackModalOpen,
-}) {
+export default function StackSectionMobile({setIsStackModalOpen, user}) {
   return (
     <div className='bg-white p-4 rounded-xl shadow m-4'>
       <div className='flex justify-between items-center mb-2'>
@@ -17,7 +14,7 @@ export default function StackSectionMobile({
         />
       </div>
       <div className='flex flex-wrap gap-2'>
-        {selectedStacks.map((item) => (
+        {user.selectedStacks.map((item) => (
           <span key={item} className='px-3 py-1 rounded-md text-xs bg-main-16'>
             {item}
           </span>
