@@ -10,7 +10,6 @@ import MainBoard from './pages/MainBoard';
 import Chat from './pages/Chat';
 import MyPage from './pages/MyPage';
 import Home from './pages/Home';
-import Profile from './pages/Profile';
 import GithubRanking from './pages/GithubRanking';
 import Post from './pages/Post';
 import Resume from './pages/Resume';
@@ -23,7 +22,6 @@ const App = () => {
         <Route path='post' element={<MainBoard />} />
         <Route path='post/:id' element={<Post />} />
         <Route path='chat' element={<Chat />} />
-        <Route path='profile' element={<Profile />} />
         <Route path='my' element={<MyPage />} />
         <Route path='githubRanking' element={<GithubRanking />} />
         <Route path='resume' element={<Resume />} />
