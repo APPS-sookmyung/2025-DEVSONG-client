@@ -1,5 +1,5 @@
 import PostCard from './PostCard';
-import {posts} from './dummyPost';
+import {posts} from '../../dummy/postList';
 
 const PostList = () => {
   return (

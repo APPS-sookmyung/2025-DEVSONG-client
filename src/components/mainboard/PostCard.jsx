@@ -38,9 +38,7 @@ const PostCard = ({
       <div>
         <div className='flex gap-1'>
           <CategoryLabel category={category} />
-          {isRecruiting && (
-            <RecruitLabel status={closed ? '모집완료' : '모집중'} />
-          )}
+          {isRecruiting && <RecruitLabel closed={closed} />}
         </div>
       </div>
       <h3 className='font-bold text-sm md:text-lg lg:text-xl'>{title}</h3>
