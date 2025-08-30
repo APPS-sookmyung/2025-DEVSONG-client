@@ -14,6 +14,7 @@ const PostForm = () => {
     const newPost = {
       title: '제목',
       content: post,
+      category: '',
     };
 
     const response = await submitPost(newPost);
