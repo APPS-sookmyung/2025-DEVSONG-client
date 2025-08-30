@@ -1,7 +1,7 @@
 import RecruitLabel from '../common/RecruitLabel';
 import CategoryLabel from '../common/CategoryLabel';
-import comment from '../../assets/icons/comment.svg';
-import heart from '../../assets/icons/heart.svg';
+import commentIcon from '../../assets/icons/comment.svg';
+import heartIcon from '../../assets/icons/heart.svg';
 import {useNavigate} from 'react-router-dom';
 
 const formatDate = (createdAt) => {
@@ -24,18 +24,19 @@ const formatDate = (createdAt) => {
 const PostCard = ({
   id,
   title,
-  content,
-  author,
+  preview,
+  username,
+  category,
   createdAt,
   closed,
-  category,
-  countLike,
-  countComment,
+  like,
+  comment,
 }) => {
   const navigate = useNavigate();
   const isRecruiting = ['프로젝트', '스터디', '대외활동'].includes(category)
     ? true
     : false;
+
   return (
     <div
       onClick={() => navigate(`/post/${id}`)}
@@ -48,29 +49,29 @@ const PostCard = ({
       </div>
       <h3 className='font-bold text-sm md:text-lg lg:text-xl'>{title}</h3>
       <p className='text-black-60 text-[10px] md:text-sm lg:text-lg'>
-        {content}
+        {preview}
       </p>
       <div className='flex items-center justify-between'>
         <div className='flex text-black-40 gap-1 text-[8px] md:text-xs lg:gap-2 lg:text-base'>
-          <span>{author}</span>
+          <span>{username}</span>
           <span>{formatDate(createdAt)}</span>
         </div>
         <div className='flex text-[10px] gap-[6px] md:text-[13px] lg:gap-2 lg:text-base'>
           <span className='flex items-center'>
             <img
-              src={heart}
+              src={heartIcon}
               className='md:w-5 md:h-5 lg:w-6 lg:h-6'
               alt='좋아요'
             />
-            {countLike}
+            {like}
           </span>
           <span className='flex items-center'>
             <img
-              src={comment}
+              src={commentIcon}
               className='md:w-5 md:h-5 lg:w-6 lg:h-6'
               alt='좋아요'
             />
-            {countComment}
+            {comment}
           </span>
         </div>
       </div>
