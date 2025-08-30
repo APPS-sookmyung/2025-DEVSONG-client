@@ -1,12 +1,14 @@
-import {NavLink, useLocation} from 'react-router-dom';
+import {NavLink, useLocation, matchPath} from 'react-router-dom';
 import Icon from '../icon/Icon';
 import {menuItems} from '.';
 
 const Navbar = () => {
   const currentPath = useLocation().pathname;
+  const noNavBar = matchPath('/post/:id', currentPath) !== null; // 게시물 페이지인지 확인
 
   return (
-    <div className='w-full fixed bottom-0 md:hidden'>
+    <div
+      className={`w-full fixed bottom-0 md:hidden ${noNavBar ? 'hidden' : ''}`}>
       <ul className='width-full flex flex-nowrap justify-around bg-white pb-8 pt-3'>
         {menuItems.map(
           ({
