@@ -33,3 +33,21 @@
 .label-style {
   @apply rounded-sm font-semibold px-2 py-[3px] text-[8px] md:text-xs;
 }
+
+.tiptap-button {
+  @apply bg-grey-02 p-2 m-1;
+}
+
+@layer base {
+  h1 {
+    @apply text-2xl font-bold;
+  }
+
+  h2 {
+    @apply text-xl font-bold;
+  }
+
+  h3 {
+    @apply text-lg font-bold;
+  }
+}
