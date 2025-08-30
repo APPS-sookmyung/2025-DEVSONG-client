@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const SERVER_URL = 'http://localhost:4000';
+const SERVER_URL = 'http://localhost:8080';
 
 export const login = async (userinfo) => {
   const response = await axios.post(`${SERVER_URL}/user/login`, {
@@ -8,7 +8,7 @@ export const login = async (userinfo) => {
     password: userinfo.password,
   });
 
-  const accessToken = response.data.token;
+  const {accessToken} = response.data.token;
 
   if (accessToken) {
     localStorage.setItem('accessToken', accessToken);
@@ -19,7 +19,7 @@ export const login = async (userinfo) => {
 
 export const getPosts = async ({category}) => {
   const token = localStorage.getItem('accessToken');
-  const response = await axios.get(`${SERVER_URL}/posts`, {
+  const response = await axios.get(`${SERVER_URL}/post`, {
     params: {category},
     headers: {
       Authorization: `Bearer ${token}`,
@@ -39,6 +39,11 @@ export const getPostDetail = async ({post_id}) => {
 };
 
 export const submitPost = async ({post}) => {
-  const response = await axios.post(`${SERVER_URL}/post`, post);
+  const token = localStorage.getItem('accessToken');
+  const response = await axios.post(`${SERVER_URL}/post/write`, post, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
   return response;
 };

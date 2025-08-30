@@ -10,9 +10,7 @@ const PostForm = () => {
     setPost(content);
   };
 
-  const onSubmitHandler = async (e) => {
-    e.preventDefault();
-
+  const onSubmitHandler = async () => {
     const newPost = {
       title: '제목',
       content: post,
