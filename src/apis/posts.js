@@ -39,6 +39,6 @@ export const getPostDetail = async ({post_id}) => {
 };
 
 export const submitPost = async ({post}) => {
-  const response = axios.post(`${SERVER_URL}/post`, post);
+  const response = await axios.post(`${SERVER_URL}/post`, post);
   return response;
 };

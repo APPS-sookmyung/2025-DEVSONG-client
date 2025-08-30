@@ -14,20 +14,11 @@ const PostForm = () => {
     e.preventDefault();
 
     const newPost = {
-      title: '해커톤 참여하실분',
+      title: '제목',
       content: post,
-      author: '이눈송',
-      createdAt: '2025-08-30 13:10:24',
-      closed: true,
-      category: 'extra',
-      countLike: 1,
-      countComment: 1,
-      comment: 0,
-      comments: [],
     };
 
     const response = await submitPost(newPost);
-    console.log(response);
   };
 
   return (
