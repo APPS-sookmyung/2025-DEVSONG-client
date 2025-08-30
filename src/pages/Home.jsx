@@ -10,7 +10,7 @@ const Home = () => {
     };
 
     const response = await login(userInfo);
-    console.log(response);
+    console.log(response.data);
   };
 
   return (
