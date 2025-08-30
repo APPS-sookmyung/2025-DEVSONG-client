@@ -7,7 +7,7 @@
       "author": "이눈송",
       "createdAt": "2025-07-27 21:53:24",
       "closed": true,
-      "category": "extra",
+      "category": "EXTRA",
       "countLike": 10,
       "countComment": 5
     },
@@ -18,7 +18,7 @@
       "author": "김눈송",
       "createdAt": "2025-07-23 21:53:24",
       "closed": false,
-      "category": "study",
+      "category": "STUDY",
       "countLike": 1,
       "countComment": 23
     },
@@ -29,7 +29,7 @@
       "author": "김눈송",
       "createdAt": "2025-07-23 21:53:24",
       "closed": false,
-      "category": "project",
+      "category": "PROJECT",
       "countLike": 3,
       "countComment": 4
     },
@@ -40,7 +40,7 @@
       "author": "김눈송",
       "createdAt": "2025-07-23 21:53:24",
       "closed": false,
-      "category": "info",
+      "category": "INFO",
       "countLike": 400,
       "countComment": 50
     },
@@ -51,7 +51,7 @@
       "author": "김눈송",
       "createdAt": "2025-07-23 21:53:24",
       "closed": false,
-      "category": "info",
+      "category": "INFO",
       "countLike": 0,
       "countComment": 10
     },
@@ -62,7 +62,7 @@
       "author": "김눈송",
       "createdAt": "2025-07-23 21:53:24",
       "closed": false,
-      "category": "info",
+      "category": "INFO",
       "countLike": 2,
       "countComment": 5
     }
@@ -135,7 +135,7 @@
           "replies": []
         }
       ],
-      "category": "project",
+      "category": "PROJECT",
       "closed": false
     },
     {
@@ -185,7 +185,7 @@
           "replies": []
         }
       ],
-      "category": "free",
+      "category": "FREE",
       "closed": false
     }
   ]
