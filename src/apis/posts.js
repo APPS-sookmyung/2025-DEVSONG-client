@@ -8,7 +8,7 @@ export const login = async (userinfo) => {
     password: userinfo.password,
   });
 
-  const {accessToken} = response.token;
+  const {accessToken} = response.data.token;
   if (accessToken) {
     localStorage.setItem('accessToken', accessToken);
   }
