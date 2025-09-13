@@ -1,11 +1,18 @@
 import {useState} from 'react';
 import CategoryOptions from '../components/postForm/CategoryOptions';
-import PostEditor from '../components/postForm/postEditor';
 import Button from '../components/common/Button';
 import {submitPost} from '../apis/posts';
+import PostEditor from '../components/postForm/PostEditor';
+import PostFormLayout from '../components/postForm/PostFormLayout';
 
 const PostForm = () => {
   const [post, setPost] = useState('글을 작성하세요');
+  const [category, setCategory] = useState();
+
+  const onSelectCategory = (category) => {
+    setCategory(category);
+  };
+
   const onChange = (content) => {
     setPost(content);
   };
@@ -16,14 +23,7 @@ const PostForm = () => {
     const newPost = {
       title: '해커톤 참여하실분',
       content: post,
-      author: '이눈송',
-      createdAt: '2025-08-30 13:10:24',
-      closed: true,
       category: 'extra',
-      countLike: 1,
-      countComment: 1,
-      comment: 0,
-      comments: [],
     };
 
     const response = await submitPost(newPost);
@@ -31,11 +31,24 @@ const PostForm = () => {
   };
 
   return (
-    <div className=''>
-      <CategoryOptions />
-      <PostEditor content={post} onChange={onChange} />
-      <Button label='등록' onClick={onSubmitHandler} />
-    </div>
+    <PostFormLayout>
+      <div className='flex-center flex-col py-6 md:pt-25'>
+        <CategoryOptions onSelectCategory={onSelectCategory} />
+        <PostEditor content={post} onChange={onChange} />
+        <div className='hidden md:flex md:gap-6'>
+          <Button
+            label='취소'
+            variant='secondaryColor'
+            onClick={onSubmitHandler}
+          />
+          <Button
+            label='등록'
+            variant='primaryColor'
+            onClick={onSubmitHandler}
+          />
+        </div>
+      </div>
+    </PostFormLayout>
   );
 };
 
