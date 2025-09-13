@@ -1,6 +1,8 @@
 import React from 'react';
 import leftArrow from '../../assets/icons/leftArrow.svg';
 import rightArrow from '../../assets/icons/rightArrow.svg';
+import mainLeftArrow from '../../assets/icons/mainLeftArrow.svg';
+import mainRightArrow from '../../assets/icons/mainRightArrow.svg';
 import RecruitLabel from '../common/RecruitLabel';
 import CategoryLabel from '../common/CategoryLabel';
 
@@ -37,7 +39,13 @@ const PopularPosts = ({
           <button
             className='absolute left-[-50px] z-10 p-2'
             onClick={handlePrev}>
-            <img src={leftArrow} alt='이전' className='w-7 h-7' />
+            <img
+              src={leftArrow}
+              alt='이전'
+              className='w-7 h-7'
+              onMouseEnter={(e) => (e.currentTarget.src = mainLeftArrow)}
+              onMouseLeave={(e) => (e.currentTarget.src = leftArrow)}
+            />
           </button>
 
           <div className='grid grid-cols-3 gap-3 w-full h-50'>
@@ -58,7 +66,13 @@ const PopularPosts = ({
           <button
             className='absolute right-[-50px] z-10 p-2'
             onClick={handleNext}>
-            <img src={rightArrow} alt='다음' className='w-7 h-7' />
+            <img
+              src={rightArrow}
+              alt='다음'
+              className='w-7 h-7'
+              onMouseEnter={(e) => (e.currentTarget.src = mainRightArrow)}
+              onMouseLeave={(e) => (e.currentTarget.src = rightArrow)}
+            />
           </button>
         </div>
       )}
