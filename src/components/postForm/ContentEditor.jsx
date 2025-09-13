@@ -3,16 +3,21 @@ import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import Button from '../common/Button';
 
-const ContentEditor = ({content, handleContentChange}) => {
+const ContentEditor = ({content, handleContentChange, isModal}) => {
   const [previewMode, setPreviewMode] = useState(false);
 
   const handleClick = () => {
     setPreviewMode(!previewMode);
   };
 
+  const variant =
+    isModal === undefined
+      ? 'md:w-144 md:h-102 lg:w-200 lg:h-128'
+      : 'md:w-133.5 md:h-77 md:p-6';
+
   return (
     <div>
-      <div className='bg-white w-86.5 h-76 rounded-xl p-5 md:w-144 md:h-102 lg:w-200 lg:h-128'>
+      <div className={`bg-white rounded-xl w-86.5 h-76 p-5 ${variant}`}>
         {!previewMode ? (
           <textarea
             value={content}
@@ -21,16 +26,19 @@ const ContentEditor = ({content, handleContentChange}) => {
             className='w-full h-full whitespace-pre-wrap resize-none focus:outline-none'
           />
         ) : (
-          <div className='prose overflow-y-scroll'>
+          <div className='prose max-w-200 h-full overflow-y-scroll'>
             <ReactMarkdown remarkPlugins={[remarkGfm]}>{content}</ReactMarkdown>
           </div>
         )}
       </div>
       <div className='flex justify-end py-4'>
-        <Button onClick={handleClick} label='미리보기' />
+        <Button
+          onClick={handleClick}
+          variant={`${previewMode ? 'secondaryColor' : 'primaryColor'}`}
+          label={`${previewMode ? '편집하기' : '미리보기'}`}
+        />
       </div>
     </div>
   );
 };
-
 export default ContentEditor;
