@@ -9,7 +9,7 @@ lg:w-26 lg:text-lg lg:leading-6`;
 
 const CategoryOptions = () => {
   return (
-    <ul className='flex justify-start text-center gap-3 md:gap-6'>
+    <ul className='flex text-center justify-center md:justify-start gap-3 md:gap-6'>
       {CATEGORIES.slice(1).map((category) => (
         <li key={category.label} className={`${base} ${mobile} ${responsive}`}>
           {category.label}

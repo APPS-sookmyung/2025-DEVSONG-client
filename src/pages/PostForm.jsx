@@ -32,10 +32,10 @@ const PostForm = () => {
 
   return (
     <PostFormLayout>
-      <div className='flex-center flex-col py-6 md:pt-25'>
+      <div className='w-fit mx-auto py-6 md:pt-25'>
         <CategoryOptions onSelectCategory={onSelectCategory} />
         <PostEditor content={post} onChange={onChange} />
-        <div className='hidden md:flex md:gap-6'>
+        <div className='hidden md:flex md:justify-center md:gap-6'>
           <Button
             label='취소'
             variant='secondaryColor'
