@@ -1,24 +1,31 @@
 import React, {useState, useEffect} from 'react';
+import axios from 'axios';
 import SearchBar from '../components/common/SearchBar';
 import PopularPosts from '../components/home/PopularPosts';
 import RankingSection from '../components/home/RankingSection';
 import Footer from '../components/home/Footer';
 import logo from '../assets/images/logo.svg';
+import {fetchBestPosts} from '../apis/bestPost';
 
-import {
-  popularPosts,
-  githubRanking,
-  bojRanking,
-} from '../components/home/dummy';
+import {githubRanking, bojRanking} from '../components/home/dummy';
 
 const Home = () => {
   const [startIndex, setStartIndex] = useState(0);
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+  const [popularPosts, setPopularPosts] = useState([]);
 
   useEffect(() => {
     const handleResize = () => setIsMobile(window.innerWidth < 768);
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  useEffect(() => {
+    const fetchPosts = async () => {
+      const data = await fetchBestPosts();
+      setPopularPosts(data);
+    };
+    fetchPosts();
   }, []);
 
   const handlePrev = () => startIndex > 0 && setStartIndex(startIndex - 3);
