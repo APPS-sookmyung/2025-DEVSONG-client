@@ -27,8 +27,10 @@ const PopularPosts = ({
                 <RecruitLabel status={post.closed} />
                 <CategoryLabel category={post.category} />
               </div>
-              <p className='font-semibold mb-1 text-sm'>{post.title}</p>
-              <p className='text-[10px] text-black-60 leading-snug line-clamp-6'>
+              <p className='font-semibold mb-1 text-sm line-clamp-2'>
+                {post.title}
+              </p>
+              <p className='text-[10px] text-black-60 leading-snug line-clamp-5'>
                 {post.preview}
               </p>
             </div>
@@ -55,7 +57,9 @@ const PopularPosts = ({
                   <RecruitLabel status={post.closed} />
                   <CategoryLabel category={post.category} />
                 </div>
-                <p className='font-semibold mb-1 text-sm'>{post.title}</p>
+                <p className='font-semibold mb-1 text-sm line-clamp-2'>
+                  {post.title}
+                </p>
                 <p className='text-[14px] text-black-60 leading-snug line-clamp-5'>
                   {post.preview}
                 </p>
