@@ -11,7 +11,7 @@ const PostHeader = ({
   studentId,
   isAuthor,
 }) => {
-  const year = studentId.toString().slice(0, 2);
+  const year = studentId?.toString().slice(0, 2);
   return (
     <div>
       <PostHeaderActions isAuthor={isAuthor} />
