@@ -1,26 +1,26 @@
-import {EditorContent, useEditor} from '@tiptap/react';
-import StarterKit from '@tiptap/starter-kit';
-import MenuBar from './MenuBar';
+import {useState} from 'react';
+import TitleEditor from './TitleEditor';
+import ContentEditor from './ContentEditor';
 
 const PostEditor = ({content, onChange}) => {
-  const editor = useEditor({
-    extensions: [StarterKit],
-    content: content,
-    editorProps: {
-      attributes: {
-        class:
-          'h-[303px] md:h-[511px] w-[345px] md:w-[800px] border rounded-xl bg-slate-50 py2-px-3',
-      },
-    },
-    onUpdate: ({editor}) => {
-      onChange(editor.getText());
-    },
-  });
+  const [title, setTitle] = useState(``);
+  const [markdownText, setMarkdownText] = useState(``);
+
+  const handleContentChange = (event) => {
+    setMarkdownText(event.target.value);
+  };
+
+  const handleTitleChange = (event) => {
+    setTitle(event.target.value);
+  };
 
   return (
-    <div>
-      <MenuBar editor={editor} />
-      <EditorContent editor={editor} />
+    <div className='md:w-156.5 lg:w-212.5 md:rounded-[28px] md:shadow-box p-[25px] md:my-10'>
+      <TitleEditor title={title} handleTitleChange={handleTitleChange} />
+      <ContentEditor
+        content={markdownText}
+        handleContentChange={handleContentChange}
+      />
     </div>
   );
 };
