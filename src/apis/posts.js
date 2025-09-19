@@ -38,12 +38,40 @@ export const getPostDetail = async ({post_id}) => {
   return response;
 };
 
-export const submitPost = async ({post}) => {
+export const submitNewPost = async (post) => {
+  console.log(post);
   const token = localStorage.getItem('accessToken');
-  const response = await axios.post(`${SERVER_URL}/post/write`, post, {
-    headers: {
-      Authorization: `Bearer ${token}`,
+  const response = await axios.post(
+    `${SERVER_URL}/post/write`,
+    {
+      title: post.title,
+      content: post.content,
+      category: post.category,
     },
-  });
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
+  return response;
+};
+
+export const updatePost = async (post, id) => {
+  const token = localStorage.getItem('accessToken');
+
+  const response = await axios.put(
+    `${SERVER_URL}/post/write/${id}`,
+    {
+      title: post.title,
+      content: post.content,
+      category: post.category,
+    },
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
   return response;
 };
