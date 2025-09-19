@@ -21,7 +21,7 @@ export const menuItems = [
     active_id: 'nav_chat_active',
   },
   {
-    path: '/profile',
+    path: '/resume',
     label: '이력서',
     alt: '이력서',
     icon_id: 'nav_profile',
