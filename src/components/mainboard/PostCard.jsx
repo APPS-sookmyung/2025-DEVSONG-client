@@ -33,7 +33,7 @@ const PostCard = ({
   comment,
 }) => {
   const navigate = useNavigate();
-  const isRecruiting = ['프로젝트', '스터디', '대외활동'].includes(category)
+  const isRecruiting = ['PROJECT', 'STUDY', 'EXTRA'].includes(category)
     ? true
     : false;
 
