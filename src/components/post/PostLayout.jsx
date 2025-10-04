@@ -15,7 +15,7 @@ const PostLayout = () => {
   const [postData, setPostData] = useState({});
 
   const fetchPostDetail = async () => {
-    const response = await getPostDetail({post_id: id});
+    const response = await getPostDetail(id);
     setPostData(response.data);
   };
 
