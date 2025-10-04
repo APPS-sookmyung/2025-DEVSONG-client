@@ -5,8 +5,8 @@ import {login} from '../apis/posts';
 const Home = () => {
   const handleLogin = async () => {
     const userInfo = {
-      email: 'example@sookmyung.ac.kr',
-      password: 'password123',
+      email: 'user20@sookmyung.ac.kr',
+      password: 'password20',
     };
 
     const response = await login(userInfo);
