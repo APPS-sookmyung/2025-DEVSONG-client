@@ -1,6 +1,6 @@
 import React from 'react';
 import Button from '../components/common/Button';
-import {login} from '../apis/posts';
+import {login} from '../apis/login';
 
 const Home = () => {
   const handleLogin = async () => {
