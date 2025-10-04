@@ -1,8 +1,8 @@
-import {authAxios} from '../axios/index';
+import {publicApi} from '../axios/index';
 
 export const login = async (userinfo) => {
   try {
-    const response = await authAxios.post(`/user/login`, {
+    const response = await publicApi.post(`/user/login`, {
       email: userinfo.email,
       password: userinfo.password,
     });

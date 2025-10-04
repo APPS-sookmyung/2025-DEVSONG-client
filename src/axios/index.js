@@ -2,7 +2,7 @@ import axios from 'axios';
 const BASE_URL = 'http://localhost:8080';
 
 // 인증 X (로그인, 회원가입 등)
-export const authAxios = axios.create({
+export const publicApi = axios.create({
   baseURL: BASE_URL,
   headers: {
     'Content-Type': 'application/json',
@@ -10,7 +10,7 @@ export const authAxios = axios.create({
 });
 
 // 인증 필요
-export const axiosInstance = axios.create({
+export const privateApi = axios.create({
   baseURL: BASE_URL,
   headers: {
     'Content-Type': 'application/json',
@@ -18,7 +18,7 @@ export const axiosInstance = axios.create({
 });
 
 // 요청을 보내기 전에 실행되는 인터셉터
-axiosInstance.interceptors.request.use(
+privateApi.interceptors.request.use(
   (config) => {
     // 로컬스토리지에서 accessToken 가져오기
     const accessToken = localStorage.getItem('accessToken');
