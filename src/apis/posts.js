@@ -2,21 +2,6 @@ import axios from 'axios';
 
 const SERVER_URL = 'http://localhost:8080';
 
-export const login = async (userinfo) => {
-  const response = await axios.post(`${SERVER_URL}/user/login`, {
-    email: userinfo.email,
-    password: userinfo.password,
-  });
-
-  const {accessToken} = response.data.token;
-
-  if (accessToken) {
-    localStorage.setItem('accessToken', accessToken);
-  }
-
-  return response;
-};
-
 export const getPosts = async ({category}) => {
   const token = localStorage.getItem('accessToken');
   const response = await axios.get(`${SERVER_URL}/post`, {
