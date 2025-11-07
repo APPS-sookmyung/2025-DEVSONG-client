@@ -11,11 +11,8 @@ const CategoryLabel = ({category}) => {
   return (
     <div>
       {category && (
-        <span
-          className={`label-style ${
-            category_map[category.toUpperCase()].style
-          }`}>
-          {category_map[category.toUpperCase()].label}
+        <span className={`label-style ${category_map[category].style}`}>
+          {category_map[category].label}
         </span>
       )}
     </div>
