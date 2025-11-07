@@ -1,22 +1,75 @@
-import React from 'react';
-import Button from '../components/common/Button';
-import {login} from '../apis/login';
+// import React from 'react';
+// import Button from '../components/common/Button';
+// import {login} from '../apis/login';
+
+// const Home = () => {
+//   const handleLogin = async () => {
+//     const userInfo = {
+//       email: 'user20@sookmyung.ac.kr',
+//       password: 'password20',
+//     };
+
+//     const response = await login(userInfo);
+//     console.log(response.data);
+//   };
+
+//   return (
+//     <div>
+//       Home 페이지 입니다!
+//       <Button label='로그인' onClick={handleLogin} />
+import React, {useState, useEffect} from 'react';
+import axios from 'axios';
+import SearchBar from '../components/common/SearchBar';
+import PopularPosts from '../components/home/PopularPosts';
+import RankingSection from '../components/home/RankingSection';
+import Footer from '../components/home/Footer';
+import logo from '../assets/images/logo.svg';
+import {fetchBestPosts} from '../apis/bestPost';
+
+import {githubRanking, bojRanking} from '../components/home/dummy';
 
 const Home = () => {
-  const handleLogin = async () => {
-    const userInfo = {
-      email: 'user20@sookmyung.ac.kr',
-      password: 'password20',
-    };
+  const [startIndex, setStartIndex] = useState(0);
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+  const [popularPosts, setPopularPosts] = useState([]);
 
-    const response = await login(userInfo);
-    console.log(response.data);
-  };
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth < 768);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  useEffect(() => {
+    const fetchPosts = async () => {
+      const data = await fetchBestPosts();
+      setPopularPosts(data);
+    };
+    fetchPosts();
+  }, []);
+
+  const handlePrev = () => startIndex > 0 && setStartIndex(startIndex - 3);
+  const handleNext = () =>
+    startIndex + 3 < popularPosts.length && setStartIndex(startIndex + 3);
 
   return (
     <div>
-      Home 페이지 입니다!
-      <Button label='로그인' onClick={handleLogin} />
+      <div className='relative flex flex-col items-center gap-2'>
+        <div className='absolute z-[-1] w-full h-hidden md:h-91 lg:h-85 bg-linear-[154deg,#a4b8ff_0%,#a8d4ff_56.76%,#d9f6ff_86.78%] rounded-b-4xl'></div>
+
+        <SearchBar />
+
+        <PopularPosts
+          posts={popularPosts}
+          startIndex={startIndex}
+          handlePrev={handlePrev}
+          handleNext={handleNext}
+          isMobile={isMobile}
+        />
+
+        <RankingSection githubData={githubRanking} bojData={bojRanking} />
+
+        {isMobile && <Footer logo={logo} />}
+      </div>
     </div>
   );
 };
