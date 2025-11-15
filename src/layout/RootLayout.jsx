@@ -6,7 +6,7 @@ import Footer from './Footer';
 
 // 모바일 헤더 레이아웃이 따로 있는 경우
 const NO_DEFAULT_MOBILE_HEADER_PATHS = [
-  '/post/:id',
+  '/post',
   '/resume',
   '/githubRanking',
   '/chat',
