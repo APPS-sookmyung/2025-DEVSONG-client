@@ -34,9 +34,9 @@ const ContentEditor = ({content, onContentChange, isModal}) => {
       <div className='flex justify-end py-4'>
         <Button
           onClick={handleClick}
-          variant={`${previewMode ? 'secondaryColor' : 'primaryColor'}`}
-          label={`${previewMode ? '편집하기' : '미리보기'}`}
-        />
+          variant={`${previewMode ? 'secondary' : 'primary'}`}>
+          {previewMode ? '편집하기' : '미리보기'}
+        </Button>
       </div>
     </div>
   );

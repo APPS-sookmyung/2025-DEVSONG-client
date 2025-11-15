@@ -25,9 +25,13 @@ const PostActions = ({isAuthor, like, comment}) => {
       </div>
       <div className='relative'>
         {isAuthor ? (
-          <Button label={'지원자 확인'} onClick={onClick} />
+          <Button variant='primary' onClick={onClick}>
+            지원자 확인
+          </Button>
         ) : (
-          <Button label={'지원하기'} />
+          <Button variant='primary' onClick={onClick}>
+            지원하기
+          </Button>
         )}
         {isOpen && <Applicants />}
       </div>
