@@ -1,31 +1,55 @@
 import React from 'react';
-import Navbar from '../components/common/Navbar';
-import {Outlet, useMatch} from 'react-router-dom';
-import Header from '../components/common/Header';
-import Footer from '../components/common/Footer';
+import Navbar from './Navbar';
+import {Outlet, useLocation} from 'react-router-dom';
+import Header from './Header';
+import Footer from './Footer';
+
+// 모바일 헤더 레이아웃이 따로 있는 경우
+const NO_DEFAULT_MOBILE_HEADER_PATHS = [
+  '/post/:id',
+  '/resume',
+  '/githubRanking',
+  '/chat',
+  '/my',
+];
+
+const POST_FORM_PATH = '/posts/write';
 
 const RootLayout = () => {
-  const hideLayout = useMatch('/posts/write') !== null;
+  const {pathname} = useLocation();
+  const hideLayout = pathname === POST_FORM_PATH;
+  const noMobileHeader = NO_DEFAULT_MOBILE_HEADER_PATHS.some((path) =>
+    pathname.startsWith(path)
+  );
 
   if (hideLayout) {
-    // 게시글 작성 페이지: 헤더, 풋터, 네브바 X
+    // 게시글 작성 페이지: 헤더, 풋터, navbar X
     return (
       <div className='min-h-screen flex flex-col'>
-        <div className='flex-1 pb-30 md:pb-12'>
+        <main className='flex-1 pb-30 md:pb-12'>
           <Outlet />
-        </div>
+        </main>
       </div>
     );
   }
 
   return (
     <div className='min-h-screen flex flex-col'>
-      <Header />
-      <div className='flex-1 pb-30 md:pb-12'>
+      <header className={`${noMobileHeader ? 'hidden md:block' : ''}`}>
+        <Header />
+      </header>
+
+      <main className='flex-1 pb-30 md:pb-12'>
         <Outlet />
-      </div>
-      <Footer />
-      <Navbar />
+      </main>
+
+      <footer>
+        <Footer />
+      </footer>
+
+      <nav>
+        <Navbar />
+      </nav>
     </div>
   );
 };
