@@ -33,11 +33,15 @@ export const createComment = async (postId, content, parentId) => {
 
 export const getApplicants = async (postId) => {
   const response = await privateApi.get(`/post/${postId}/applicantlist`);
+  console.log(response);
   return response;
 };
 
 export const applyToPost = async (postId) => {
-  const response = await privateApi.post(`/post/${postId}/apply`);
+  const response = await privateApi.post(`/post/apply`, {
+    postId,
+  });
+
   return response;
 };
 

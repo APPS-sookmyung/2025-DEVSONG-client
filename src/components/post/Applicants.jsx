@@ -9,7 +9,7 @@ const Applicants = ({postId}) => {
     const fetchApplicants = async () => {
       try {
         const response = await getApplicants(postId); // API 호출
-        setApplicants(response.data.applicants);
+        setApplicants(response.data);
       } catch (error) {
         console.error('지원자 목록 불러오기 실패', error);
       }

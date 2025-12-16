@@ -24,7 +24,7 @@ const PostActions = ({
   const onApplyClick = async () => {
     if (isApplied) return; // 이미 지원했다면 중복 클릭 방지
 
-    if (!window.confirm('이 프로젝트에 지원하시겠습니까?')) return;
+    // if (!window.confirm('이 프로젝트에 지원하시겠습니까?')) return;
 
     try {
       await applyToPost(postId);

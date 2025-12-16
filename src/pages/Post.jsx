@@ -8,7 +8,6 @@ import {useEffect, useState} from 'react';
 import {createComment, getPostDetail} from '@apis/posts';
 import {useParams} from 'react-router-dom';
 import PostLayout from '@components/post/PostLayout';
-import {post} from '../dummy/post';
 
 const Post = () => {
   const {id} = useParams(); // post id 받아오기
@@ -88,7 +87,7 @@ const Post = () => {
             <PostContent content={postData.content} />
             <PostActions
               postId={postData.id}
-              isAuthor={false}
+              isAuthor={postData.author}
               liked={postData.liked}
               applied={postData.applied}
               likeCount={postData.likeCount}
