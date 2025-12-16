@@ -1,5 +1,5 @@
 import PostHeader from '@components/post/PostHeader';
-import PostLayout from '../components/post/PostLayout';
+// import PostLayout from '../components/post/PostLayout';
 import PostResumeHeader from '../layout/PostResumeHeader';
 import PostContent from '@components/post/PostContent';
 import PostActions from '@components/post/PostActions';

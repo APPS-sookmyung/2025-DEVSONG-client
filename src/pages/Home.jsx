@@ -16,16 +16,6 @@ const Home = () => {
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
   const [popularPosts, setPopularPosts] = useState([]);
 
-  const handleLogin = async () => {
-    const userInfo = {
-      email: 'user20@sookmyung.ac.kr',
-      password: 'password20',
-    };
-
-    const response = await login(userInfo);
-    console.log(response.data);
-  };
-
   useEffect(() => {
     const handleResize = () => setIsMobile(window.innerWidth < 768);
     window.addEventListener('resize', handleResize);
@@ -50,10 +40,6 @@ const Home = () => {
         <div className='absolute z-[-1] w-full h-hidden md:h-91 lg:h-85 bg-linear-[154deg,#a4b8ff_0%,#a8d4ff_56.76%,#d9f6ff_86.78%] rounded-b-4xl'></div>
 
         <SearchBar />
-
-        <Button variant='primary' onClick={handleLogin}>
-          로그인
-        </Button>
 
         <PopularPosts
           posts={popularPosts}

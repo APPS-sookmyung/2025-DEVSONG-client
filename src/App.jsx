@@ -7,6 +7,7 @@ import {
 } from 'react-router-dom';
 import RootLayout from './layout/RootLayout';
 import MainBoard from './pages/MainBoard';
+import Login from './pages/Login';
 import Chat from './pages/Chat';
 import MyPage from './pages/MyPage';
 import Home from './pages/Home';
@@ -21,6 +22,7 @@ const App = () => {
       <Route path='/' element={<RootLayout />}>
         <Route index element={<Home />} />
         <Route path='posts' element={<MainBoard />} />
+        <Route path='login' element={<Login />} />
         <Route path='posts/write' element={<PostForm />} />
         <Route path='post/:id' element={<Post />} />
         <Route path='chat' element={<Chat />} />
