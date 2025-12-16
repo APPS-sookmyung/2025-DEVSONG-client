@@ -26,7 +26,7 @@ const RootLayout = () => {
     // 게시글 작성 페이지: 헤더, 풋터, navbar X
     return (
       <div className='min-h-screen flex flex-col'>
-        <main className='flex-1 pb-30 md:pb-12'>
+        <main className='flex-1'>
           <Outlet />
         </main>
       </div>
@@ -39,7 +39,7 @@ const RootLayout = () => {
         <Header />
       </header>
 
-      <main className='flex-1 pb-30 md:pb-12'>
+      <main className='flex-1 mb-12'>
         <Outlet />
       </main>
 
