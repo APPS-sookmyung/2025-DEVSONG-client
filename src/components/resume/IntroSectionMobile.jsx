@@ -38,7 +38,7 @@ export default function IntroSectionMobile({user}) {
       {isEditing && (
         <ResumeFormLayout>
           <div
-            className='fixed inset-0 z-50 flex items-center justify-center bg-black/50'
+            className='fixed inset-0 backdrop-blur-sm bg-white/30 flex justify-center items-center z-50'
             onClick={handleCancel}>
             <div
               className='bg-white rounded-xl w-11/12 max-w-md p-5 flex flex-col'
