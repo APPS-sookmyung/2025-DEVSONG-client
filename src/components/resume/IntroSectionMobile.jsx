@@ -41,7 +41,7 @@ export default function IntroSectionMobile({user}) {
             className='fixed inset-0 backdrop-blur-sm bg-white/30 flex justify-center items-center z-50'
             onClick={handleCancel}>
             <div
-              className='bg-white rounded-xl w-11/12 max-w-md p-5 flex flex-col'
+              className='bg-white rounded-xl w-11/12 max-w-md p-5 flex flex-col pl-1'
               onClick={(e) => e.stopPropagation()}>
               <ContentEditor
                 content={content}
