@@ -45,6 +45,14 @@ export const applyToPost = async (postId) => {
   return response;
 };
 
+// 좋아요
+export const likePost = async (postId) => {
+  const response = await privateApi.post(`/post/like`, {
+    postId,
+  });
+  return response;
+};
+
 // export const updatePost = async (post, id) => {
 //   const response = await privateApi.put(`/post/write/${id}`, {
 //     title: post.title,
