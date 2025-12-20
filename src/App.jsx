@@ -15,21 +15,28 @@ import GithubRanking from './pages/GithubRanking';
 import Post from './pages/Post';
 import Resume from './pages/Resume';
 import PostForm from './pages/PostForm';
+import Signup from '@pages/Signup';
 
 const App = () => {
   const router = createBrowserRouter(
     createRoutesFromElements(
-      <Route path='/' element={<RootLayout />}>
-        <Route index element={<Home />} />
-        <Route path='posts' element={<MainBoard />} />
-        <Route path='login' element={<Login />} />
-        <Route path='posts/write' element={<PostForm />} />
-        <Route path='post/:id' element={<Post />} />
-        <Route path='chat' element={<Chat />} />
-        <Route path='my' element={<MyPage />} />
-        <Route path='githubRanking' element={<GithubRanking />} />
-        <Route path='resume' element={<Resume />} />
-      </Route>
+      <>
+        <Route path='/' element={<RootLayout />}>
+          <Route index element={<Home />} />
+          <Route path='posts' element={<MainBoard />} />
+          <Route path='login' element={<Login />} />
+          <Route path='posts/write' element={<PostForm />} />
+          <Route path='post/:id' element={<Post />} />
+          <Route path='chat' element={<Chat />} />
+          <Route path='my' element={<MyPage />} />
+          <Route path='githubRanking' element={<GithubRanking />} />
+          <Route path='resume' element={<Resume />} />
+        </Route>
+
+        <Route path='/'>
+          <Route path='signup' element={<Signup />} />
+        </Route>
+      </>
     )
   );
   return <RouterProvider router={router} />;
