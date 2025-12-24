@@ -1,8 +1,22 @@
-import React from 'react';
+import React, {useState} from 'react';
 import profil from '../../assets/image/profil.svg';
 import whiteEditIcon from '../../assets/icons/whiteEditIcon.svg';
 
-export default function ProfileEditModal({closeModal, user}) {
+export default function ProfileEditModal({closeModal, user, onSave}) {
+  const [githubId, setGithubId] = useState(user.githubId);
+  const [bojId, setBojId] = useState(user.bojId);
+
+  const handleSave = async () => {
+    const updates = {
+      githubId: githubId,
+      bojId: bojId,
+      profil: newImage,
+    };
+
+    const success = await onSave(updates);
+    if (success) closeModal();
+  };
+
   return (
     <div
       className='fixed inset-0 backdrop-blur-sm bg-white/30 flex justify-center items-center z-50'
@@ -28,7 +42,8 @@ export default function ProfileEditModal({closeModal, user}) {
           <label className='block text-sm font-medium mb-1'>Github ID</label>
           <input
             type='text'
-            defaultValue={user.githubId}
+            value={githubId}
+            onChange={(e) => setGithubId(e.target.value)}
             className='w-full p-2 rounded bg-grey-02'
           />
         </div>
@@ -36,7 +51,8 @@ export default function ProfileEditModal({closeModal, user}) {
           <label className='block text-sm font-medium mb-1'>BOJ 핸들</label>
           <input
             type='text'
-            defaultValue={user.bojId}
+            value={bojId}
+            onChange={(e) => setBojId(e.target.value)}
             className='w-full p-2 rounded bg-grey-02'
           />
         </div>
@@ -47,7 +63,7 @@ export default function ProfileEditModal({closeModal, user}) {
             취소
           </button>
           <button
-            onClick={closeModal}
+            onClick={handleSave}
             className='w-1/2 p-2 bg-main text-white rounded ml-2 cursor-pointer'>
             저장
           </button>
