@@ -37,7 +37,7 @@ export default function BaekjoonRankingTable({pagedData, startIndex}) {
 
             {/* 이름 */}
             <span className='flex-1 font-bold truncate text-center sm:text-left sm:pl-0'>
-              {user.name}
+              {user.username}
             </span>
 
             {/* AC Rating */}
@@ -49,9 +49,9 @@ export default function BaekjoonRankingTable({pagedData, startIndex}) {
 
             {/* 푼 문제 */}
             <span
-              className='w-16 sm:w-20 font-semibold text-right mr-1 sm:mr-7'
+              className='w-16 sm:w-20 font-semibold text-right mr-1 sm:mr-7 pr-3'
               style={{color: '#747577'}}>
-              {user.solved}
+              {user.solvedCount}
             </span>
           </li>
         ))}

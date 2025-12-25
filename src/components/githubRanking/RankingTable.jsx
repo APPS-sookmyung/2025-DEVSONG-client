@@ -25,7 +25,7 @@ export default function RankingTable({pagedData, startIndex}) {
         {pagedData.map((user, index) => (
           <li
             key={startIndex + index}
-            className='flex justify-between p-1 sm:p-3'>
+            className='flex justify-between p-1 sm:p-3 hover:bg-gray-50'>
             <span className='font-bold mr-50 sm:mr-100 md:mr-130 lg:mr-165'>
               <span className='mr-5'>
                 {startIndex + index + 1 < 10
