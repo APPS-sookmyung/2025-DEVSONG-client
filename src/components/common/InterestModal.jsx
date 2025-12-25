@@ -1,11 +1,18 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import editIcon from '../../assets/icons/editIcon.svg';
 
 export default function InterestModal({
   selectedInterests: initialInterests,
   closeModal,
+  onSave,
 }) {
-  const [selectedInterests, setSelectedInterests] = useState(initialInterests);
+  const [selectedInterests, setSelectedInterests] = useState([]);
+
+  useEffect(() => {
+    if (initialInterests) {
+      setSelectedInterests(initialInterests);
+    }
+  }, [initialInterests]);
 
   const allInterests = [
     '웹 프론트엔드',
@@ -39,10 +46,15 @@ export default function InterestModal({
     );
   };
 
+  const handleClose = () => {
+    onSave(selectedInterests);
+    closeModal();
+  };
+
   return (
     <div
       className='fixed inset-0 backdrop-blur-sm bg-white/30 flex justify-center items-center z-50'
-      onClick={closeModal}>
+      onClick={handleClose}>
       <div
         className='bg-white p-6 rounded-xl w-96 max-h-[80vh] overflow-y-auto shadow-2xl'
         onClick={(e) => e.stopPropagation()}>
@@ -52,7 +64,7 @@ export default function InterestModal({
             src={editIcon}
             alt='닫기'
             className='w-6 h-6 cursor-pointer'
-            onClick={closeModal}
+            onClick={handleClose}
           />
         </div>
         <div className='flex flex-wrap gap-2'>
@@ -62,8 +74,10 @@ export default function InterestModal({
               <span
                 key={interest}
                 onClick={() => toggleInterest(interest)}
-                className={`px-3 py-1 rounded-md text-xs cursor-pointer ${
-                  isSelected ? 'bg-main-16' : 'bg-grey-02'
+                className={`px-3 py-1 rounded-md text-xs cursor-pointer transition-colors ${
+                  isSelected
+                    ? 'bg-main-16 text-black'
+                    : 'bg-grey-02 text-black-60'
                 }`}>
                 {interest}
               </span>
