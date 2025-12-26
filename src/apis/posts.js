@@ -22,6 +22,37 @@ export const submitNewPost = async (post) => {
   return response;
 };
 
+export const createComment = async (postId, content, parentId) => {
+  const response = await privateApi.post(`/post/comment`, {
+    postId,
+    content,
+    parentId,
+  });
+  return response;
+};
+
+export const getApplicants = async (postId) => {
+  const response = await privateApi.get(`/post/${postId}/applicantlist`);
+  console.log(response);
+  return response;
+};
+
+export const applyToPost = async (postId) => {
+  const response = await privateApi.post(`/post/apply`, {
+    postId,
+  });
+
+  return response;
+};
+
+// 좋아요
+export const likePost = async (postId) => {
+  const response = await privateApi.post(`/post/like`, {
+    postId,
+  });
+  return response;
+};
+
 // export const updatePost = async (post, id) => {
 //   const response = await privateApi.put(`/post/write/${id}`, {
 //     title: post.title,

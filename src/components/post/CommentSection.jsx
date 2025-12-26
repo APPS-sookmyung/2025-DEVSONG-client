@@ -1,8 +1,9 @@
+import {useState} from 'react';
 import CommentThread from './CommentThread';
 import comment from '@assets/icons/comment_grey.svg';
 
-const CommentSection = ({comments}) => {
-  const noComment = comments ?? true;
+const CommentSection = ({comments, activeCommentId, onToggle}) => {
+  const noComment = !comments || comments.length === 0;
 
   if (noComment) {
     return (
@@ -17,9 +18,16 @@ const CommentSection = ({comments}) => {
 
   return (
     <div>
-      {comments?.map((comment, index) => {
+      {comments.map((comment, index) => {
         return (
-          <CommentThread key={comment.commentId} index={index} {...comment} />
+          <CommentThread
+            key={comment.commentId}
+            index={index}
+            isActive={activeCommentId === comment.commentId}
+            onToggle={() => onToggle(comment.commentId)}
+            replies={comment.children || []}
+            {...comment}
+          />
         );
       })}
     </div>
