@@ -6,7 +6,7 @@ const PostResumeHeader = ({onClick}) => {
   const navigate = useNavigate();
 
   return (
-    <header className='bg-white w-full h-16 px-6 flex items-center justify-between *:cursor-pointer md:hidden'>
+    <header className='bg-white w-full h-16 px-6 flex items-center relative z-50 justify-between shadow-box md:shadow-none *:cursor-pointer md:hidden'>
       <img
         className='w-5 h-5'
         onClick={() => navigate(-1)}

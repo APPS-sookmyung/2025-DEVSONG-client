@@ -12,7 +12,7 @@ const PostActions = ({isAuthor, like, comment}) => {
   };
 
   return (
-    <div className='flex items-center justify-between mt-4 mb-3 md:my-5'>
+    <div className='flex items-center justify-between mt-4 mb-3 md:my-5 pb-3 md:pb-5 border-b-1 border-black-60'>
       <div className='flex text-sm gap-3 md:text-base'>
         <span className='flex items-center'>
           <img src={heartIcon} className='w-7 h-7' alt='좋아요 수' />

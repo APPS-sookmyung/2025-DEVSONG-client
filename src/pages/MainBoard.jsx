@@ -31,7 +31,7 @@ const MainBoard = () => {
       const response = await getPosts(
         category === DEFAULT_CATEGORY ? null : category
       );
-      setPosts(response.data);
+      setPosts(response.data.posts);
     } catch (error) {
       console.error('게시글 목록 불러오기 실패:', error);
     }
