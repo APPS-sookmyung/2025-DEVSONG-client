@@ -1,22 +1,29 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import editIcon from '../../assets/icons/editIcon.svg';
 
 export default function StackModal({
   selectedStacks: initialStacks,
   closeModal,
+  onSave,
 }) {
-  const [selectedStacks, setSelectedStacks] = useState(initialStacks);
+  const [selectedStacks, setSelectedStacks] = useState([]);
+
+  useEffect(() => {
+    if (initialStacks) {
+      setSelectedStacks(initialStacks);
+    }
+  }, [initialStacks]);
 
   const allStacks = [
     'Flutter',
     'Python',
-    'Java Script',
+    'JavaScript',
     'Java',
     'C',
     'C++',
     'Android',
-    'IOS',
-    'Type Script',
+    'iOS',
+    'TypeScript',
     'Kotlin',
     'Swift',
     'Go',
@@ -32,10 +39,10 @@ export default function StackModal({
     'Spring Boot',
     'Django',
     'Flask',
-    'Tensor Flow',
+    'TensorFlow',
     'PyTorch',
     'Git',
-    'Github',
+    'GitHub',
     'Firebase',
     'AWS',
     'Docker',
@@ -44,9 +51,10 @@ export default function StackModal({
     'Postman',
     'Notion',
     'MySQL',
-    'PostgrSQL',
+    'PostgreSQL',
     'MongoDB',
     'VS Code',
+    'AI / 머신러닝',
   ];
 
   const toggleStack = (stack) => {
@@ -55,10 +63,15 @@ export default function StackModal({
     );
   };
 
+  const handleClose = () => {
+    onSave(selectedStacks);
+    closeModal();
+  };
+
   return (
     <div
       className='fixed inset-0 backdrop-blur-sm bg-white/30 flex justify-center items-center z-50'
-      onClick={closeModal}>
+      onClick={handleClose}>
       <div
         className='bg-white p-6 rounded-xl w-96 max-h-[80vh] overflow-y-auto shadow-2xl'
         onClick={(e) => e.stopPropagation()}>
@@ -68,7 +81,7 @@ export default function StackModal({
             src={editIcon}
             alt='닫기'
             className='w-6 h-6 cursor-pointer'
-            onClick={closeModal}
+            onClick={handleClose}
           />
         </div>
         <div className='flex flex-wrap gap-2'>
@@ -78,8 +91,10 @@ export default function StackModal({
               <span
                 key={stack}
                 onClick={() => toggleStack(stack)}
-                className={`px-3 py-1 rounded-md text-xs cursor-pointer ${
-                  isSelected ? 'bg-main-16' : 'bg-grey-02'
+                className={`px-3 py-1 rounded-md text-xs cursor-pointer transition-colors ${
+                  isSelected
+                    ? 'bg-main-16 text-black'
+                    : 'bg-grey-02 text-black-60'
                 }`}>
                 {stack}
               </span>
