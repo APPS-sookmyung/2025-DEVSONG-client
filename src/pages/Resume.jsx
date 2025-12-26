@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import ResumeHeaderMobile from '../components/resume/ResumeHeaderMobile';
+// import ResumeHeaderMobile from '../components/resume/ResumeHeaderMobile';
 import ProfileCardMobile from '../components/resume/ProfileCardMobile';
 import IntroSectionMobile from '../components/resume/IntroSectionMobile';
 import StackSectionMobile from '../components/resume/StackSectionMobile';
@@ -12,6 +12,7 @@ import StackModal from '../components/common/StackModal';
 import InterestModal from '../components/common/InterestModal';
 import ProfileEditModal from '../components/resume/ProfileEditModal';
 import {resume} from '../components/resume/dummy';
+import PostResumeHeader from '../layout/PostResumeHeader';
 
 export default function Resume() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -22,7 +23,7 @@ export default function Resume() {
   return (
     <div className='p-0 space-y-4 max-w-6xl mx-auto'>
       <div className='block md:hidden'>
-        <ResumeHeaderMobile />
+        <PostResumeHeader />
         <ProfileCardMobile setIsModalOpen={setIsModalOpen} user={user} />
         <IntroSectionMobile user={user} />
         <StackSectionMobile

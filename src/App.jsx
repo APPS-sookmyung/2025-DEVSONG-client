@@ -21,7 +21,6 @@ const App = () => {
       <Route path='/' element={<RootLayout />}>
         <Route index element={<Home />} />
         <Route path='posts' element={<MainBoard />} />
-        <Route path='posts/:category' element={<MainBoard />} />
         <Route path='posts/write' element={<PostForm />} />
         <Route path='post/:id' element={<Post />} />
         <Route path='chat' element={<Chat />} />

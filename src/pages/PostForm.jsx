@@ -4,8 +4,10 @@ import Button from '../components/common/Button';
 import {submitNewPost} from '../apis/posts';
 import PostEditor from '../components/postForm/PostEditor';
 import PostFormLayout from '../components/postForm/PostFormLayout';
+import {useNavigate} from 'react-router-dom';
 
 const PostForm = () => {
+  const navigate = useNavigate();
   const [selectedCategory, setSelectedCategory] = useState();
   const [title, setTitle] = useState(``);
   const [content, setContent] = useState(``);
@@ -38,22 +40,34 @@ const PostForm = () => {
 
   return (
     <PostFormLayout>
-      <div className='w-fit mx-auto py-6 md:pt-25'>
+      <main className='w-fit mx-auto py-6 md:pt-25'>
         <CategoryOptions
           selectedCategory={selectedCategory}
           onCategorySelect={onCategorySelect}
         />
+
         <PostEditor
           title={title}
           content={content}
           onTitleChange={onTitleChange}
           onContentChange={onContentChange}
         />
-        <div className='hidden md:flex md:justify-center md:gap-6'>
-          <Button label='취소' variant='secondaryColor' />
-          <Button label='등록' variant='primaryColor' onClick={onPostSubmit} />
-        </div>
-      </div>
+
+        <section className='hidden md:flex md:justify-center md:gap-6'>
+          <Button
+            variant='secondary'
+            classname='w-22 px-4 py-2'
+            onClick={() => navigate(-1)}>
+            취소
+          </Button>
+          <Button
+            variant='primary'
+            classname='w-22 px-4 py-2'
+            onClick={onPostSubmit}>
+            등록
+          </Button>
+        </section>
+      </main>
     </PostFormLayout>
   );
 };
