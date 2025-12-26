@@ -4,8 +4,10 @@ const InputField = ({
   label,
   type = 'text',
   value,
+  name,
   onChange,
   placeholder,
+  className = '',
   required = false,
   suffix,
   ...props
@@ -22,10 +24,11 @@ const InputField = ({
         <input
           type={type}
           value={value}
+          name={name}
           onChange={onChange}
           placeholder={placeholder}
           required={required}
-          className='w-full p-3 border border-grey-01 rounded-lg bg-grey-01 focus:outline-none focus:ring-1 focus:ring-main'
+          className={`${className} w-full p-2.5 md:p-3 border border-grey-02 rounded-lg bg-grey-01 placeholder:text-xs md:placeholder:text-base focus:outline-none focus:ring-1 focus:ring-main`}
           {...props}></input>
         {suffix && (
           <div className='whitespace-nowrap font-medium text-[10px] md:text-base leading-4 md:leading-6'>
