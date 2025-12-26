@@ -41,7 +41,7 @@ const RootLayout = () => {
         <Header />
       </header>
 
-      <main className='flex-1 pb-30 md:pb-12'>
+      <main className='flex-1 mb-12'>
         <Outlet />
       </main>
 
