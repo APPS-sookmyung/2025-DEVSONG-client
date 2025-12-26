@@ -1,16 +1,15 @@
-import logo from '../../assets/images/logo.svg';
-import notification from '../../assets/icons/notificationIcon.svg';
-import signout from '../../assets/icons/signoutIcon.svg';
-import Icon from '../icon/Icon';
-import {menuItems} from '.';
+import logo from '../assets/images/logo.svg';
+import notification from '../assets/icons/notificationIcon.svg';
+import signout from '../assets/icons/signoutIcon.svg';
+import Icon from '../components/icon/Icon';
+import {menuItems} from '../components/common';
 import {useLocation, NavLink, matchPath} from 'react-router-dom';
 
 const Header = () => {
   const currentPath = useLocation().pathname;
-  const noHeader = matchPath('/post/:id', currentPath) !== null; // 게시물 페이지인지 확인
 
   return (
-    <header className={`${noHeader ? 'hidden md:block' : ''}`}>
+    <header>
       <div className='flex justify-between bg-white px-6 py-4 md:gap-9 lg:gap-12 lg:px-32'>
         <img src={logo} alt='logo' />
         <div className='md:flex md:items-center md:flex-1 md:justify-between'>

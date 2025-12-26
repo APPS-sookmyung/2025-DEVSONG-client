@@ -1,4 +1,6 @@
 import React, {useState, useEffect} from 'react';
+import Button from '../components/common/Button';
+import {login} from '../apis/login';
 import axios from 'axios';
 import SearchBar from '../components/common/SearchBar';
 import PopularPosts from '../components/home/PopularPosts';

@@ -7,7 +7,7 @@ const SortOptions = () => {
       {optionItems.map((option, index) => (
         <div
           key={index}
-          className='text-xs md:text-sm lg:text-base font-medium text-black-100'>
+          className='text-xs md:text-sm lg:text-base font-medium text-black-100 lg:pl-1.5'>
           {option}
         </div>
       ))}
