@@ -1,18 +1,32 @@
-import axios from 'axios';
+import {privateApi} from '../axios';
 
-const SERVER_URL = 'http://localhost:4000';
-
-export const getPosts = async ({category}) => {
-  const response = await axios.get(`${SERVER_URL}/posts`, {params: {category}});
+export const getPosts = async (category) => {
+  const response = await privateApi.get(`/post`, {
+    params: category ? {category} : {}, // 조건부 params 처리
+  });
   return response;
 };
 
-export const getPostDetail = async ({post_id}) => {
-  const response = await axios.get(`${SERVER_URL}/post/${post_id}`);
+export const getPostDetail = async (id) => {
+  const response = await privateApi.get(`/post/${id}`);
   return response;
 };
 
-export const submitPost = async ({post}) => {
-  const response = axios.post(`${SERVER_URL}/post`, post);
+export const submitNewPost = async (post) => {
+  console.log(post);
+  const response = await privateApi.post(`/post/write`, {
+    title: post.title,
+    content: post.content,
+    category: post.category,
+  });
   return response;
 };
+
+// export const updatePost = async (post, id) => {
+//   const response = await privateApi.put(`/post/write/${id}`, {
+//     title: post.title,
+//     content: post.content,
+//     category: post.category,
+//   });
+//   return response;
+// };

@@ -10,10 +10,12 @@ import {useParams} from 'react-router-dom';
 const PostLayout = () => {
   const {id} = useParams(); // post id 받아오기
   const userId = 123;
+  const authorId = 124;
+
   const [postData, setPostData] = useState({});
 
   const fetchPostDetail = async () => {
-    const response = await getPostDetail({post_id: id});
+    const response = await getPostDetail(id);
     setPostData(response.data);
   };
 
@@ -31,11 +33,11 @@ const PostLayout = () => {
           studentId={postData.studentId}
           category={postData.category}
           closed={postData.closed}
-          isAuthor={postData.authorId === userId}
+          isAuthor={authorId === userId}
         />
         <PostContent content={postData.content} />
         <PostActions
-          isAuthor={postData.authorId === userId}
+          isAuthor={authorId === userId}
           like={postData.like}
           comment={postData.comment}
         />
