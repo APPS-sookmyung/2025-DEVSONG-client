@@ -4,11 +4,11 @@ import CategorySelector from '../components/mainboard/CategorySelector';
 import SortSelector from '../components/mainboard/SortSelector';
 import RecruitmentStatusFilter from '../components/mainboard/RecruitmentStatusFilter';
 import Pagination from '../components/githubRanking/Pagination';
-import write from '@assets/icons/writeIcon.svg';
-import {getPosts} from '../apis/posts';
+import {getPosts} from '@apis/posts';
 import {useEffect, useState} from 'react';
 import {useNavigate, useSearchParams} from 'react-router-dom';
 import Button from '@components/common/Button';
+import WriteButton from '@components/mainboard/WriteButton';
 
 const DEFAULT_CATEGORY = 'all';
 
@@ -56,13 +56,7 @@ const MainBoard = () => {
       <section className='flex items-center gap-3 md:gap-7 mb-4 w-86 md:mb-6 lg:mb-8 md:w-149 lg:w-212'>
         <SortSelector />
         <RecruitmentStatusFilter />
-        <Button
-          variant='primary'
-          classname='ml-auto flex-center gap-2 p-1.5 lg:p-2'
-          onClick={() => navigate('write')}>
-          <img src={write} className='md:w-6 md:h-6' alt='글쓰기' />
-          <span className='hidden md:pr-[5px] md:inline'>글쓰기</span>
-        </Button>
+        <WriteButton />
       </section>
 
       <PostList posts={posts} />
