@@ -16,7 +16,7 @@ const PostHeader = ({
     <div>
       <PostHeaderActions isAuthor={isAuthor} />
       <div className='flex items-center justify-start gap-3 pb-[9px] md:pb-4'>
-        <CategoryLabel category={category} />
+        {/* <CategoryLabel category={category} /> */}
         <RecruitLabel status={closed} />
       </div>
       <h1 className='font-bold text-lg pb-3 leading-none md:text-2xl md:pb-[13px]'>

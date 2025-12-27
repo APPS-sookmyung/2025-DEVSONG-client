@@ -1,53 +1,73 @@
 import {useState} from 'react';
 import CategoryOptions from '../components/postForm/CategoryOptions';
 import Button from '../components/common/Button';
-import {submitPost} from '../apis/posts';
+import {submitNewPost} from '../apis/posts';
 import PostEditor from '../components/postForm/PostEditor';
 import PostFormLayout from '../components/postForm/PostFormLayout';
+import {useNavigate} from 'react-router-dom';
 
 const PostForm = () => {
-  const [post, setPost] = useState('글을 작성하세요');
-  const [category, setCategory] = useState();
+  const navigate = useNavigate();
+  const [selectedCategory, setSelectedCategory] = useState();
+  const [title, setTitle] = useState(``);
+  const [content, setContent] = useState(``);
 
-  const onSelectCategory = (category) => {
-    setCategory(category);
+  const onContentChange = (e) => {
+    setContent(e.target.value);
   };
 
-  const onChange = (content) => {
-    setPost(content);
+  const onTitleChange = (e) => {
+    setTitle(e.target.value);
   };
 
-  const onSubmitHandler = async (e) => {
-    e.preventDefault();
+  const onCategorySelect = (category) => {
+    setSelectedCategory(category);
+  };
 
+  const onPostSubmit = async () => {
     const newPost = {
-      title: '해커톤 참여하실분',
-      content: post,
-      category: 'extra',
+      title: title,
+      content: content,
+      category: selectedCategory,
     };
 
-    const response = await submitPost(newPost);
-    console.log(response);
+    try {
+      const response = await submitNewPost(newPost);
+    } catch (error) {
+      console.error('포스트를 생성하지 못했습니다.', error);
+    }
   };
 
   return (
     <PostFormLayout>
-      <div className='w-fit mx-auto py-6 md:pt-25'>
-        <CategoryOptions onSelectCategory={onSelectCategory} />
-        <PostEditor content={post} onChange={onChange} />
-        <div className='hidden md:flex md:justify-center md:gap-6'>
+      <main className='w-fit mx-auto py-6 md:pt-25'>
+        <CategoryOptions
+          selectedCategory={selectedCategory}
+          onCategorySelect={onCategorySelect}
+        />
+
+        <PostEditor
+          title={title}
+          content={content}
+          onTitleChange={onTitleChange}
+          onContentChange={onContentChange}
+        />
+
+        <section className='hidden md:flex md:justify-center md:gap-6'>
           <Button
-            label='취소'
-            variant='secondaryColor'
-            onClick={onSubmitHandler}
-          />
+            variant='secondary'
+            classname='w-22 px-4 py-2'
+            onClick={() => navigate(-1)}>
+            취소
+          </Button>
           <Button
-            label='등록'
-            variant='primaryColor'
-            onClick={onSubmitHandler}
-          />
-        </div>
-      </div>
+            variant='primary'
+            classname='w-22 px-4 py-2'
+            onClick={onPostSubmit}>
+            등록
+          </Button>
+        </section>
+      </main>
     </PostFormLayout>
   );
 };

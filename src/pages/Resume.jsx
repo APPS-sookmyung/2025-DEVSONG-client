@@ -13,6 +13,8 @@ import InterestModal from '../components/common/InterestModal';
 import ProfileEditModal from '../components/resume/ProfileEditModal';
 import {resume as dummyResume} from '../components/resume/dummy';
 import {getResumeApi, updateResumeApi} from '../apis/resume.js';
+import {resume} from '../components/resume/dummy';
+import PostResumeHeader from '../layout/PostResumeHeader';
 
 export default function Resume() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -124,7 +126,7 @@ export default function Resume() {
     <div className='p-0 space-y-4 max-w-6xl mx-auto'>
       {/* 모바일 뷰 */}
       <div className='block md:hidden'>
-        <ResumeHeaderMobile />
+        <PostResumeHeader />
         <ProfileCardMobile setIsModalOpen={setIsModalOpen} user={user} />
         <IntroSectionMobile user={user} onUpdate={handleUpdate} />
         <StackSectionMobile

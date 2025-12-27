@@ -1,40 +1,29 @@
+import {useEffect, useState} from 'react';
 import ModalLayout from '../common/ModalLayout';
+import {getApplicants} from '@apis/posts';
 
-const applicants = [
-  {
-    name: '박송이',
-    major: '데이터사이언스전공',
-    year: 24,
-  },
-  {
-    name: '이송이',
-    major: '컴퓨터과학전공',
-    year: 23,
-  },
-  {
-    name: '김송이',
-    major: '데이터사이언스전공',
-    year: 22,
-  },
-  {
-    name: '눈송이',
-    major: '데이터사이언스전공',
-    year: 23,
-  },
-  {
-    name: '최송이',
-    major: '데이터사이언스전공',
-    year: 25,
-  },
-];
+const Applicants = ({postId}) => {
+  const [applicants, setApplicants] = useState([]);
 
-const Applicants = () => {
+  useEffect(() => {
+    const fetchApplicants = async () => {
+      try {
+        const response = await getApplicants(postId); // API 호출
+        setApplicants(response.data);
+      } catch (error) {
+        console.error('지원자 목록 불러오기 실패', error);
+      }
+    };
+
+    fetchApplicants();
+  }, [postId]);
+
   return (
     <ModalLayout width={'w-36.5'}>
-      {applicants.map(({name, major, year}, index) => (
+      {applicants?.map(({username, major, studentId}, index) => (
         <div key={index}>
-          <h3 className='text-sm font-semibold leading-[22.4px]'>{name}</h3>
-          <p className='text-[10px] font-medium text-black-60'>{`${major}전공 ${year}학번`}</p>
+          <h3 className='text-sm font-semibold leading-[22.4px]'>{username}</h3>
+          <p className='text-[10px] font-medium text-black-60'>{`${major}전공 ${studentId}학번`}</p>
         </div>
       ))}
     </ModalLayout>

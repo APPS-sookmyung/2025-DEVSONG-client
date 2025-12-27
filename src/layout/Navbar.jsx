@@ -1,6 +1,6 @@
 import {NavLink, useLocation, matchPath} from 'react-router-dom';
-import Icon from '../icon/Icon';
-import {menuItems} from '.';
+import Icon from '../components/icon/Icon';
+import {menuItems} from '../components/common';
 
 const Navbar = () => {
   const currentPath = useLocation().pathname;

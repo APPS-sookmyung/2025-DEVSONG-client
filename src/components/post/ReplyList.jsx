@@ -3,11 +3,11 @@ import enter from '../../assets/icons/enter.svg';
 
 const ReplyList = ({replies}) => {
   return (
-    <div className='flex items-start gap-2 md:gap-3 mt-3 md:mt-4.5'>
+    <div className='flex items-start gap-2 md:gap-3 md:mb-6'>
       <img className='md:w-6 md:h-6' src={enter} alt='엔터' />
       <div className='flex-1 flex flex-col gap-3'>
         {replies.map((reply) => (
-          <Reply key={reply.replyId} {...reply} />
+          <Reply key={reply.commentId} {...reply} />
         ))}
       </div>
     </div>

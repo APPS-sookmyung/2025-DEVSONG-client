@@ -3,7 +3,7 @@ import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import Button from '../common/Button';
 
-const ContentEditor = ({content, handleContentChange, isModal}) => {
+const ContentEditor = ({content, onContentChange, isModal}) => {
   const [previewMode, setPreviewMode] = useState(false);
 
   const handleClick = () => {
@@ -21,7 +21,7 @@ const ContentEditor = ({content, handleContentChange, isModal}) => {
         {!previewMode ? (
           <textarea
             value={content}
-            onChange={handleContentChange}
+            onChange={onContentChange}
             placeholder='마크다운을 이용해서 편리하게 글을 작성할 수 있어요.'
             className='w-full h-full whitespace-pre-wrap resize-none focus:outline-none'
           />
@@ -34,9 +34,9 @@ const ContentEditor = ({content, handleContentChange, isModal}) => {
       <div className='flex justify-end py-4'>
         <Button
           onClick={handleClick}
-          variant={`${previewMode ? 'secondaryColor' : 'primaryColor'}`}
-          label={`${previewMode ? '편집하기' : '미리보기'}`}
-        />
+          variant={`${previewMode ? 'secondary' : 'primary'}`}>
+          {previewMode ? '편집하기' : '미리보기'}
+        </Button>
       </div>
     </div>
   );

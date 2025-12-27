@@ -1,18 +1,30 @@
 const variants = {
-  primaryColor: `bg-main text-white`,
-  secondaryColor: `bg-white text-black-60`,
+  primary: `bg-main text-white`,
+  secondary: `bg-white text-black-60`,
+  ghost: `text-black-60`,
 };
 
-const Button = ({variant, label, onClick}) => {
-  const handleOnClick = () => {
-    onClick();
-  };
+const sizes = {
+  md: 'px-4 py-2',
+  none: 'p-0',
+};
 
+const Button = ({
+  variant = 'primary',
+  onClick,
+  children,
+  className = '',
+  size = 'md',
+  type = 'button',
+  disabled = false,
+}) => {
   return (
     <button
-      onClick={handleOnClick}
-      className={`${variants[variant]} md:min-w-22 cursor-pointer rounded-lg font-medium text-sm md:text-base leading-4 px-4 py-2 shadow-box`}>
-      {label}
+      type={type}
+      onClick={onClick}
+      disabled={disabled}
+      className={`${sizes[size]} ${className} ${variants[variant]} rounded-lg font-medium text-sm md:text-base`}>
+      {children}
     </button>
   );
 };
