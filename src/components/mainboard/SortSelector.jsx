@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import arrowdown from '../../assets/icons/arrowdownIcon.svg';
 import SortOptions from './SortOptions';
+import {handle} from '../../../node_modules/mdast-util-to-markdown/lib/handle/index';
 
 const SortSelector = () => {
   const [sortType, setSortType] = useState('최신순');
@@ -8,6 +9,11 @@ const SortSelector = () => {
 
   const handleOnClick = () => {
     setIsOpen(!isOpen);
+  };
+
+  const handleSortChange = (type) => {
+    setSortType(type);
+    setIsOpen(false);
   };
 
   return (
@@ -18,7 +24,7 @@ const SortSelector = () => {
         {sortType}
         <img src={arrowdown} alt='자세히 보기' />
       </div>
-      {isOpen && <SortOptions />}
+      {isOpen && <SortOptions handleSortChange={handleSortChange} />}
     </div>
   );
 };
