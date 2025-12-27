@@ -13,7 +13,7 @@ const PostCard = ({
   category,
   createdAt,
   closed,
-  like,
+  likeCount,
   comment,
 }) => {
   const navigate = useNavigate();
@@ -47,7 +47,7 @@ const PostCard = ({
               className='md:w-5 md:h-5 lg:w-6 lg:h-6'
               alt='좋아요'
             />
-            {like}
+            {likeCount}
           </span>
           <span className='flex items-center'>
             <img
