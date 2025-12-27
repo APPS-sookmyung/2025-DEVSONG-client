@@ -1,5 +1,4 @@
 import React, {useState, useEffect} from 'react';
-import ResumeHeaderMobile from '../components/resume/ResumeHeaderMobile';
 import ProfileCardMobile from '../components/resume/ProfileCardMobile';
 import IntroSectionMobile from '../components/resume/IntroSectionMobile';
 import StackSectionMobile from '../components/resume/StackSectionMobile';
@@ -13,7 +12,6 @@ import InterestModal from '../components/common/InterestModal';
 import ProfileEditModal from '../components/resume/ProfileEditModal';
 import {resume as dummyResume} from '../components/resume/dummy';
 import {getResumeApi, updateResumeApi} from '../apis/resume.js';
-import {resume} from '../components/resume/dummy';
 import PostResumeHeader from '../layout/PostResumeHeader';
 
 export default function Resume() {
