@@ -18,6 +18,7 @@ const MainBoard = () => {
   const [pageInfo, setPageInfo] = useState({currentPage: 1, totalPages: 1});
   const category = searchParams.get('category') || DEFAULT_CATEGORY;
   const sortBy = searchParams.get('sortBy') || DEFAULT_SORT_TYPE;
+  const closed = searchParams.get('closed');
   const page = Number(searchParams.get('page') || 1);
 
   const handleCategoryChange = (next) => {
@@ -28,6 +29,19 @@ const MainBoard = () => {
       params.page = 1;
     }
 
+    setSearchParams(params, {replace: true});
+  };
+
+  const handleRecruitmentStatusChange = (status) => {
+    const params = Object.fromEntries([...searchParams]);
+    if (status === 'ALL') {
+      params.closed = undefined;
+    } else if (status === 'OPEN') {
+      params.closed = false;
+    } else if (status === 'CLOSED') {
+      params.closed = true;
+    }
+    params.page = 1;
     setSearchParams(params, {replace: true});
   };
 
@@ -66,7 +80,7 @@ const MainBoard = () => {
 
   useEffect(() => {
     fetchPosts();
-  }, [category, page]);
+  }, [category, page, sortBy, closed]);
 
   return (
     <main className='relative flex flex-col items-center gap-2'>

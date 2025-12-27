@@ -1,14 +1,19 @@
 import {useState} from 'react';
-import ellipse from '../../assets/icons/ellipseIcon.svg';
+import ellipse from '@assets/icons/ellipseIcon.svg';
 
 const status = [
   {id: 'ALL', title: '전체'},
   {id: 'OPEN', title: '모집중'},
   {id: 'CLOSED', title: '모집완료'},
 ];
-const RecruitmentStatusFilter = () => {
+const RecruitmentStatusFilter = ({handleRecruitmentStatusChange}) => {
   const [isClicked, setIsClicked] = useState('ALL');
   const clickedStyle = 'text-black-100 font-medium';
+
+  const onRecruitmentStatusClick = (statusId) => {
+    setIsClicked(statusId);
+    handleRecruitmentStatusChange(statusId);
+  };
 
   return (
     <div>
@@ -20,7 +25,7 @@ const RecruitmentStatusFilter = () => {
               className={`${
                 item.id === isClicked ? clickedStyle : ''
               } flex-center gap-1.5 py-2`}
-              onClick={() => setIsClicked(item.id)}>
+              onClick={() => onRecruitmentStatusClick(item.id)}>
               <img src={ellipse} alt='' />
               <li>{item.title}</li>
             </div>
