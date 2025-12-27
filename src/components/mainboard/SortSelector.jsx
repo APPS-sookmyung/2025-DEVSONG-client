@@ -1,7 +1,6 @@
 import React, {useState} from 'react';
 import arrowdown from '../../assets/icons/arrowdownIcon.svg';
 import SortOptions from './SortOptions';
-import {handle} from '../../../node_modules/mdast-util-to-markdown/lib/handle/index';
 
 const SortSelector = () => {
   const [sortType, setSortType] = useState('최신순');
