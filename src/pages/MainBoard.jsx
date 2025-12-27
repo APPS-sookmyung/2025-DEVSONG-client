@@ -10,12 +10,14 @@ import {useSearchParams} from 'react-router-dom';
 import WriteButton from '@components/mainboard/WriteButton';
 
 const DEFAULT_CATEGORY = 'all';
+const DEFAULT_SORT_TYPE = 'createdAt';
 
 const MainBoard = () => {
   const [posts, setPosts] = useState([]);
   const [searchParams, setSearchParams] = useSearchParams();
   const [pageInfo, setPageInfo] = useState({currentPage: 1, totalPages: 1});
   const category = searchParams.get('category') || DEFAULT_CATEGORY;
+  const sortBy = searchParams.get('sortBy') || DEFAULT_SORT_TYPE;
   const page = Number(searchParams.get('page') || 1);
 
   const handleCategoryChange = (next) => {
@@ -29,6 +31,13 @@ const MainBoard = () => {
     setSearchParams(params, {replace: true});
   };
 
+  const handleSortChange = (sortType) => {
+    const params = Object.fromEntries([...searchParams]);
+    params.sortBy = sortType;
+    params.page = 1;
+    setSearchParams(params, {replace: true});
+  };
+
   const handlePageChange = (page) => {
     const params = Object.fromEntries([...searchParams]);
     params.page = page;
@@ -39,7 +48,9 @@ const MainBoard = () => {
     try {
       const response = await getPosts(
         category === DEFAULT_CATEGORY ? null : category,
-        page
+        page,
+        sortBy,
+        closed
       );
 
       setPageInfo({
@@ -55,7 +66,7 @@ const MainBoard = () => {
 
   useEffect(() => {
     fetchPosts();
-  }, [category, page, sortBy, closed]);
+  }, [category, page]);
 
   return (
     <main className='relative flex flex-col items-center gap-2'>

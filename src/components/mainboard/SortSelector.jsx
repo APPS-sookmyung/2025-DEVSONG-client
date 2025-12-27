@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import arrowdown from '../../assets/icons/arrowdownIcon.svg';
 import SortOptions from './SortOptions';
 
-const SortSelector = () => {
+const SortSelector = ({handleSortChange}) => {
   const [sortType, setSortType] = useState('최신순');
   const [isOpen, setIsOpen] = useState(false);
 
@@ -10,9 +10,12 @@ const SortSelector = () => {
     setIsOpen(!isOpen);
   };
 
-  const handleSortChange = (type) => {
+  const onSortChange = (type) => {
+    const sortBy = type === '최신순' ? 'createdAt' : 'like';
     setSortType(type);
     setIsOpen(false);
+
+    handleSortChange(sortBy);
   };
 
   return (
@@ -23,7 +26,7 @@ const SortSelector = () => {
         {sortType}
         <img src={arrowdown} alt='자세히 보기' />
       </div>
-      {isOpen && <SortOptions handleSortChange={handleSortChange} />}
+      {isOpen && <SortOptions handleSortChange={onSortChange} />}
     </div>
   );
 };

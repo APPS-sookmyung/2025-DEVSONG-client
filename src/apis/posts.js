@@ -1,9 +1,10 @@
 import {privateApi} from '../axios';
 
-export const getPosts = async (category, page) => {
+export const getPosts = async (category, page, sortBy) => {
   const params = {
     ...(category && {category}),
     page: page - 1,
+    sortBy: sortBy,
   };
 
   const response = await privateApi.get(`/post`, {
