@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react';
+import {fetchGithubRanking} from '../apis/githubRanking';
 import RankingHeader from '../components/githubRanking/RankingHeader';
 import RankingTable from '../components/githubRanking/RankingTable';
 import Pagination from '../components/githubRanking/Pagination';
@@ -13,49 +14,42 @@ function useWindowWidth() {
   return width;
 }
 
-const mockRankingData = [
-  {name: '김눈송', total: 1286},
-  {name: '김눈송', total: 1350},
-  {name: '김눈송', total: 900},
-  {name: '김눈송', total: 1450},
-  {name: '김눈송', total: 1200},
-  {name: '김눈송', total: 1500},
-  {name: '김눈송', total: 1100},
-  {name: '김눈송', total: 1000},
-  {name: '김눈송', total: 1050},
-  {name: '김눈송', total: 980},
-  {name: '김눈송', total: 1250},
-  {name: '김눈송', total: 1600},
-  {name: '김눈송', total: 1320},
-  {name: '김눈송', total: 1190},
-  {name: '김눈송', total: 800},
-  {name: '김눈송', total: 1120},
-  {name: '김눈송', total: 1400},
-  {name: '김눈송', total: 1180},
-  {name: '김눈송', total: 1010},
-  {name: '김눈송', total: 950},
-  {name: '김눈송', total: 1105},
-  {name: '김눈송', total: 1210},
-  {name: '김눈송', total: 1275},
-  {name: '김눈송', total: 1390},
-  {name: '김눈송', total: 1340},
-  {name: '김눈송', total: 970},
-  {name: '김눈송', total: 990},
-  {name: '김눈송', total: 1150},
-  {name: '김눈송', total: 1520},
-  {name: '김눈송', total: 1080},
-];
-
 export default function RankingList() {
+  const [rankingData, setRankingData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const windowWidth = useWindowWidth();
 
   const itemsPerPage = windowWidth < 640 ? 16 : 10;
 
-  const sortedData = [...mockRankingData].sort((a, b) => b.total - a.total);
+  useEffect(() => {
+    const getRanking = async () => {
+      try {
+        const data = await fetchGithubRanking();
+
+        if (Array.isArray(data)) {
+          const sortedData = data.sort(
+            (a, b) => a.rank - b.rank || b.commitCount - a.commitCount
+          );
+          setRankingData(sortedData);
+        } else {
+          setRankingData([]);
+        }
+      } catch (error) {
+        console.error('Github 랭킹 로딩 실패', error);
+        setRankingData([]);
+      }
+    };
+
+    getRanking();
+  }, []);
+
+  // 현재 페이지에 보여줄 데이터 자르기
   const startIndex = (currentPage - 1) * itemsPerPage;
-  const pagedData = sortedData.slice(startIndex, startIndex + itemsPerPage);
-  const totalPages = Math.ceil(sortedData.length / itemsPerPage);
+  const pagedData = Array.isArray(rankingData)
+    ? rankingData.slice(startIndex, startIndex + itemsPerPage)
+    : [];
+
+  const totalPages = Math.ceil(rankingData.length / itemsPerPage);
 
   return (
     <div
@@ -66,11 +60,15 @@ export default function RankingList() {
         <div className='flex justify-center'>
           <RankingTable pagedData={pagedData} startIndex={startIndex} />
         </div>
-        <Pagination
-          currentPage={currentPage}
-          totalPages={totalPages}
-          setCurrentPage={setCurrentPage}
-        />
+
+        {/* 데이터가 있을 때만 페이지네이션 표시 */}
+        {rankingData.length > 0 && (
+          <Pagination
+            currentPage={currentPage}
+            totalPages={totalPages}
+            setCurrentPage={setCurrentPage}
+          />
+        )}
       </div>
     </div>
   );

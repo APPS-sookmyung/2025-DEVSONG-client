@@ -1,24 +1,52 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import nextArrow from '../../assets/icons/nextArrow.svg';
 import {useNavigate} from 'react-router-dom';
+import {fetchGithubRanking} from '../../apis/githubRanking';
 
 const RankingSection = ({githubData, bojData}) => {
+  const [realGithubData, setRealGithubData] = useState([]);
+
+  useEffect(() => {
+    const getGithubData = async () => {
+      try {
+        const data = await fetchGithubRanking();
+        if (Array.isArray(data)) {
+          const sortedData = data.sort(
+            (a, b) => a.rank - b.rank || b.commitCount - a.commitCount
+          );
+          setRealGithubData(sortedData.slice(0, 5));
+        }
+      } catch (error) {
+        console.error('Github 랭킹 데이터 로딩 실패:', error);
+      }
+    };
+
+    getGithubData();
+  }, []);
+
+  const safeBojData = bojData || [];
+
   return (
     <div className='w-full max-w-5xl px-4 mt-8 grid grid-cols-1 md:grid-cols-2 gap-6'>
       <RankingTable
         title='Github 랭킹'
-        data={githubData}
+        data={realGithubData}
         link='/githubRanking'
       />
-      <RankingTable title='BOJ 랭킹' data={bojData} isBOJ link='/bojRanking' />
+
+      <RankingTable
+        title='BOJ 랭킹'
+        data={safeBojData}
+        isBOJ
+        link='/bojRanking'
+      />
     </div>
   );
 };
 
 const RankingTable = ({title, data, isBOJ, link}) => {
   const navigate = useNavigate();
-
-  const emptyRows = Math.max(0, 5 - data.length);
+  const emptyRows = Math.max(0, 5 - (data?.length || 0));
 
   return (
     <div className='bg-grey-02 rounded-[24px] p-4'>
@@ -47,23 +75,27 @@ const RankingTable = ({title, data, isBOJ, link}) => {
           </tr>
         </thead>
         <tbody>
-          {data.map((item) => (
-            <tr key={item.rank}>
-              <td className='py-2 pl-5 font-semibold'>{item.rank}</td>
-              <td className='font-semibold'>{item.name}</td>
-              {isBOJ && (
-                <td className='text-right pr-5 text-black-60'>
-                  {item.acRating}
+          {data &&
+            data.map((item, index) => (
+              <tr key={item.githubId || item.rank || index}>
+                <td className='py-2 pl-5 font-semibold'>
+                  {item.rank ? item.rank : index + 1}
                 </td>
-              )}
-              <td
-                className={`text-right text-black-60 ${
-                  isBOJ ? 'pr-7' : 'pr-4'
-                }`}>
-                {isBOJ ? item.solvedCount : item.total}
-              </td>
-            </tr>
-          ))}
+                <td className='font-semibold'>{item.username || item.name}</td>
+                {isBOJ && (
+                  <td className='text-right pr-5 text-black-60'>
+                    {item.acRating || item.rating}
+                  </td>
+                )}
+                <td
+                  className={`text-right text-black-60 ${
+                    isBOJ ? 'pr-7' : 'pr-4'
+                  }`}>
+                  {/* Github는 commitCount, 백준은 solvedCount */}
+                  {isBOJ ? item.solvedCount : item.commitCount}
+                </td>
+              </tr>
+            ))}
 
           {Array.from({length: emptyRows}).map((_, index) => (
             <tr key={`empty-${index}`}>
