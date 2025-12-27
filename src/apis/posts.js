@@ -1,9 +1,15 @@
 import {privateApi} from '../axios';
 
-export const getPosts = async (category) => {
+export const getPosts = async (category, page) => {
+  const params = {
+    ...(category && {category}),
+    page: page - 1,
+  };
+
   const response = await privateApi.get(`/post`, {
-    params: category ? {category} : {}, // 조건부 params 처리
+    params,
   });
+
   return response;
 };
 
