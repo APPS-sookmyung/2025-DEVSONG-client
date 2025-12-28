@@ -84,7 +84,7 @@ const LoginPage = () => {
               회원가입
             </Link>
             <span className='mx-4'>|</span>
-            <a href='#' className='hover:text-black-60'>
+            <a href='#' className='hover:text-black-60 pointer-events-none'>
               비밀번호 초기화
             </a>
           </div>
