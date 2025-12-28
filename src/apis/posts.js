@@ -5,7 +5,7 @@ export const getPosts = async (category, page, sortBy, closed) => {
     ...(category && {category}),
     page: page - 1,
     sortBy: sortBy,
-    ...(typeof closed === 'boolean' ? {closed} : {}),
+    // ...(closed !== undefined && {closed}),
   };
 
   const response = await privateApi.get(`/post`, {
@@ -58,6 +58,12 @@ export const likePost = async (postId) => {
   const response = await privateApi.post(`/post/like`, {
     postId,
   });
+  return response;
+};
+
+export const closeApply = async (postId) => {
+  const response = await privateApi.post(`/post/${postId}/close`);
+
   return response;
 };
 
