@@ -1,3 +1,4 @@
+import {signUp} from '@apis/login';
 import Step1 from '@components/signup/Step1';
 import Step2 from '@components/signup/Step2';
 import Step3 from '@components/signup/Step3';
@@ -40,6 +41,15 @@ const Signup = () => {
     });
   };
 
+  const handleSignUp = async () => {
+    try {
+      const response = await signUp(signUpForm);
+      console.log('회원가입 성공:', response.data);
+    } catch (error) {
+      console.error('로그인 실패:', error);
+    }
+  };
+
   return (
     <main>
       <div
@@ -48,7 +58,7 @@ const Signup = () => {
           background:
             'linear-gradient(154deg, #a4b8ff 0%, #a8d4ff 56.76%, #d9f6ff 86.78%)',
         }}>
-        <div className='bg-white p-5 md:p-8 rounded-3xl shadow-lg w-[85%] md:w-full max-w-137.5'>
+        <form className='bg-white p-5 md:p-8 rounded-3xl shadow-lg w-[85%] md:w-full max-w-137.5'>
           {currentStep === 1 && (
             <Step1
               handleNextStep={handleNextStep}
@@ -70,8 +80,8 @@ const Signup = () => {
               signUpForm={signUpForm}
             />
           )}
-          {currentStep === 4 && <Step4 handleNextStep={handleNextStep} />}
-        </div>
+          {currentStep === 4 && <Step4 handleSignUp={handleSignUp} />}
+        </form>
       </div>
     </main>
   );
