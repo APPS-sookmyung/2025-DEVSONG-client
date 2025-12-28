@@ -33,14 +33,15 @@ const PostForm = () => {
 
     try {
       const response = await submitNewPost(newPost);
+      navigate(`/post/${response.data.post_id}`);
     } catch (error) {
       console.error('포스트를 생성하지 못했습니다.', error);
     }
   };
 
   return (
-    <PostFormLayout>
-      <main className='w-fit mx-auto py-6 md:pt-25'>
+    <PostFormLayout onClick={onPostSubmit}>
+      <main className='w-fit mx-auto py-6 md:pt-25 md:pb-18'>
         <CategoryOptions
           selectedCategory={selectedCategory}
           onCategorySelect={onCategorySelect}
@@ -56,14 +57,11 @@ const PostForm = () => {
         <section className='hidden md:flex md:justify-center md:gap-6'>
           <Button
             variant='secondary'
-            classname='w-22 px-4 py-2'
+            className='w-22'
             onClick={() => navigate(-1)}>
             취소
           </Button>
-          <Button
-            variant='primary'
-            classname='w-22 px-4 py-2'
-            onClick={onPostSubmit}>
+          <Button variant='primary' className='w-22' onClick={onPostSubmit}>
             등록
           </Button>
         </section>

@@ -1,11 +1,16 @@
+import {Link} from 'react-router-dom';
 import back from '../../assets/icons/back.svg';
 
-const PostFormLayout = ({children}) => {
+const PostFormLayout = ({children, onClick}) => {
   return (
     <>
       <header className='bg-white flex items-center justify-between p-6 md:hidden *:cursor-pointer'>
-        <img src={back} alt='뒤로가기' />
-        <span className='text-main text-sm font-semibold'>등록</span>
+        <Link to={-1}>
+          <img src={back} alt='뒤로가기' />
+        </Link>
+        <span className='text-main text-sm font-semibold' onClick={onClick}>
+          등록
+        </span>
       </header>
       {children}
     </>
