@@ -1,45 +1,43 @@
-import React from 'react';
-import prevArrow from '../../assets/icons/prevArrow.svg';
-import nextArrow from '../../assets/icons/nextArrow.svg';
+import prevArrow from '@assets/icons/prevArrow.svg';
+import nextArrow from '@assets/icons/nextArrow.svg';
+import Button from '@components/common/Button';
 
 export default function Pagination({currentPage, totalPages, setCurrentPage}) {
+  const isFirstPage = currentPage === 1;
+  const isLastPage = currentPage === totalPages;
+
   return (
-    <div className='flex justify-center space-x-2 mt-6 gap-2'>
-      <button
+    <div className='flex-center space-x-2 mt-6 gap-2'>
+      <Button
         onClick={() => setCurrentPage((prev) => Math.max(1, prev - 1))}
-        disabled={currentPage === 1}
-        className='disabled:opacity-30'>
-        <img
-          src={prevArrow}
-          alt='이전'
-          className='w-6 h-6 sm:w-8 sm:h-8 bg-white rounded-md'
-        />
-      </button>
+        disabled={isFirstPage}
+        className='disabled:opacity-30 bg-white rounded-md p-1.5 md:p-2'
+        size='none'>
+        <img src={prevArrow} alt='이전' className='w-3 h-3 md:w-6 md:h-6' />
+      </Button>
 
       {Array.from({length: totalPages}, (_, i) => (
-        <button
-          key={i + 1}
-          onClick={() => setCurrentPage(i + 1)}
-          className={`w-6 h-6 sm:w-8 sm:h-8 rounded ${
-            currentPage === i + 1
-              ? 'text-white'
-              : 'bg-gray-200 hover:bg-gray-300'
-          }`}
-          style={currentPage === i + 1 ? {backgroundColor: '#5C5AEE'} : {}}>
-          {i + 1}
-        </button>
+        <>
+          <Button
+            key={i + 1}
+            onClick={() => setCurrentPage(i + 1)}
+            className={`w-6 h-6 md:w-8 md:h-8 rounded-md text-center text-[10px] ${
+              currentPage === i + 1
+                ? 'text-white bg-main'
+                : 'bg-gray-200 hover:bg-gray-300'
+            }`}
+            size='none'>
+            {i + 1}
+          </Button>
+        </>
       ))}
-
-      <button
+      <Button
         onClick={() => setCurrentPage((prev) => Math.min(totalPages, prev + 1))}
-        disabled={currentPage === totalPages}
-        className='disabled:opacity-30'>
-        <img
-          src={nextArrow}
-          alt='다음'
-          className='w-6 h-6 sm:w-8 sm:h-8 bg-white rounded-md'
-        />
-      </button>
+        disabled={isLastPage}
+        className='disabled:opacity-30 bg-white rounded-md p-1.5 md:p-2'
+        size='none'>
+        <img src={nextArrow} alt='다음' className='w-3 h-3 md:w-6 md:h-6' />
+      </Button>
     </div>
   );
 }

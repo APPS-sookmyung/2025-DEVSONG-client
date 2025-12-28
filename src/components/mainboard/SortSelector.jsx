@@ -10,6 +10,11 @@ const SortSelector = () => {
     setIsOpen(!isOpen);
   };
 
+  const handleSortChange = (type) => {
+    setSortType(type);
+    setIsOpen(false);
+  };
+
   return (
     <div className='relative cursor-pointer'>
       <div
@@ -18,7 +23,7 @@ const SortSelector = () => {
         {sortType}
         <img src={arrowdown} alt='자세히 보기' />
       </div>
-      {isOpen && <SortOptions />}
+      {isOpen && <SortOptions handleSortChange={handleSortChange} />}
     </div>
   );
 };
