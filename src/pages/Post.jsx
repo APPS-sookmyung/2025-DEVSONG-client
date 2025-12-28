@@ -74,7 +74,7 @@ const Post = () => {
       <PostResumeHeader />
       <PostLayout>
         <div className='relative flex flex-col w-full h-screen *:px-6 *:md:px-11'>
-          <section className='flex flex-col flex-1 min-h-0 md:h-[850px] overflow-y-auto py-4 md:py-9'>
+          <section className='flex flex-col flex-1 min-h-0 md:h-212.5 overflow-y-auto py-4 md:py-9'>
             <PostHeader
               title={postData.title}
               author={postData.username}
@@ -93,11 +93,14 @@ const Post = () => {
               likeCount={postData.likeCount}
               comment={postData.comment}
             />
-            <CommentSection
-              comments={comments}
-              onToggle={handleActiveComment}
-              activeCommentId={activeCommentId}
-            />
+            <section className='md:flex-1'>
+              <CommentSection
+                isAuthor={postData.author}
+                comments={comments}
+                onToggle={handleActiveComment}
+                activeCommentId={activeCommentId}
+              />
+            </section>
           </section>
 
           <CommentBar onAddComment={onAddComment} />

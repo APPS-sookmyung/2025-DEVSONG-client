@@ -56,7 +56,7 @@ const PostActions = ({
   };
 
   return (
-    <div className='flex items-center justify-between mt-4 md:mt-5 pb-3 md:pb-5 border-b-1 border-black-60'>
+    <div className='flex items-center justify-between mt-4 md:mt-5 pb-3 md:pb-5 border-b border-black-60'>
       <div className='flex text-sm gap-3 md:text-base'>
         <span className='flex items-center' onClick={onLikeClick}>
           {isLiked !== null ? (
