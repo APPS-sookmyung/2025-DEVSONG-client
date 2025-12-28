@@ -3,6 +3,7 @@ import CategoryLabel from '../common/CategoryLabel';
 import PostHeaderActions from './PostHeaderActions';
 
 const PostHeader = ({
+  postId,
   title,
   author,
   category,
@@ -14,7 +15,7 @@ const PostHeader = ({
   const year = studentId?.toString().slice(0, 2);
   return (
     <div>
-      <PostHeaderActions isAuthor={isAuthor} />
+      <PostHeaderActions isAuthor={isAuthor} postId={postId} />
       <div className='flex items-center justify-start gap-3 pb-2.25 md:pb-4'>
         <CategoryLabel category={category} />
         <RecruitLabel status={closed} />
