@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {useNavigate} from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 import logo from '../assets/images/logo.svg';
 import {login} from '../apis/login';
 
@@ -80,9 +80,9 @@ const LoginPage = () => {
           </div>
 
           <div className='flex justify-center mt-6 text-sm text-black-60'>
-            <a href='#' className='hover:text-black-60'>
+            <Link to='/signup' className='hover:text-black-60'>
               회원가입
-            </a>
+            </Link>
             <span className='mx-4'>|</span>
             <a href='#' className='hover:text-black-60'>
               비밀번호 초기화
