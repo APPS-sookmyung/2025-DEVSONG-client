@@ -7,14 +7,18 @@ import PopularPosts from '../components/home/PopularPosts';
 import RankingSection from '../components/home/RankingSection';
 import Footer from '../components/home/Footer';
 import logo from '../assets/images/logo.svg';
-import {fetchBestPosts} from '../apis/bestPost';
 
-import {githubRanking, bojRanking} from '../components/home/dummy';
+import {fetchBestPosts} from '../apis/bestPost';
+import {fetchBojRanking} from '../apis/bojRanking';
+
+import {githubRanking} from '../components/home/dummy';
 
 const Home = () => {
   const [startIndex, setStartIndex] = useState(0);
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+
   const [popularPosts, setPopularPosts] = useState([]);
+  const [bojData, setBojData] = useState([]); // 백준 랭킹 데이터 state 추가
 
   useEffect(() => {
     const handleResize = () => setIsMobile(window.innerWidth < 768);
@@ -23,11 +27,26 @@ const Home = () => {
   }, []);
 
   useEffect(() => {
-    const fetchPosts = async () => {
-      const data = await fetchBestPosts();
-      setPopularPosts(data);
+    const fetchData = async () => {
+      const posts = await fetchBestPosts();
+      setPopularPosts(posts);
+
+      const rankingResponse = await fetchBojRanking();
+
+      const mappedData = rankingResponse
+        .map((user) => ({
+          rank: user.rank,
+          name: user.username,
+          acRating: user.rating,
+          solvedCount: user.solvedCount,
+          bojId: user.bojId,
+        }))
+        .slice(0, 5); // 상위 5개만 자르기
+
+      setBojData(mappedData);
     };
-    fetchPosts();
+
+    fetchData();
   }, []);
 
   const handlePrev = () => startIndex > 0 && setStartIndex(startIndex - 3);
@@ -48,8 +67,7 @@ const Home = () => {
           handleNext={handleNext}
           isMobile={isMobile}
         />
-
-        <RankingSection githubData={githubRanking} bojData={bojRanking} />
+        <RankingSection githubData={githubRanking} bojData={bojData} />
 
         {isMobile && <Footer logo={logo} />}
       </div>
