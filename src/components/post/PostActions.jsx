@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import commentIcon from '../../assets/icons/comment.svg';
 import heartIcon from '../../assets/icons/heart.svg';
 import fullHeartIcon from '@assets/icons/fullHeart.svg';
@@ -6,31 +6,16 @@ import Button from '../common/Button';
 import Applicants from './Applicants';
 import {applyToPost, likePost} from '@apis/posts';
 
-const PostActions = ({
-  postId,
-  isAuthor,
-  applied,
-  liked,
-  likeCount,
-  comment,
-}) => {
+const PostActions = ({postId, isAuthor, applied, likeCount, comment}) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [isLiked, setIsLiked] = useState(liked);
-  const [currentLikeCount, setCurrentLikeCount] = useState(
-    likeCount ? likeCount : 0
-  );
+  const [isLiked, setIsLiked] = useState(Number(likeCount) > 0 ? true : false);
+  // const [currentLikeCount, setCurrentLikeCount] = useState(likeCount);
 
   const onLikeClick = async () => {
     try {
       const response = await likePost(postId);
-      const newLikeId = response.data.postLikeId;
-      setIsLiked(newLikeId);
-
-      if (newLikeId !== null) {
-        setCurrentLikeCount((prev) => prev + 1);
-      } else {
-        setCurrentLikeCount((prev) => prev - 1);
-      }
+      const like = response.data.postLikeId !== null ? true : false;
+      setIsLiked(like);
     } catch (error) {
       console.error('좋아요 처리 실패:', error);
     }
@@ -56,15 +41,15 @@ const PostActions = ({
   };
 
   return (
-    <div className='flex items-center justify-between mt-4 md:mt-5 pb-3 md:pb-5 border-b-1 border-black-60'>
+    <div className='flex items-center justify-between mt-4 md:mt-5 pb-3 md:pb-5 border-b border-black-60'>
       <div className='flex text-sm gap-3 md:text-base'>
         <span className='flex items-center' onClick={onLikeClick}>
-          {isLiked !== null ? (
-            <img src={fullHeartIcon} className='w-4.5 h-4.5' alt='좋아요' />
+          {isLiked === true ? (
+            <img src={fullHeartIcon} className='w-7 h-7' alt='full' />
           ) : (
-            <img src={heartIcon} className='w-7 h-7' alt='좋아요' />
+            <img src={heartIcon} className='w-7 h-7' alt='empty' />
           )}
-          {currentLikeCount}
+          {likeCount}
         </span>
         <span className='flex items-center'>
           <img src={commentIcon} className='w-7 h-7' alt='댓글 수' />
