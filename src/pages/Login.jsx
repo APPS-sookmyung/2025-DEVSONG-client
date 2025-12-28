@@ -56,7 +56,7 @@ const LoginPage = () => {
             <div className='flex flex-col gap-4 flex-1'>
               <input
                 type='text'
-                placeholder='이메일'
+                placeholder='숙명 이메일'
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 className='w-full p-3 border border-black-20 rounded-lg bg-grey-01 focus:outline-none focus:ring-1 focus:ring-main'
