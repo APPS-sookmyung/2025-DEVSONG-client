@@ -21,6 +21,7 @@ const Post = () => {
 
   const fetchPostDetail = async () => {
     const response = await getPostDetail(id);
+
     setPostData(response.data);
     setComments(response.data.comments);
   };
@@ -101,12 +102,11 @@ const Post = () => {
             <PostActions
               postId={postData.id}
               isAuthor={postData.author}
-              liked={postData.liked}
               applied={postData.applied}
               likeCount={postData.likeCount}
               comment={postData.comment}
             />
-            <section className='md:flex-1'>
+            <section className='flex-1'>
               <CommentSection
                 isAuthor={postData.author}
                 comments={comments}
