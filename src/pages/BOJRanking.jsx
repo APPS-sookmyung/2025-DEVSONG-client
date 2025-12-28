@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
-import {fetchGithubRanking} from '../apis/githubRanking';
-import RankingHeader from '../components/githubRanking/RankingHeader';
-import RankingTable from '../components/githubRanking/RankingTable';
+import {fetchBojRanking} from '../apis/bojRanking';
+import BaekjoonRankingHeader from '../components/BOJRanking/RankingHeader';
+import BaekjoonRankingTable from '../components/BOJRanking/RankingTable';
 import Pagination from '../components/githubRanking/Pagination';
 
 function useWindowWidth() {
@@ -14,7 +14,7 @@ function useWindowWidth() {
   return width;
 }
 
-export default function RankingList() {
+export default function BaekjoonRanking() {
   const [rankingData, setRankingData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const windowWidth = useWindowWidth();
@@ -24,27 +24,23 @@ export default function RankingList() {
   useEffect(() => {
     const getRanking = async () => {
       try {
-        const data = await fetchGithubRanking();
+        const data = await fetchBojRanking();
 
         if (Array.isArray(data)) {
-          const sortedData = data.sort(
-            (a, b) => a.rank - b.rank || b.commitCount - a.commitCount
-          );
-          setRankingData(sortedData);
+          setRankingData(data);
         } else {
           setRankingData([]);
         }
       } catch (error) {
-        console.error('Github 랭킹 로딩 실패', error);
-        setRankingData([]);
+        setRankingData([]); // 에러 시 빈 배열
       }
     };
 
     getRanking();
   }, []);
 
-  // 현재 페이지에 보여줄 데이터 자르기
   const startIndex = (currentPage - 1) * itemsPerPage;
+
   const pagedData = Array.isArray(rankingData)
     ? rankingData.slice(startIndex, startIndex + itemsPerPage)
     : [];
@@ -52,13 +48,11 @@ export default function RankingList() {
   const totalPages = Math.ceil(rankingData.length / itemsPerPage);
 
   return (
-    <div
-      className='flex flex-col items-center justify-center pt-0 sm:pt-15'
-      style={{backgroundColor: '#F9FAFC'}}>
+    <div className='flex flex-col items-center justify-center pt-0 sm:pt-15 bg-background'>
       <div className='w-full sm:w-auto sm:items-center sm:justify-center'>
-        <RankingHeader />
+        <BaekjoonRankingHeader />
         <div className='flex justify-center'>
-          <RankingTable pagedData={pagedData} startIndex={startIndex} />
+          <BaekjoonRankingTable pagedData={pagedData} startIndex={startIndex} />
         </div>
 
         {/* 데이터가 있을 때만 페이지네이션 표시 */}
