@@ -1,6 +1,6 @@
 export const menuItems = [
   {
-    path: '/',
+    path: '/home',
     label: '홈',
     alt: '홈',
     icon_id: 'nav_home',
