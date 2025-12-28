@@ -5,6 +5,7 @@ import fullHeartIcon from '@assets/icons/fullHeart.svg';
 import Button from '../common/Button';
 import Applicants from './Applicants';
 import {applyToPost, likePost} from '@apis/posts';
+import ApplyModal from './applyModal';
 
 const PostActions = ({
   postId,
@@ -16,6 +17,7 @@ const PostActions = ({
   onLikeToggle,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isApplyOpen, setIsApplyOpen] = useState(false);
 
   const onLikeClick = async () => {
     const nextLiked = !liked;
@@ -72,11 +74,17 @@ const PostActions = ({
             지원자 확인
           </Button>
         ) : (
-          <Button variant='primary' onClick={onApplyClick}>
+          <Button
+            variant='primary'
+            className={`${isApplied ? 'bg-main/70' : ''}`}
+            onClick={() => {
+              setIsApplyOpen(true);
+            }}>
             {isApplied ? '지원완료' : '지원하기'}
           </Button>
         )}
         {isAuthor && isOpen && <Applicants postId={postId} />}
+        {isApplyOpen && <ApplyModal />}
       </div>
     </div>
   );
