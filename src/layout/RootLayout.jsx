@@ -13,7 +13,7 @@ const NO_DEFAULT_MOBILE_HEADER_PATHS = [
   '/my',
 ];
 
-const HIDE_LAYOUT_PATHS = ['/posts/write', '/login'];
+const HIDE_LAYOUT_PATHS = ['/posts/write', '/'];
 
 const RootLayout = () => {
   const {pathname} = useLocation();
