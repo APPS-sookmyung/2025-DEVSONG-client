@@ -11,11 +11,16 @@ const PostHeader = ({
   major,
   studentId,
   isAuthor,
+  handlePostUpdate,
 }) => {
   const year = studentId?.toString().slice(0, 2);
   return (
     <div>
-      <PostHeaderActions isAuthor={isAuthor} postId={postId} />
+      <PostHeaderActions
+        isAuthor={isAuthor}
+        postId={postId}
+        handlePostUpdate={handlePostUpdate}
+      />
       <div className='flex items-center justify-start gap-3 pb-2.25 md:pb-4'>
         <CategoryLabel category={category} />
         <RecruitLabel status={closed} />

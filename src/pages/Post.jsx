@@ -6,11 +6,12 @@ import CommentSection from '@components/post/CommentSection';
 import CommentBar from '@components/post/CommentBar';
 import {useEffect, useState} from 'react';
 import {createComment, getPostDetail} from '@apis/posts';
-import {useParams} from 'react-router-dom';
+import {useNavigate, useParams} from 'react-router-dom';
 import PostLayout from '@components/post/PostLayout';
 
 const Post = () => {
   const {id} = useParams(); // post id 받아오기
+  const navigate = useNavigate();
 
   const [postData, setPostData] = useState({});
   const [comments, setComments] = useState([]);
@@ -69,13 +70,24 @@ const Post = () => {
     }
   };
 
+  const handlePostUpdate = () => {
+    localStorage.setItem('isUpdate', true);
+    localStorage.setItem('id', postData.id);
+    localStorage.setItem('title', postData.title);
+    localStorage.setItem('content', postData.content);
+    localStorage.setItem('category', postData.category);
+
+    navigate('/posts/write');
+  };
+
   return (
     <>
-      <PostResumeHeader />
+      <PostResumeHeader isPost={true} />
       <PostLayout>
         <div className='relative flex flex-col w-full h-screen *:px-6 *:md:px-11'>
           <section className='flex flex-col flex-1 min-h-0 md:h-212.5 overflow-y-auto py-4 md:py-9'>
             <PostHeader
+              postId={postData.id}
               title={postData.title}
               author={postData.username}
               major={postData.major}
@@ -83,6 +95,7 @@ const Post = () => {
               category={postData.category}
               closed={postData.closed}
               isAuthor={postData.author}
+              handlePostUpdate={handlePostUpdate}
             />
             <PostContent content={postData.content} />
             <PostActions

@@ -5,12 +5,10 @@ import {useState} from 'react';
 import ModalLayout from '@components/common/ModalLayout';
 import {closeApply} from '@apis/posts';
 
-const PostHeaderActions = ({isAuthor, postId}) => {
+const PostHeaderActions = ({isAuthor, postId, handlePostUpdate}) => {
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
   const optionItems = ['수정', '마감'];
-
-  const handleEdit = () => {};
 
   const handleClose = async () => {
     try {
@@ -48,7 +46,7 @@ const PostHeaderActions = ({isAuthor, postId}) => {
             {optionItems.map((option, index) => (
               <div
                 key={index}
-                onClick={option === '마감' ? handleClose : handleEdit}
+                onClick={option === '마감' ? handleClose : handlePostUpdate}
                 className='text-xs md:text-sm lg:text-base font-medium text-black-100 lg:pl-1.5'>
                 {option}
               </div>
