@@ -23,7 +23,7 @@ const Button = ({
       type={type}
       onClick={onClick}
       disabled={disabled}
-      className={`${sizes[size]} ${className} ${variants[variant]} rounded-lg font-medium text-sm md:text-base`}>
+      className={`${sizes[size]} ${className} ${variants[variant]} cursor-pointer rounded-lg font-medium text-sm md:text-base`}>
       {children}
     </button>
   );

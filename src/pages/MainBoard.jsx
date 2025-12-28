@@ -1,36 +1,77 @@
-import SearchBar from '../components/common/SearchBar';
-import PostList from '../components/mainboard/PostList';
-import CategorySelector from '../components/mainboard/CategorySelector';
-import SortSelector from '../components/mainboard/SortSelector';
-import RecruitmentStatusFilter from '../components/mainboard/RecruitmentStatusFilter';
-import Pagination from '../components/githubRanking/Pagination';
+import SearchBar from '@components/common/SearchBar';
+import PostList from '@components/mainboard/PostList';
+import CategorySelector from '@components/mainboard/CategorySelector';
+import SortSelector from '@components/mainboard/SortSelector';
+import RecruitmentStatusFilter from '@components/mainboard/RecruitmentStatusFilter';
+import Pagination from '@components/githubRanking/Pagination';
 import {getPosts} from '@apis/posts';
 import {useEffect, useState} from 'react';
-import {useNavigate, useSearchParams} from 'react-router-dom';
-import Button from '@components/common/Button';
+import {useSearchParams} from 'react-router-dom';
 import WriteButton from '@components/mainboard/WriteButton';
 
 const DEFAULT_CATEGORY = 'all';
+const DEFAULT_SORT_TYPE = 'createdAt';
 
 const MainBoard = () => {
-  const navigate = useNavigate();
   const [posts, setPosts] = useState([]);
   const [searchParams, setSearchParams] = useSearchParams();
+  const [pageInfo, setPageInfo] = useState({currentPage: 1, totalPages: 1});
   const category = searchParams.get('category') || DEFAULT_CATEGORY;
+  const sortBy = searchParams.get('sortBy') || DEFAULT_SORT_TYPE;
+  const closed = searchParams.get('closed');
+  const page = Number(searchParams.get('page') || 1);
 
   const handleCategoryChange = (next) => {
-    if (!next || next === DEFAULT_CATEGORY) {
-      setSearchParams({}, {replace: true});
-    } else {
-      setSearchParams({category: next}, {replace: true});
+    const params = {};
+
+    if (next && next !== DEFAULT_CATEGORY) {
+      params.category = next;
+      params.page = 1;
     }
+
+    setSearchParams(params, {replace: true});
+  };
+
+  const handleRecruitmentStatusChange = (status) => {
+    const params = Object.fromEntries([...searchParams]);
+    if (status === 'ALL') {
+      params.closed = undefined;
+    } else if (status === 'OPEN') {
+      params.closed = false;
+    } else if (status === 'CLOSED') {
+      params.closed = true;
+    }
+    params.page = 1;
+    setSearchParams(params, {replace: true});
+  };
+
+  const handleSortChange = (sortType) => {
+    const params = Object.fromEntries([...searchParams]);
+    params.sortBy = sortType;
+    params.page = 1;
+    setSearchParams(params, {replace: true});
+  };
+
+  const handlePageChange = (page) => {
+    const params = Object.fromEntries([...searchParams]);
+    params.page = page;
+    setSearchParams(params, {replace: true});
   };
 
   const fetchPosts = async () => {
     try {
       const response = await getPosts(
-        category === DEFAULT_CATEGORY ? null : category
+        category === DEFAULT_CATEGORY ? null : category,
+        page,
+        sortBy,
+        closed
       );
+
+      setPageInfo({
+        currentPage: response.data.currentPage + 1,
+        totalPages: response.data.totalPages,
+      });
+
       setPosts(response.data.posts);
     } catch (error) {
       console.error('게시글 목록 불러오기 실패:', error);
@@ -39,7 +80,7 @@ const MainBoard = () => {
 
   useEffect(() => {
     fetchPosts();
-  }, [category]);
+  }, [category, page, sortBy, closed]);
 
   return (
     <main className='relative flex flex-col items-center gap-2'>
@@ -54,13 +95,19 @@ const MainBoard = () => {
       </section>
 
       <section className='flex items-center gap-3 md:gap-7 mb-4 w-86 md:mb-6 lg:mb-8 md:w-149 lg:w-212'>
-        <SortSelector />
-        <RecruitmentStatusFilter />
+        <SortSelector handleSortChange={handleSortChange} />
+        <RecruitmentStatusFilter
+          handleRecruitmentStatusChange={handleRecruitmentStatusChange}
+        />
         <WriteButton />
       </section>
 
       <PostList posts={posts} />
-      <Pagination currentPage={1} totalPages={1} setCurrentPage={() => {}} />
+      <Pagination
+        currentPage={pageInfo.currentPage}
+        totalPages={pageInfo.totalPages}
+        setCurrentPage={handlePageChange}
+      />
     </main>
   );
 };

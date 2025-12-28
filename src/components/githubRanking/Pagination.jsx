@@ -9,7 +9,7 @@ export default function Pagination({currentPage, totalPages, setCurrentPage}) {
   return (
     <div className='flex-center space-x-2 mt-6 gap-2'>
       <Button
-        onClick={() => setCurrentPage((prev) => Math.max(1, prev - 1))}
+        onClick={() => setCurrentPage(Math.max(1, currentPage - 1))}
         disabled={isFirstPage}
         className='disabled:opacity-30 bg-white rounded-md p-1.5 md:p-2'
         size='none'>
@@ -17,22 +17,17 @@ export default function Pagination({currentPage, totalPages, setCurrentPage}) {
       </Button>
 
       {Array.from({length: totalPages}, (_, i) => (
-        <>
-          <Button
-            key={i + 1}
-            onClick={() => setCurrentPage(i + 1)}
-            className={`w-6 h-6 md:w-8 md:h-8 rounded-md text-center text-[10px] ${
-              currentPage === i + 1
-                ? 'text-white bg-main'
-                : 'bg-gray-200 hover:bg-gray-300'
-            }`}
-            size='none'>
-            {i + 1}
-          </Button>
-        </>
+        <Button
+          key={i + 1}
+          variant={`${currentPage === i + 1 ? 'primary' : 'secondary'}`}
+          onClick={() => setCurrentPage(i + 1)}
+          className={`w-6 h-6 md:w-8 md:h-8 rounded-md text-center text-[10px]`}
+          size='none'>
+          {i + 1}
+        </Button>
       ))}
       <Button
-        onClick={() => setCurrentPage((prev) => Math.min(totalPages, prev + 1))}
+        onClick={() => setCurrentPage(Math.min(totalPages, currentPage + 1))}
         disabled={isLastPage}
         className='disabled:opacity-30 bg-white rounded-md p-1.5 md:p-2'
         size='none'>
