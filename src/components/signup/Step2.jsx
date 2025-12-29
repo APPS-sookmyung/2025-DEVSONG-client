@@ -6,7 +6,7 @@ const Step2 = ({handleNextStep, handleDataEnter, signUpForm}) => {
     signUpForm.githubId.trim().length > 0 && signUpForm.bojId.trim().length > 0
   );
   return (
-    <div>
+    <section>
       <h2 className='font-semibold leading-6 text-base md:text-xl mb-4 md:mb-5'>
         추가 정보 입력
       </h2>
@@ -27,7 +27,7 @@ const Step2 = ({handleNextStep, handleDataEnter, signUpForm}) => {
         />
       </div>
       <ActionsButton handleNextStep={handleNextStep} isDisabled={isDisabled} />
-    </div>
+    </section>
   );
 };
 
