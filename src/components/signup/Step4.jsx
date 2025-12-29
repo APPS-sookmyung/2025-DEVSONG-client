@@ -8,7 +8,7 @@ const Step4 = ({handleSignUp}) => {
         회원가입이 완료되었어요
       </h2>
       <Button onClick={handleSignUp} className='h-10 md:h-12'>
-        <Link to='/login' className='w-full h-full flex-center'>
+        <Link to='/' className='w-full h-full flex-center'>
           로그인 하기
         </Link>
       </Button>
