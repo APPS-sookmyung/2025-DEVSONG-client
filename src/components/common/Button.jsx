@@ -1,6 +1,7 @@
 const variants = {
   primary: `bg-main text-white`,
   secondary: `bg-white text-black-60`,
+  tertiary: 'bg-grey-02 text-black-60',
   ghost: `text-black-60`,
 };
 

@@ -6,7 +6,7 @@ export const getPosts = async (category, page, sortBy, closed) => {
     ...(category && {category}),
     page: page - 1,
     sortBy: sortBy,
-    // ...(closed !== undefined && {closed}),
+    ...(closed !== undefined && {closed}),
   };
 
   const response = await privateApi.get(`/post`, {

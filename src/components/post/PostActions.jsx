@@ -1,23 +1,35 @@
-import {useEffect, useState} from 'react';
-import commentIcon from '../../assets/icons/comment.svg';
-import heartIcon from '../../assets/icons/heart.svg';
+import {useState} from 'react';
+import commentIcon from '@assets/icons/comment.svg';
+import heartIcon from '@assets/icons/heart.svg';
 import fullHeartIcon from '@assets/icons/fullHeart.svg';
 import Button from '../common/Button';
 import Applicants from './Applicants';
 import {applyToPost, likePost} from '@apis/posts';
+import ApplyModal from './applyModal';
 
-const PostActions = ({postId, isAuthor, applied, likeCount, comment}) => {
+const PostActions = ({
+  postId,
+  isAuthor,
+  applied,
+  liked,
+  likeCount,
+  comment,
+  onLikeToggle,
+}) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [isLiked, setIsLiked] = useState(Number(likeCount) > 0 ? true : false);
-  // const [currentLikeCount, setCurrentLikeCount] = useState(likeCount);
+  const [isApplyOpen, setIsApplyOpen] = useState(false);
 
   const onLikeClick = async () => {
+    const nextLiked = !liked;
+    const nextCount = Math.max(0, likeCount + (nextLiked ? 1 : -1));
+
+    onLikeToggle(nextLiked, nextCount);
+
     try {
-      const response = await likePost(postId);
-      const like = response.data.postLikeId !== null ? true : false;
-      setIsLiked(like);
+      await likePost(postId);
     } catch (error) {
       console.error('좋아요 처리 실패:', error);
+      onLikeToggle(liked, likeCount);
     }
   };
 
@@ -28,13 +40,13 @@ const PostActions = ({postId, isAuthor, applied, likeCount, comment}) => {
   const [isApplied, setIsApplied] = useState(applied);
 
   const onApplyClick = async () => {
-    if (isApplied) return; // 이미 지원했다면 중복 클릭 방지
+    if (isApplied) return;
 
     // if (!window.confirm('이 프로젝트에 지원하시겠습니까?')) return;
 
     try {
       await applyToPost(postId);
-      setIsApplied(true); // 상태를 지원 완료로 변경
+      setIsApplied(true);
     } catch (error) {
       console.error('지원하기 실패:', error);
     }
@@ -44,11 +56,11 @@ const PostActions = ({postId, isAuthor, applied, likeCount, comment}) => {
     <div className='flex items-center justify-between mt-4 md:mt-5 pb-3 md:pb-5 border-b border-black-60'>
       <div className='flex text-sm gap-3 md:text-base'>
         <span className='flex items-center' onClick={onLikeClick}>
-          {isLiked === true ? (
-            <img src={fullHeartIcon} className='w-7 h-7' alt='full' />
-          ) : (
-            <img src={heartIcon} className='w-7 h-7' alt='empty' />
-          )}
+          <img
+            src={liked ? fullHeartIcon : heartIcon}
+            className='w-7 h-7'
+            alt='like'
+          />
           {likeCount}
         </span>
         <span className='flex items-center'>
@@ -62,11 +74,17 @@ const PostActions = ({postId, isAuthor, applied, likeCount, comment}) => {
             지원자 확인
           </Button>
         ) : (
-          <Button variant='primary' onClick={onApplyClick}>
+          <Button
+            variant='primary'
+            className={`${isApplied ? 'bg-main/70' : ''}`}
+            onClick={() => {
+              setIsApplyOpen(true);
+            }}>
             {isApplied ? '지원완료' : '지원하기'}
           </Button>
         )}
         {isAuthor && isOpen && <Applicants postId={postId} />}
+        {isApplyOpen && <ApplyModal />}
       </div>
     </div>
   );
