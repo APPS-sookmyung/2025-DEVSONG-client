@@ -64,6 +64,11 @@ const Post = () => {
           return comment;
         });
       });
+      setPostData((prev) => ({
+        ...prev,
+        comment: (prev.comment || 0) + 1,
+      }));
+
       console.log('댓글이 생성되었습니다:', comments);
       setActiveCommentId(null);
     } catch (error) {
