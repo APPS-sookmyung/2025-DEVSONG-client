@@ -29,7 +29,7 @@ const Step1 = ({handleNextStep, handleDataEnter, signUpForm}) => {
   };
 
   return (
-    <form className='flex flex-col'>
+    <section className='flex flex-col'>
       <h2 className='font-semibold leading-6 text-base md:text-xl mb-4 md:mb-5'>
         회원가입
       </h2>
@@ -111,7 +111,7 @@ const Step1 = ({handleNextStep, handleDataEnter, signUpForm}) => {
         disabled={isNextEnabled === false}>
         회원가입
       </Button>
-    </form>
+    </section>
   );
 };
 

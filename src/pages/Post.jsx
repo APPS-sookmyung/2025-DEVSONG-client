@@ -6,11 +6,12 @@ import CommentSection from '@components/post/CommentSection';
 import CommentBar from '@components/post/CommentBar';
 import {useEffect, useState} from 'react';
 import {createComment, getPostDetail} from '@apis/posts';
-import {useParams} from 'react-router-dom';
+import {useNavigate, useParams} from 'react-router-dom';
 import PostLayout from '@components/post/PostLayout';
 
 const Post = () => {
   const {id} = useParams(); // post id 받아오기
+  const navigate = useNavigate();
 
   const [postData, setPostData] = useState({});
   const [comments, setComments] = useState([]);
@@ -20,6 +21,7 @@ const Post = () => {
 
   const fetchPostDetail = async () => {
     const response = await getPostDetail(id);
+
     setPostData(response.data);
     setComments(response.data.comments);
   };
@@ -44,7 +46,7 @@ const Post = () => {
       const response = await createComment(postData.id, content, parentId);
       const newComment = response.data;
       console.log('댓글이 생성되었습니다:', response.data);
-      // 3. 상태 업데이트 (불변성 유지)
+
       setComments((prevComments) => {
         // 일반 댓글
         if (newComment.parentId === null) {
@@ -62,6 +64,11 @@ const Post = () => {
           return comment;
         });
       });
+      setPostData((prev) => ({
+        ...prev,
+        comment: (prev.comment || 0) + 1,
+      }));
+
       console.log('댓글이 생성되었습니다:', comments);
       setActiveCommentId(null);
     } catch (error) {
@@ -69,13 +76,33 @@ const Post = () => {
     }
   };
 
+  const handleLikeToggle = (isLiked, nextCount) => {
+    setPostData((prev) => ({
+      ...prev,
+      liked: isLiked,
+      likeCount: nextCount,
+    }));
+  };
+
+  const handlePostUpdate = () => {
+    localStorage.setItem('isUpdate', true);
+    localStorage.setItem('id', postData.id);
+    localStorage.setItem('title', postData.title);
+    localStorage.setItem('content', postData.content);
+    localStorage.setItem('category', postData.category);
+
+    navigate('/posts/write'); // 글쓰기 페이지로 이동
+  };
+
   return (
     <>
-      <PostResumeHeader />
+      <PostResumeHeader isPost={true} />
       <PostLayout>
         <div className='relative flex flex-col w-full h-screen *:px-6 *:md:px-11'>
-          <section className='flex flex-col flex-1 min-h-0 md:h-[850px] overflow-y-auto py-4 md:py-9'>
+          <section className='flex flex-col flex-1 min-h-0 md:h-269.5 overflow-y-auto py-4 md:py-9 scroll-smooth'>
+            <div></div>
             <PostHeader
+              postId={postData.id}
               title={postData.title}
               author={postData.username}
               major={postData.major}
@@ -83,21 +110,26 @@ const Post = () => {
               category={postData.category}
               closed={postData.closed}
               isAuthor={postData.author}
+              handlePostUpdate={handlePostUpdate}
             />
             <PostContent content={postData.content} />
             <PostActions
               postId={postData.id}
               isAuthor={postData.author}
-              liked={postData.liked}
               applied={postData.applied}
+              liked={postData.liked}
               likeCount={postData.likeCount}
               comment={postData.comment}
+              onLikeToggle={handleLikeToggle}
             />
-            <CommentSection
-              comments={comments}
-              onToggle={handleActiveComment}
-              activeCommentId={activeCommentId}
-            />
+            <section className='flex-1'>
+              <CommentSection
+                isAuthor={postData.author}
+                comments={comments}
+                onToggle={handleActiveComment}
+                activeCommentId={activeCommentId}
+              />
+            </section>
           </section>
 
           <CommentBar onAddComment={onAddComment} />

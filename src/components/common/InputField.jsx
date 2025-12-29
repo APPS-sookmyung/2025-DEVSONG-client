@@ -22,6 +22,7 @@ const InputField = ({
       }
       <div className='flex items-center gap-2'>
         <input
+          autoComplete='off'
           type={type}
           value={value}
           name={name}

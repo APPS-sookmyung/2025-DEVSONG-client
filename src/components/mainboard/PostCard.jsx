@@ -1,9 +1,10 @@
-import RecruitLabel from '../common/RecruitLabel';
-import CategoryLabel from '../common/CategoryLabel';
-import commentIcon from '../../assets/icons/comment.svg';
-import heartIcon from '../../assets/icons/heart.svg';
+import commentIcon from '@assets/icons/comment.svg';
+import heartIcon from '@assets/icons/heart.svg';
 import {useNavigate} from 'react-router-dom';
-import {formatDate} from '../../lib/formateDate';
+
+import CategoryLabel from '@components/common/CategoryLabel';
+import RecruitLabel from '@components/common/RecruitLabel';
+import {formatDate} from '@lib/formateDate';
 
 const PostCard = ({
   id,
@@ -13,11 +14,11 @@ const PostCard = ({
   category,
   createdAt,
   closed,
-  like,
+  likeCount,
   comment,
 }) => {
   const navigate = useNavigate();
-  const isRecruiting = ['PROJECT', 'STUDY', 'EXTRA'].includes(category)
+  const isRecruiting = ['project', 'study', 'extra'].includes(category)
     ? true
     : false;
 
@@ -27,7 +28,7 @@ const PostCard = ({
       className='bg-white flex flex-col justify-center rounded-xl shadow-box w-86 h-32 px-4 py-3 gap-2 md:w-149 md:h-44 md:px-5.5 md:py-4.5 lg:w-212 lg:h-56 lg:gap-4 lg:px-7 lg:py-6'>
       <div>
         <div className='flex gap-1'>
-          <CategoryLabel category={category.toLowerCase()} />
+          <CategoryLabel category={category} />
           {isRecruiting && <RecruitLabel closed={closed} />}
         </div>
       </div>
@@ -47,7 +48,7 @@ const PostCard = ({
               className='md:w-5 md:h-5 lg:w-6 lg:h-6'
               alt='좋아요'
             />
-            {like}
+            {likeCount}
           </span>
           <span className='flex items-center'>
             <img

@@ -1,6 +1,7 @@
 const variants = {
   primary: `bg-main text-white`,
   secondary: `bg-white text-black-60`,
+  tertiary: 'bg-grey-02 text-black-60',
   ghost: `text-black-60`,
 };
 
@@ -23,7 +24,7 @@ const Button = ({
       type={type}
       onClick={onClick}
       disabled={disabled}
-      className={`${sizes[size]} ${className} ${variants[variant]} rounded-lg font-medium text-sm md:text-base`}>
+      className={`${sizes[size]} ${className} ${variants[variant]} cursor-pointer rounded-lg font-medium text-sm md:text-base`}>
       {children}
     </button>
   );

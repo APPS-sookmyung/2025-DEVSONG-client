@@ -1,8 +1,7 @@
-import {useState} from 'react';
 import CommentThread from './CommentThread';
 import comment from '@assets/icons/comment_grey.svg';
 
-const CommentSection = ({comments, activeCommentId, onToggle}) => {
+const CommentSection = ({isAuthor, comments, activeCommentId, onToggle}) => {
   const noComment = !comments || comments.length === 0;
 
   if (noComment) {
@@ -22,6 +21,7 @@ const CommentSection = ({comments, activeCommentId, onToggle}) => {
         return (
           <CommentThread
             key={comment.commentId}
+            isAuthor={isAuthor}
             index={index}
             isActive={activeCommentId === comment.commentId}
             onToggle={() => onToggle(comment.commentId)}
