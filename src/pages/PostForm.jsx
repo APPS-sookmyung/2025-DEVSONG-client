@@ -77,6 +77,7 @@ const PostForm = () => {
         <CategoryOptions
           selectedCategory={selectedCategory}
           onCategorySelect={onCategorySelect}
+          disabled={isUpdate}
         />
 
         <PostEditor
