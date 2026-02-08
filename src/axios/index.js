@@ -1,5 +1,5 @@
 import axios from 'axios';
-const BASE_URL = '/api';
+const BASE_URL = 'http://localhost:8080';
 
 // 인증 X (로그인, 회원가입 등)
 export const publicApi = axios.create({
