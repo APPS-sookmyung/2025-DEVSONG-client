@@ -97,11 +97,15 @@ const Post = () => {
 
   return (
     <>
-      <PostResumeHeader isPost={true} />
+      <PostResumeHeader
+        isPost={true}
+        isAuthor={postData.author}
+        postId={postData.id}
+        handlePostUpdate={handlePostUpdate}
+      />
       <PostLayout>
         <div className='relative flex flex-col w-full h-screen *:px-6 *:md:px-11'>
           <section className='flex flex-col flex-1 min-h-0 md:h-269.5 overflow-y-auto py-4 md:py-9 scroll-smooth'>
-            <div></div>
             <PostHeader
               postId={postData.id}
               title={postData.title}
