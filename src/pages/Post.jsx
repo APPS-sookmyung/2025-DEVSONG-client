@@ -4,7 +4,7 @@ import PostContent from '@components/post/PostContent';
 import PostActions from '@components/post/PostActions';
 import CommentSection from '@components/post/CommentSection';
 import CommentBar from '@components/post/CommentBar';
-import {useEffect, useState} from 'react';
+import {useCallback, useEffect, useState} from 'react';
 import {createComment, getPostDetail} from '@apis/posts';
 import {useNavigate, useParams} from 'react-router-dom';
 import PostLayout from '@components/post/PostLayout';
