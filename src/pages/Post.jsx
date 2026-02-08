@@ -19,16 +19,17 @@ const Post = () => {
   // 선택된 댓글
   const [activeCommentId, setActiveCommentId] = useState(null);
 
-  const fetchPostDetail = async () => {
+  // 게시글 상세 정보 불러오기
+  const fetchPostDetail = useCallback(async () => {
     const response = await getPostDetail(id);
 
     setPostData(response.data);
     setComments(response.data.comments);
-  };
+  }, [id]);
 
   useEffect(() => {
     fetchPostDetail();
-  }, []);
+  }, [fetchPostDetail]);
 
   // 댓글 선택/해제 토글 핸들러
   const handleActiveComment = (commentId) => {
