@@ -7,6 +7,7 @@ const PostResumeHeader = ({
   isAuthor,
   postId,
   handlePostUpdate,
+  handlePostClose,
 }) => {
   return (
     <header className='bg-white w-full h-16 px-6 flex items-center relative z-50 justify-between shadow-box md:shadow-none *:cursor-pointer md:hidden'>
@@ -17,6 +18,7 @@ const PostResumeHeader = ({
         isAuthor={isAuthor}
         postId={postId}
         handlePostUpdate={handlePostUpdate}
+        handlePostClose={handlePostClose}
       />
     </header>
   );
