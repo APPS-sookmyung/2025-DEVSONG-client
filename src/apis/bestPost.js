@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const SERVER_URL = 'http://localhost:8080';
+const SERVER_URL = '/api';
 
 export const fetchBestPosts = async () => {
   const token = localStorage.getItem('accessToken');

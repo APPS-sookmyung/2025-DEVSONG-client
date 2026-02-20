@@ -21,12 +21,16 @@ const MainBoard = () => {
   const closed = searchParams.get('closed');
   const page = Number(searchParams.get('page') || 1);
 
+  // 카테고리 변경 핸들러
   const handleCategoryChange = (next) => {
-    const params = {};
+    const params = Object.fromEntries([...searchParams]);
+    params.page = 1;
 
-    if (next && next !== DEFAULT_CATEGORY) {
+    // 'all' 카테고리는 쿼리 파라미터에서 제거
+    if (!next || next === DEFAULT_CATEGORY) {
+      delete params.category;
+    } else {
       params.category = next;
-      params.page = 1;
     }
 
     setSearchParams(params, {replace: true});
@@ -34,13 +38,15 @@ const MainBoard = () => {
 
   const handleRecruitmentStatusChange = (status) => {
     const params = Object.fromEntries([...searchParams]);
+
     if (status === 'ALL') {
-      params.closed = undefined;
+      delete params.closed;
     } else if (status === 'OPEN') {
       params.closed = false;
     } else if (status === 'CLOSED') {
       params.closed = true;
     }
+
     params.page = 1;
     setSearchParams(params, {replace: true});
   };
