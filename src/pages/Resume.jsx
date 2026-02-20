@@ -1,5 +1,4 @@
 import React, {useState, useEffect} from 'react';
-import ResumeHeaderMobile from '../components/resume/ResumeHeaderMobile';
 import ProfileCardMobile from '../components/resume/ProfileCardMobile';
 import IntroSectionMobile from '../components/resume/IntroSectionMobile';
 import StackSectionMobile from '../components/resume/StackSectionMobile';
@@ -13,14 +12,12 @@ import InterestModal from '../components/common/InterestModal';
 import ProfileEditModal from '../components/resume/ProfileEditModal';
 import {resume as dummyResume} from '../components/resume/dummy';
 import {getResumeApi, updateResumeApi} from '../apis/resume.js';
-import {resume} from '../components/resume/dummy';
 import PostResumeHeader from '../layout/PostResumeHeader';
 
 export default function Resume() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isStackModalOpen, setIsStackModalOpen] = useState(false);
   const [isInterestModalOpen, setIsInterestModalOpen] = useState(false);
-
   const [user, setUser] = useState(dummyResume);
 
   const TECH_STACK_MAP = {
@@ -66,12 +63,40 @@ export default function Resume() {
     AI_ML: 'AI / 머신러닝',
   };
 
+  const INTEREST_MAP = {
+    WEB_FRONTEND: '웹 프론트엔드',
+    WEB_BACKEND: '웹 백엔드',
+    MOBILE_DEVELOPMENT: '모바일 프로그래밍',
+    ANDROID: 'Android',
+    IOS: 'iOS',
+    GAME: '게임 개발',
+    DATA_ANALYTICS: '데이터 분석',
+    AI_ML: 'AI / 머신러닝',
+    EMBEDDED_SYSTEMS: '임베디드 / IoT',
+    BLOCKCHAIN: '블록체인',
+    ALGORITHMS_DATA_STRUCTURES: '알고리즘 / 자료구조',
+    NETWORK_SECURITY: '네트워크 / 보안',
+    SYSTEM_PROGRAMMING: '시스템 프로그래밍',
+    FULLSTACK: '풀스택',
+    OS_COMPILERS: 'OS / 컴파일러',
+    DATABASE: '데이터베이스',
+    STARTUP: '스타트업',
+    RESEARCH: '연구 / 대학원',
+    HACKATHON: '해커톤',
+    OPEN_SOURCE: '오픈소스',
+    UX_UI: 'UX / UI',
+  };
+
   useEffect(() => {
     const fetchData = async () => {
       const data = await getResumeApi();
 
       const uiStackList = (data.techStack || []).map(
         (enumVal) => TECH_STACK_MAP[enumVal] || enumVal
+      );
+
+      const uiInterestList = (data.interests || []).map(
+        (enumVal) => INTEREST_MAP[enumVal] || enumVal
       );
 
       const formattedUser = {
@@ -86,45 +111,51 @@ export default function Resume() {
         bojId: data.bojId,
         introduction: data.content || '',
         selectedStacks: uiStackList,
-        selectedInterests: data.interests || [],
+        selectedInterests: uiInterestList,
       };
+
       setUser(formattedUser);
     };
+
     fetchData();
   }, []);
 
   const handleUpdate = async (updates) => {
     try {
       const nextUser = {...user, ...updates};
-      setUser(nextUser);
 
-      const finalTechStacks = nextUser.selectedStacks.map((uiLabel) => {
-        const foundEnum = Object.keys(TECH_STACK_MAP).find(
-          (key) => TECH_STACK_MAP[key] === uiLabel
-        );
-        return foundEnum || uiLabel;
-      });
+      const finalInterests = (nextUser.selectedInterests || []).map(
+        (uiLabel) =>
+          Object.keys(INTEREST_MAP).find(
+            (key) => INTEREST_MAP[key] === uiLabel
+          ) || uiLabel
+      );
 
-      const requestBody = {
+      const finalTechStacks = (nextUser.selectedStacks || []).map(
+        (uiLabel) =>
+          Object.keys(TECH_STACK_MAP).find(
+            (key) => TECH_STACK_MAP[key] === uiLabel
+          ) || uiLabel
+      );
+
+      await updateResumeApi({
         bojId: nextUser.bojId,
         githubId: nextUser.githubId,
-        profileImage:
-          nextUser.profil === dummyResume.profil ? null : nextUser.profil,
+        profileImage: nextUser.profil,
         content: nextUser.introduction,
-        interests: nextUser.selectedInterests,
+        interests: finalInterests,
         techStack: finalTechStacks,
-      };
+      });
 
-      await updateResumeApi(requestBody);
+      setUser(nextUser);
+
       return true;
     } catch (error) {
       return false;
     }
   };
-
   return (
     <div className='p-0 space-y-4 max-w-6xl mx-auto'>
-      {/* 모바일 뷰 */}
       <div className='block md:hidden'>
         <PostResumeHeader />
         <ProfileCardMobile setIsModalOpen={setIsModalOpen} user={user} />
@@ -139,7 +170,6 @@ export default function Resume() {
         />
       </div>
 
-      {/* PC 뷰 */}
       <div className='hidden md:flex gap-6 mr-40 ml-40'>
         <ProfileCardPC setIsModalOpen={setIsModalOpen} user={user} />
         <div className='flex-1 space-y-4 mt-15'>
@@ -155,7 +185,6 @@ export default function Resume() {
         </div>
       </div>
 
-      {/* 모달들 */}
       {isStackModalOpen && (
         <StackModal
           selectedStacks={user.selectedStacks}
