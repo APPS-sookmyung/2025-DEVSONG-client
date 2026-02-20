@@ -14,7 +14,7 @@ export default function ProfileCardPC({setIsModalOpen, user}) {
         <img
           src={user.profil}
           alt='프로필'
-          className='w-full h-full object-cover'
+          className='w-30 h-25 rounded-full object-cover'
         />
       </div>
       <div className='mt-4 text-center'>
