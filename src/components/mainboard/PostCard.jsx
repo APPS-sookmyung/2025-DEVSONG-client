@@ -5,6 +5,7 @@ import {useNavigate} from 'react-router-dom';
 import CategoryLabel from '@components/common/CategoryLabel';
 import RecruitLabel from '@components/common/RecruitLabel';
 import {formatDate} from '@lib/formateDate';
+import ContentPreview from '@components/common/ContentPreview';
 
 const PostCard = ({
   id,
@@ -33,9 +34,12 @@ const PostCard = ({
         </div>
       </div>
       <h3 className='font-bold text-sm md:text-lg lg:text-xl'>{title}</h3>
-      <p className='text-black-60 text-[10px] md:text-sm lg:text-lg'>
+      <ContentPreview size='none' className='overflow-hidden'>
         {preview}
-      </p>
+      </ContentPreview>
+      {/* <p className='text-black-60 text-[10px] md:text-sm lg:text-lg'>
+        {preview}
+      </p> */}
       <div className='flex items-center justify-between'>
         <div className='flex text-black-40 gap-1 text-[8px] md:text-xs lg:gap-2 lg:text-base'>
           <span>{username}</span>
