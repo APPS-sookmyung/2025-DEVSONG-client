@@ -4,12 +4,14 @@ import submit from '../../assets/icons/submitIcon.svg';
 const CommentBar = ({onAddComment}) => {
   const [comment, setComment] = useState('');
 
-  const onSubmitHandler = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
     if (!comment.trim()) return;
 
-    onAddComment(comment);
-    setComment('');
+    const success = await onAddComment(comment);
+    if (success) {
+      setComment('');
+    }
   };
 
   return (
@@ -17,7 +19,7 @@ const CommentBar = ({onAddComment}) => {
       <form
         autoComplete='off'
         className='bg-grey-01 mt-2.5 mb-6.5 md:my-9 w-full flex gap-1 py-3 pl-3.5 rounded-lg'
-        onSubmit={onSubmitHandler}>
+        onSubmit={onSubmit}>
         <input
           className='flex-1 text-sm leading-[22.4px] focus:outline-none'
           name='comment'
