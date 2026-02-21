@@ -3,7 +3,7 @@ import heartIcon from '@assets/icons/heart.svg';
 import {useNavigate} from 'react-router-dom';
 import CategoryLabel from '@components/common/CategoryLabel';
 import RecruitLabel from '@components/common/RecruitLabel';
-import {formatDate} from '@lib/formateDate';
+import {formatDate} from '@lib/formatDate';
 import removeMd from 'remove-markdown';
 
 const PostCard = ({

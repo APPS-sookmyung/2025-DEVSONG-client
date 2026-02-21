@@ -4,7 +4,7 @@ import commentIcon from '../../assets/icons/comment_grey.svg';
 import menuIcon from '../../assets/icons/verticalEllipsisIcon.svg';
 import {useState} from 'react';
 import ModalLayout from '@components/common/ModalLayout';
-import {formatDate} from '../../lib/formateDate';
+import {formatDate} from '../../lib/formatDate';
 import useClickOutside from '@hooks/useClickOutside';
 
 function CommentHeader({isAuthor, username, createdAt, handleSetClicked}) {

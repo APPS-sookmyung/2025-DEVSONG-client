@@ -10,7 +10,7 @@ const PostHeaderActions = ({
 }) => {
   const goBack = useGoBack('/posts');
   return (
-    <div className='hidden md:pb-5 md:flex md:justify-between *:md:bg-grey-01 *:rounded-sm *:cursor-pointet'>
+    <div className='hidden md:pb-5 md:flex md:justify-between *:md:bg-grey-01 *:rounded-sm *:cursor-pointer'>
       <div
         onClick={() => goBack()}
         className='flex-center w-7 h-7 px-[5.5px] py-[10.5px] cursor-pointer'>
