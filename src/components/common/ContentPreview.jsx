@@ -1,14 +1,11 @@
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import remarkBreaks from 'remark-breaks';
+import React from 'react';
 
-const ContentPreview = ({children, size = 'default'}) => {
-  const sizes = {
-    default: 'max-w-200 h-full',
-    none: '',
-  };
+const ContentPreview = ({children}) => {
   return (
-    <div className={`prose ${sizes[size]} overflow-y-scroll`}>
+    <div className={`prose max-w-none overflow-y-scroll`}>
       <ReactMarkdown remarkPlugins={[remarkGfm, remarkBreaks]} breaks>
         {children}
       </ReactMarkdown>
@@ -16,4 +13,4 @@ const ContentPreview = ({children, size = 'default'}) => {
   );
 };
 
-export default ContentPreview;
+export default React.memo(ContentPreview);

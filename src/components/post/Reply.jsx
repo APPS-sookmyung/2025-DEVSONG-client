@@ -1,4 +1,4 @@
-import {formatDate} from '../../lib/formateDate';
+import {formatDate} from '../../lib/formatDate';
 
 const Reply = ({username, content, createdAt}) => {
   return (

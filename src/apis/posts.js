@@ -24,7 +24,6 @@ export const getPostDetail = async (id) => {
 
 // Post 작성
 export const submitNewPost = async (post) => {
-  console.log(post);
   const response = await privateApi.post(`/post/write`, {
     title: post.title,
     content: post.content,

@@ -6,7 +6,7 @@ const CommentSection = ({isAuthor, comments, activeCommentId, onToggle}) => {
 
   if (noComment) {
     return (
-      <div className='flex-center flex-col h-80 gap-5'>
+      <div className='flex items-center justify-center flex-col md:h-50 gap-5 mt-20 md:mt-10'>
         <img className='w-22 h-22' src={comment} alt='댓글' />
         <p className='text-lg text-black-60 font-medium'>
           첫 댓글을 남겨주세요.

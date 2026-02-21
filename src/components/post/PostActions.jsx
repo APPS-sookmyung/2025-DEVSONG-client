@@ -5,31 +5,40 @@ import fullHeartIcon from '@assets/icons/fullHeart.svg';
 import Button from '../common/Button';
 import Applicants from './Applicants';
 import {applyToPost, likePost} from '@apis/posts';
+import useClickOutside from '@hooks/useClickOutside';
 
 const PostActions = ({
-  postId,
+  id,
   isAuthor,
   applied,
   liked,
   likeCount,
   comment,
+  closed,
+  applyCount,
   onLikeToggle,
+  handlePostApply,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
-
-  console.log('isAuthor', isAuthor);
+  const applicantsRef = useClickOutside(() => setIsOpen(false));
+  const [isLiking, setIsLiking] = useState(false);
 
   const onLikeClick = async () => {
+    if (isLiking) return;
+    setIsLiking(true);
+
     const nextLiked = !liked;
     const nextCount = Math.max(0, likeCount + (nextLiked ? 1 : -1));
 
     onLikeToggle(nextLiked, nextCount);
 
     try {
-      await likePost(postId);
+      await likePost(id);
     } catch (error) {
       console.error('좋아요 처리 실패:', error);
       onLikeToggle(liked, likeCount);
+    } finally {
+      setIsLiking(false);
     }
   };
 
@@ -37,16 +46,12 @@ const PostActions = ({
     setIsOpen(!isOpen);
   };
 
-  const [isApplied, setIsApplied] = useState(applied);
-
   const onApplyClick = async () => {
-    if (isApplied) return;
-
     if (!window.confirm('이 프로젝트에 지원하시겠습니까?')) return;
 
     try {
-      await applyToPost(postId);
-      setIsApplied(true);
+      await applyToPost(id);
+      handlePostApply();
     } catch (error) {
       console.error('지원하기 실패:', error);
     }
@@ -55,7 +60,9 @@ const PostActions = ({
   return (
     <div className='flex items-center justify-between mt-4 md:mt-5 pb-3 md:pb-5 border-b border-black-60'>
       <div className='flex text-sm gap-3 md:text-base'>
-        <span className='flex items-center' onClick={onLikeClick}>
+        <span
+          className='flex items-center cursor-pointer'
+          onClick={onLikeClick}>
           <img
             src={liked ? fullHeartIcon : heartIcon}
             className='w-7 h-7'
@@ -63,25 +70,29 @@ const PostActions = ({
           />
           {likeCount}
         </span>
-        <span className='flex items-center'>
+        <span className='flex items-center cursor-pointer'>
           <img src={commentIcon} className='w-7 h-7' alt='댓글 수' />
           {comment}
         </span>
       </div>
-      <div className='relative'>
+      <div ref={applicantsRef} className='relative'>
         {isAuthor ? (
-          <Button variant='primary' onClick={onCheckApplicantsClick}>
-            지원자 확인
+          <Button
+            variant='primary'
+            disabled={applyCount === 0}
+            onClick={onCheckApplicantsClick}>
+            지원자 확인 ({applyCount})
           </Button>
         ) : (
           <Button
             variant='primary'
-            className={`${isApplied ? 'bg-main/70' : ''}`}
+            disabled={applied || closed}
+            className={`${applied ? 'bg-main/70' : ''}`}
             onClick={onApplyClick}>
-            {isApplied ? '지원완료' : '지원하기'}
+            {applied ? '지원완료' : '지원하기'}
           </Button>
         )}
-        {isAuthor && isOpen && <Applicants postId={postId} />}
+        {isAuthor && isOpen && <Applicants postId={id} />}
       </div>
     </div>
   );

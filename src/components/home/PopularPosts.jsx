@@ -5,6 +5,7 @@ import mainLeftArrow from '../../assets/icons/mainLeftArrow.svg';
 import mainRightArrow from '../../assets/icons/mainRightArrow.svg';
 import RecruitLabel from '../common/RecruitLabel';
 import CategoryLabel from '../common/CategoryLabel';
+import removeMd from 'remove-markdown';
 
 const PopularPosts = ({
   posts,
@@ -31,7 +32,7 @@ const PopularPosts = ({
                 {post.title}
               </p>
               <p className='text-[10px] text-black-60 leading-snug line-clamp-5'>
-                {post.preview}
+                {removeMd(post.preview)}
               </p>
             </div>
           ))}
@@ -61,7 +62,7 @@ const PopularPosts = ({
                   {post.title}
                 </p>
                 <p className='text-[14px] text-black-60 leading-snug line-clamp-5'>
-                  {post.preview}
+                  {removeMd(post.preview)}
                 </p>
               </div>
             ))}

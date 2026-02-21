@@ -10,7 +10,8 @@
       "@constants/*": ["constants/*"],
       "@layout/*": ["layout/*"],
       "@lib/*": ["lib/*"],
-      "@axios/*": ["axios/*"]
+      "@axios/*": ["axios/*"],
+      "@hooks/*": ["hooks/*"]
     }
   }
 }
