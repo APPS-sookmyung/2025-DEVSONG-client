@@ -21,7 +21,6 @@ const LoginPage = () => {
 
     try {
       const response = await login(userInfo);
-      console.log('로그인 성공:', response.data);
 
       if (response.data && response.data.token) {
         localStorage.setItem('accessToken', response.data.token);
