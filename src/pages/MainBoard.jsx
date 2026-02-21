@@ -1,5 +1,5 @@
 import SearchBar from '@components/common/SearchBar';
-import PostList from '@components/mainboard/PostList';
+import PostList from '@components/common/PostList';
 import CategorySelector from '@components/mainboard/CategorySelector';
 import SortSelector from '@components/mainboard/SortSelector';
 import RecruitmentStatusFilter from '@components/mainboard/RecruitmentStatusFilter';
