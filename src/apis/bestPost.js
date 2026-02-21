@@ -1,12 +1,8 @@
-import axios from 'axios';
-
-const SERVER_URL = '/api';
+import {privateApi} from '@axios/index';
 
 export const fetchBestPosts = async () => {
-  const token = localStorage.getItem('accessToken');
-  const response = await axios.get(`${SERVER_URL}/post/best`, {
-    headers: {Authorization: `Bearer ${token}`},
-  });
+  const response = await privateApi.get('/post/best');
+
   return response.data.map((p) => ({
     id: p.postId,
     title: p.title,
