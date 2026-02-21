@@ -111,8 +111,8 @@ const MobileMyPage = ({
             <InputField
               label='이메일'
               value={email}
-              onChange={() => {}}
               className='h-9 text-sm'
+              readOnly
             />
             <InputField
               label='학번'
