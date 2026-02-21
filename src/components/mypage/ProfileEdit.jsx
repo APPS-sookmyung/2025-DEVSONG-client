@@ -9,7 +9,7 @@ const ProfileEdit = ({
   major = '데이터사이언스전공',
 }) => {
   return (
-    <div className='w-133.5 max-w-133.5 h-fit bg-white rounded-3xl p-6 shadow-box'>
+    <div className='w-full max-w-133.5 h-fit bg-white rounded-3xl p-6 shadow-box'>
       {/* 제목과 아이콘 */}
       <h3 className='text-base font-bold text-black-100 mb-6 flex items-center gap-2'>
         <img src={editIcon} alt='edit icon' className='w-6 h-6' />

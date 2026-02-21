@@ -2,6 +2,8 @@ import {useState} from 'react';
 import Sidebar from '@components/mypage/Sidebar';
 import ProfileEdit from '@components/mypage/ProfileEdit';
 import PostList from '@components/common/PostList';
+import {useMediaQuery} from 'react-responsive';
+import MobileMyPage from '@components/mypage/MobileMyPage';
 
 const dummyPosts = [
   {
@@ -63,19 +65,31 @@ const dummyPosts = [
 
 function MyPage() {
   const [activeTab, setActiveTab] = useState('edit');
+  const isMobile = useMediaQuery({query: '(max-width: 767px)'});
 
+  // 모바일 버전 렌더링
+  if (isMobile) {
+    return (
+      <MobileMyPage
+        activeTab={activeTab}
+        setActiveTab={setActiveTab}
+        dummyPosts={dummyPosts}
+      />
+    );
+  }
+
+  // 데스크탑 버전 렌더링
   return (
     <div className='w-full h-full bg-background my-12 md:px-10'>
       <div className='flex justify-center gap-10'>
         {/* 사이드바 */}
         <Sidebar activeTab={activeTab} setActiveTab={setActiveTab} />
 
-        {/* 프로필 수정 탭*/}
-        {activeTab === 'edit' && <ProfileEdit />}
-
-        {/* 내가 쓴 글, 댓글 단 글, 좋아요한 글, 지원한 글 탭 */}
-        {activeTab !== 'edit' && (
-          <div className='max-w-133 h-179.5 p-6 bg-grey-01 shadow-box rounded-3xl overflow-y-auto'>
+        {/* 콘텐츠 영역 */}
+        {activeTab === 'edit' ? (
+          <ProfileEdit />
+        ) : (
+          <div className='w-full max-w-133.5 h-179.5 p-6 bg-grey-01 shadow-box rounded-3xl overflow-y-auto'>
             {activeTab === 'written' && (
               <PostList posts={dummyPosts} cardVariant='flex' />
             )}
