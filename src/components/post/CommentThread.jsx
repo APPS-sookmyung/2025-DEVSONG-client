@@ -25,7 +25,6 @@ function CommentHeader({isAuthor, username, createdAt, handleSetClicked}) {
             src={commentIcon}
             className='w-5 h-5 md:w-6 md:h-6'
             alt='답글'
-            ㄴ
             onClick={(e) => {
               e.stopPropagation();
               handleSetClicked();
@@ -59,7 +58,6 @@ function CommentHeader({isAuthor, username, createdAt, handleSetClicked}) {
 }
 
 const CommentThread = ({
-  commentId,
   isAuthor,
   index,
   isActive,
@@ -67,7 +65,6 @@ const CommentThread = ({
   username,
   content,
   createdAt,
-  parentId,
   replies,
 }) => {
   const handleClick = (e) => {

@@ -1,7 +1,6 @@
 import commentIcon from '@assets/icons/comment.svg';
 import heartIcon from '@assets/icons/heart.svg';
 import {useNavigate} from 'react-router-dom';
-
 import CategoryLabel from '@components/common/CategoryLabel';
 import RecruitLabel from '@components/common/RecruitLabel';
 import {formatDate} from '@lib/formateDate';
@@ -37,9 +36,6 @@ const PostCard = ({
       <ContentPreview size='none' className='overflow-hidden'>
         {preview}
       </ContentPreview>
-      {/* <p className='text-black-60 text-[10px] md:text-sm lg:text-lg'>
-        {preview}
-      </p> */}
       <div className='flex items-center justify-between'>
         <div className='flex text-black-40 gap-1 text-[8px] md:text-xs lg:gap-2 lg:text-base'>
           <span>{username}</span>

@@ -3,14 +3,20 @@ import submit from '../../assets/icons/submitIcon.svg';
 
 const CommentBar = ({onAddComment}) => {
   const [comment, setComment] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    if (!comment.trim()) return;
+    if (!comment.trim() || isSubmitting) return;
 
-    const success = await onAddComment(comment);
-    if (success) {
-      setComment('');
+    setIsSubmitting(true);
+    try {
+      const success = await onAddComment(comment);
+      if (success) {
+        setComment('');
+      }
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -28,7 +34,10 @@ const CommentBar = ({onAddComment}) => {
           value={comment}
           onChange={(e) => setComment(e.target.value)}
         />
-        <button type='submit' className='cursor-pointer'>
+        <button
+          type='submit'
+          className='cursor-pointer'
+          disabled={isSubmitting}>
           <img className='pr-2' src={submit} alt='제출' />
         </button>
       </form>
