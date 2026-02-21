@@ -19,7 +19,7 @@ const PostActionMenu = ({
   const handleClose = async () => {
     try {
       await closeApply(Number(postId));
-      handlePostClose();
+      handlePostClose?.();
       alert('포스트가 마감되었습니다.');
     } catch (error) {
       console.error('포스트 마감 처리 실패', error);

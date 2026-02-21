@@ -26,9 +26,8 @@ const Post = () => {
 
     try {
       const response = await getPostDetail(id);
-      console.log('게시글 상세 정보:', response.data);
       setPostData(response.data);
-      setComments(response.data.comments);
+      setComments(response.data.comments ?? []);
     } catch (error) {
       setError('게시글 정보를 불러오는 데 실패했습니다.');
     } finally {

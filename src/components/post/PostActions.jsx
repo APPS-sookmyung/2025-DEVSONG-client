@@ -92,7 +92,7 @@ const PostActions = ({
             {applied ? '지원완료' : '지원하기'}
           </Button>
         )}
-        {isAuthor && isOpen && <Applicants id={id} />}
+        {isAuthor && isOpen && <Applicants postId={id} />}
       </div>
     </div>
   );

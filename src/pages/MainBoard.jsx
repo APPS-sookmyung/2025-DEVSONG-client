@@ -106,7 +106,7 @@ const MainBoard = () => {
 
       {isLoading && <p className='py-10 text-black-40'>로딩 중...</p>}
       {error && (
-        <p className='py-20 md:py-10 text-sm md:text-lg text-shadow-red-300'>
+        <p className='py-20 md:py-10 text-sm md:text-lg text-red-500'>
           {error}
         </p>
       )}

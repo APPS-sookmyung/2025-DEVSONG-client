@@ -15,6 +15,8 @@ const CommentBar = ({onAddComment}) => {
       if (success) {
         setComment('');
       }
+    } catch (error) {
+      console.error('댓글 추가 실패:', error);
     } finally {
       setIsSubmitting(false);
     }
