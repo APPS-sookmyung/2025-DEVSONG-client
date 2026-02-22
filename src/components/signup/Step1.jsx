@@ -1,3 +1,4 @@
+import {sendEmailVerification, verifyEmailCode} from '@apis/auth';
 import Button from '@components/common/Button';
 import InputField from '@components/common/InputField';
 import {useState} from 'react';
@@ -7,6 +8,9 @@ const Step1 = ({handleNextStep, handleDataEnter, signUpForm}) => {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [verifyEmail, setVerifyEmail] = useState(false);
   const [passwordsMatch, setPasswordsMatch] = useState(null);
+  const [emailSent, setEmailSent] = useState(false);
+  const [emailCode, setEmailCode] = useState('');
+  const [isSending, setIsSending] = useState(false);
 
   const isNextEnabled =
     signUpForm.username.trim().length > 0 &&
@@ -15,18 +19,46 @@ const Step1 = ({handleNextStep, handleDataEnter, signUpForm}) => {
     passwordsMatch === true &&
     signUpForm.studentId.trim().length > 0 &&
     signUpForm.major.trim().length > 0;
+  // verifyEmail === true;
 
   // 비밀번호 일치 여부 확인
   const handlePasswordConfirm = (e) => {
     const {value} = e.target;
     setConfirmPassword(value);
+    setPasswordsMatch(signUpForm.password === value);
+  };
 
-    if (signUpForm.password !== value) {
-      setPasswordsMatch(false);
-    } else {
-      setPasswordsMatch(true);
+  // 이메일 인증 요청
+  const handleSendEmailVerification = async () => {
+    setIsSending(true);
+    try {
+      await sendEmailVerification(signUpForm.email);
+      setEmailSent(true);
+    } catch (error) {
+      console.error('이메일 인증 요청 실패:', error);
+      alert('이메일 인증 요청에 실패했습니다. 다시 시도해주세요.');
+    } finally {
+      setIsSending(false);
     }
   };
+
+  // 이메일 인증 코드 검증
+  const handleVerifyCode = async () => {
+    try {
+      const response = await verifyEmailCode(signUpForm.email, emailCode);
+      if (response.data.available) {
+        setVerifyEmail(true);
+      } else {
+        alert('인증 코드가 올바르지 않습니다. 다시 시도해주세요.');
+      }
+    } catch (error) {
+      console.error('이메일 인증 실패:', error);
+      alert('이메일 인증에 실패했습니다. 다시 시도해주세요.');
+    }
+  };
+
+  const emailInputDisabled =
+    signUpForm.email.trim().length === 0 || emailSent || isSending;
 
   return (
     <section className='flex flex-col'>
@@ -51,13 +83,43 @@ const Step1 = ({handleNextStep, handleDataEnter, signUpForm}) => {
             required={true}
             placeholder={'이메일 아이디'}
             suffix={'@sookmyung.ac.kr'}
+            disabled={verifyEmail} // 인증 완료 후 수정 방지
           />
-          <Button
-            variant='primary'
-            className='bg-main/70 h-10 md:h-12'
-            disabled={verifyEmail === false}>
-            이메일 인증
-          </Button>
+
+          {/* 이메일 인증 버튼 및 입력 필드 */}
+          {!emailSent ? (
+            <Button
+              variant='primary'
+              className={`${
+                emailInputDisabled ? 'pointer-events-none bg-main/70' : ''
+              } h-10 md:h-12`}
+              disabled={emailInputDisabled}
+              onClick={handleSendEmailVerification}>
+              {isSending ? '인증 메일 발송 중...' : '이메일 인증'}
+            </Button>
+          ) : (
+            <div className='flex items-end gap-2'>
+              <div className='flex-1'>
+                <InputField
+                  placeholder='인증 코드 입력'
+                  value={emailCode}
+                  onChange={(e) => setEmailCode(e.target.value)}
+                />
+              </div>
+              <Button
+                variant='primary'
+                className='w-21.5 md:w-34.5 h-11.5 md:h-12.5 shrink-0'
+                disabled={emailCode.trim().length === 0 || verifyEmail}
+                onClick={handleVerifyCode}>
+                {emailSent ? '인증' : '인증 완료'}
+              </Button>
+            </div>
+          )}
+
+          {/* 인증 완료 메시지 */}
+          {verifyEmail && (
+            <p className='text-xs text-green'>이메일 인증이 완료되었습니다.</p>
+          )}
         </div>
 
         <InputField
@@ -66,7 +128,7 @@ const Step1 = ({handleNextStep, handleDataEnter, signUpForm}) => {
           value={signUpForm.password}
           onChange={handleDataEnter}
           type='password'
-          placeholder={'비밀번호 (8자 이상)'}
+          placeholder={'비밀번호'}
           required={true}
         />
         <InputField
@@ -77,9 +139,7 @@ const Step1 = ({handleNextStep, handleDataEnter, signUpForm}) => {
           type='password'
           placeholder={'비밀번호 확인'}
           className={
-            passwordsMatch === false
-              ? 'focus:ring-red-500'
-              : 'focus:ring-green-400'
+            passwordsMatch === false ? 'focus:ring-red' : 'focus:ring-green'
           }
           required={true}
         />
@@ -109,7 +169,7 @@ const Step1 = ({handleNextStep, handleDataEnter, signUpForm}) => {
           isNextEnabled === false ? 'pointer-events-none bg-main/70' : ''
         } h-10 md:h-12 mt-4 md:mt-5`}
         disabled={isNextEnabled === false}>
-        회원가입
+        다음
       </Button>
     </section>
   );
