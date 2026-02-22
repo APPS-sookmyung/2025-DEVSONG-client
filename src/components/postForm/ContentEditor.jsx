@@ -1,7 +1,6 @@
 import {useState} from 'react';
-import ReactMarkdown from 'react-markdown';
-import remarkGfm from 'remark-gfm';
-import Button from '../common/Button';
+import ContentPreview from '@components/common/ContentPreview';
+import Button from '@components/common/Button';
 
 const ContentEditor = ({content, onContentChange, isModal}) => {
   const [previewMode, setPreviewMode] = useState(false);
@@ -26,9 +25,7 @@ const ContentEditor = ({content, onContentChange, isModal}) => {
             className='w-full h-full whitespace-pre-wrap resize-none focus:outline-none'
           />
         ) : (
-          <div className='prose max-w-200 h-full overflow-y-scroll'>
-            <ReactMarkdown remarkPlugins={[remarkGfm]}>{content}</ReactMarkdown>
-          </div>
+          <ContentPreview>{content}</ContentPreview>
         )}
       </div>
       <div className='flex justify-end py-4'>

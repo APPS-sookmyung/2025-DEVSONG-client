@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {useNavigate} from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 import logo from '../assets/images/logo.svg';
 import {login} from '../apis/login';
 
@@ -21,12 +21,11 @@ const LoginPage = () => {
 
     try {
       const response = await login(userInfo);
-      console.log('로그인 성공:', response.data);
 
       if (response.data && response.data.token) {
         localStorage.setItem('accessToken', response.data.token);
       }
-      navigate('/');
+      navigate('/home');
     } catch (error) {
       console.error('로그인 실패:', error);
       alert('로그인에 실패했습니다. 이메일과 비밀번호를 확인해주세요.');
@@ -56,7 +55,7 @@ const LoginPage = () => {
             <div className='flex flex-col gap-4 flex-1'>
               <input
                 type='text'
-                placeholder='이메일'
+                placeholder='숙명 이메일'
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 className='w-full p-3 border border-black-20 rounded-lg bg-grey-01 focus:outline-none focus:ring-1 focus:ring-main'
@@ -80,11 +79,11 @@ const LoginPage = () => {
           </div>
 
           <div className='flex justify-center mt-6 text-sm text-black-60'>
-            <a href='#' className='hover:text-black-60'>
+            <Link to='/signup' className='hover:text-black-60'>
               회원가입
-            </a>
+            </Link>
             <span className='mx-4'>|</span>
-            <a href='#' className='hover:text-black-60'>
+            <a href='#' className='hover:text-black-60 pointer-events-none'>
               비밀번호 초기화
             </a>
           </div>

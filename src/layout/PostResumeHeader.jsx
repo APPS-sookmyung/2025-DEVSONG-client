@@ -1,23 +1,24 @@
-import verticalEllipsis from '../assets/icons/vertical_ellipsis.svg';
 import back from '../assets/icons/back2.svg';
-import {useNavigate} from 'react-router-dom';
+import {Link} from 'react-router-dom';
+import PostActionMenu from '@components/post/PostActionMenu';
 
-const PostResumeHeader = ({onClick}) => {
-  const navigate = useNavigate();
-
+const PostResumeHeader = ({
+  isPost = false,
+  isAuthor,
+  postId,
+  handlePostUpdate,
+  handlePostClose,
+}) => {
   return (
     <header className='bg-white w-full h-16 px-6 flex items-center relative z-50 justify-between shadow-box md:shadow-none *:cursor-pointer md:hidden'>
-      <img
-        className='w-5 h-5'
-        onClick={() => navigate(-1)}
-        src={back}
-        alt='뒤로가기'
-      />
-      <img
-        onClick={() => onClick()}
-        className='w-6 h-6'
-        src={verticalEllipsis}
-        alt='메뉴'
+      <Link to={isPost ? '/posts' : -1}>
+        <img className='w-5 h-5' src={back} alt='뒤로가기' />
+      </Link>
+      <PostActionMenu
+        isAuthor={isAuthor}
+        postId={postId}
+        handlePostUpdate={handlePostUpdate}
+        handlePostClose={handlePostClose}
       />
     </header>
   );

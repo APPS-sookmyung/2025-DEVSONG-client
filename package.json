@@ -19,7 +19,9 @@
     "react-markdown": "^10.1.0",
     "react-responsive": "^10.0.1",
     "react-router-dom": "^7.7.0",
+    "remark-breaks": "^4.0.0",
     "remark-gfm": "^4.0.1",
+    "remove-markdown": "^0.6.3",
     "tailwindcss": "^4.1.11"
   },
   "devDependencies": {

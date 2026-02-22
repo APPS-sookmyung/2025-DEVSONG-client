@@ -1,0 +1,16 @@
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
+import remarkBreaks from 'remark-breaks';
+import React from 'react';
+
+const ContentPreview = ({children}) => {
+  return (
+    <div className={`prose max-w-none overflow-y-scroll`}>
+      <ReactMarkdown remarkPlugins={[remarkGfm, remarkBreaks]} breaks>
+        {children}
+      </ReactMarkdown>
+    </div>
+  );
+};
+
+export default React.memo(ContentPreview);

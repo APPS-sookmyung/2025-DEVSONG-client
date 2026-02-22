@@ -12,6 +12,7 @@ import Chat from './pages/Chat';
 import MyPage from './pages/MyPage';
 import Home from './pages/Home';
 import GithubRanking from './pages/GithubRanking';
+import BOJRanking from './pages/BOJRanking';
 import Post from './pages/Post';
 import Resume from './pages/Resume';
 import PostForm from './pages/PostForm';
@@ -22,14 +23,15 @@ const App = () => {
     createRoutesFromElements(
       <>
         <Route path='/' element={<RootLayout />}>
-          <Route index element={<Home />} />
+          <Route index element={<Login />} />
           <Route path='posts' element={<MainBoard />} />
-          <Route path='login' element={<Login />} />
           <Route path='posts/write' element={<PostForm />} />
           <Route path='post/:id' element={<Post />} />
+          <Route path='home' element={<Home />} />
           <Route path='chat' element={<Chat />} />
           <Route path='my' element={<MyPage />} />
           <Route path='githubRanking' element={<GithubRanking />} />
+          <Route path='bojRanking' element={<BOJRanking />} />
           <Route path='resume' element={<Resume />} />
         </Route>
 

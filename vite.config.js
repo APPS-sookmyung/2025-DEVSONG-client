@@ -17,6 +17,10 @@ export default defineConfig({
       '@lib': path.resolve(__dirname, './src/lib'),
       '@pages': path.resolve(__dirname, './src/pages'),
       '@utils': path.resolve(__dirname, './src/utils'),
+      '@hooks': path.resolve(__dirname, './src/hooks'),
     },
+  },
+  server: {
+    host: '0.0.0.0',
   },
 });

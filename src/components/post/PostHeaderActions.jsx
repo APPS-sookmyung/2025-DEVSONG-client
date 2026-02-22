@@ -1,27 +1,27 @@
-import verticalEllipsis from '../../assets/icons/verticalEllipsisIcon.svg';
+import useGoBack from '@hooks/useGoBack';
 import back from '../../assets/icons/back_grey.svg';
-import {useNavigate} from 'react-router-dom';
+import PostActionMenu from './PostActionMenu';
 
-const PostHeaderActions = ({isAuthor}) => {
-  const navigate = useNavigate();
-
+const PostHeaderActions = ({
+  isAuthor,
+  postId,
+  handlePostUpdate,
+  handlePostClose,
+}) => {
+  const goBack = useGoBack('/posts');
   return (
-    <div
-      className={`hidden md:pb-5 md:flex md:justify-between *:md:bg-grey-01 *:rounded-sm *:cursor-pointet`}>
+    <div className='hidden md:pb-5 md:flex md:justify-between *:md:bg-grey-01 *:rounded-sm *:cursor-pointer'>
       <div
-        onClick={() => navigate(-1)}
+        onClick={() => goBack()}
         className='flex-center w-7 h-7 px-[5.5px] py-[10.5px] cursor-pointer'>
         <img src={back} alt='뒤로가기' />
       </div>
-      <div>
-        <img
-          className={`w-7 h-7 p-0.5 cursor-pointer ${
-            !isAuthor ? 'md:hidden' : ''
-          }`}
-          src={verticalEllipsis}
-          alt='메뉴'
-        />
-      </div>
+      <PostActionMenu
+        isAuthor={isAuthor}
+        postId={postId}
+        handlePostUpdate={handlePostUpdate}
+        handlePostClose={handlePostClose}
+      />
     </div>
   );
 };
