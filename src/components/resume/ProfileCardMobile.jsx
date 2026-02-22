@@ -10,7 +10,7 @@ export default function ProfileCardMobile({setIsModalOpen, user}) {
           <img
             src={user.profil}
             alt='프로필'
-            className='w-full h-full object-cover'
+            className='w-full h-full rounded-full object-cover'
           />
           <img
             src={whiteEditIcon}
