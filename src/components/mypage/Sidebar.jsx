@@ -1,95 +1,65 @@
-import React from 'react';
+import nextArrow from '@assets/icons/nextArrow.svg';
+import {MENU_OPTIONS} from './constant';
 
-import my from '../../assets/icons/my_profile.png';
-import editIcon from '../../assets/icons/my_write.png';
-import commentIcon from '../../assets/icons/comment.svg';
-import likedIcon from '../../assets/icons/heart.svg';
-import appliedIcon from '../../assets/icons/my_applied.png';
-import nextArrow from '../../assets/icons/nextArrow.svg';
-
-import myActive from '../../assets/icons/my_white.png';
-import editIconActive from '../../assets/icons/editIcon.svg';
-import commentIconActive from '../../assets/icons/comment.svg';
-import likedIconActive from '../../assets/icons/heart.svg';
-import appliedIconActive from '../../assets/icons/my_applied_active.png';
-
-const Sidebar = ({activeTab, setActiveTab}) => {
-  const menus = [
-    {
-      id: 'edit',
-      label: '프로필 수정',
-      icon: my,
-      activeIcon: myActive,
-    },
-    {
-      id: 'written',
-      label: '내가 쓴 글',
-      icon: editIcon,
-      activeIcon: editIconActive,
-    },
-    {
-      id: 'comments',
-      label: '댓글 단 글',
-      icon: commentIcon,
-      activeIcon: commentIconActive,
-    },
-    {
-      id: 'liked',
-      label: '좋아요한 글',
-      icon: likedIcon,
-      activeIcon: likedIconActive,
-    },
-    {
-      id: 'applied',
-      label: '지원한 글',
-      icon: appliedIcon,
-      activeIcon: appliedIconActive,
-    },
-  ];
-
+const Sidebar = ({
+  activeTab,
+  setActiveTab,
+  username = '김눈송',
+  studentId = '2520000',
+  major = '한국어문학부',
+}) => {
   return (
-    <div className='w-[280px] min-w-[280px] flex-shrink-0 h-fit bg-white rounded-[20px] p-[30px] shadow-box flex flex-col items-center'>
-      <div className='w-20 h-20 bg-[#4cd918] rounded-full mb-4'></div>
-      <h2 className='text-xl font-bold text-black-100 mb-1'>김눈송</h2>
-      <div className='text-sm text-black text-center mb-8 leading-relaxed'>
-        24학번
-        <br />
-        데이터사이언스전공
+    <section className='bg-white w-71 min-w-71 h-fit flex flex-col items-center shrink-0 rounded-2xl px-3.5 pb-4 pt-11 shadow-box'>
+      {/* 프로필 이미지 */}
+      <div className='w-20 h-20 bg-[#4cd918] rounded-full mb-4'>
+        {/* TODO: 프로필 이미지 */}
       </div>
 
-      <nav className='w-full flex flex-col gap-2.5'>
-        {menus.map((menu) => (
+      {/* 이름 */}
+      <h2 className='text-2xl font-bold text-black-100 mb-5'>{username}</h2>
+
+      {/* 학번과 전공*/}
+      <div className='text-lg/[28.8px] text-black font-medium text-center mb-9'>
+        <p>{studentId.slice(0, 2)}학번</p>
+        <p>{major}</p>
+      </div>
+
+      {/* 메뉴 옵션 */}
+      <nav className='w-full flex flex-col gap-2'>
+        {MENU_OPTIONS.map(({id, label, icon}) => (
           <button
-            key={menu.id}
-            onClick={() => setActiveTab(menu.id)}
+            key={id}
+            onClick={() => setActiveTab(id)}
             className={`
-              w-full flex justify-between items-center px-5 py-3 rounded-xl transition-colors duration-200
+              cursor-pointer w-full flex justify-between items-center px-3 py-2.5 rounded-xl transition-colors duration-150
               ${
-                activeTab === menu.id
+                activeTab === id
                   ? 'bg-main text-white'
                   : 'bg-grey-01 text-black hover:bg-grey-02'
               }
             `}>
             <div className='flex items-center gap-3 text-sm'>
               <img
-                src={activeTab === menu.id ? menu.activeIcon : menu.icon}
-                alt={menu.label}
-                className='w-5 h-5'
+                src={icon}
+                alt={label}
+                className={`w-5 h-5 ${
+                  activeTab === id ? 'brightness-0 invert' : 'stroke-black'
+                }`}
               />
-              <span>{menu.label}</span>
+              <span className='text-base font-medium'>{label}</span>
             </div>
 
             <img
               src={nextArrow}
               alt='arrow'
-              className={`w-5 h-5 pl-43${
-                activeTab === menu.id ? 'brightness-0 invert' : ''
+              className={`w-5 h-5 ${
+                activeTab === id ? 'brightness-0 invert' : ''
               }`}
             />
           </button>
         ))}
       </nav>
-    </div>
+    </section>
   );
 };
 

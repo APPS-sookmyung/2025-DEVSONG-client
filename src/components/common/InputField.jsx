@@ -17,7 +17,7 @@ const InputField = ({
       {
         <label className='text-black-100 block mb-2 font-semibold text-xs leading-5 md:text-base md:leading-6'>
           {label}
-          {required && <span className='pl-[2px] text-black-100'>*</span>}
+          {required && <span className='pl-0.5 text-black-100'>*</span>}
         </label>
       }
       <div className='flex items-center gap-2'>
