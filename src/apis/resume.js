@@ -1,29 +1,24 @@
-import axios from 'axios';
-
-const api = axios.create({
-  baseURL: '/api',
-});
-
-api.interceptors.request.use(
-  (config) => {
-    const token = localStorage.getItem('accessToken');
-
-    if (token) {
-      config.headers.Authorization = `Bearer ${token}`;
-    }
-    return config;
-  },
-  (error) => {
-    return Promise.reject(error);
-  }
-);
+import {privateApi} from '../axios/index';
 
 export const getResumeApi = async () => {
-  const response = await api.get('/user/me/resume');
+  const response = await privateApi.get('/user/me/resume');
   return response.data;
 };
 
 export const updateResumeApi = async (data) => {
-  const response = await api.post('/user/me/resume', data);
+  const response = await privateApi.post('/user/me/resume', data);
+  return response.data;
+};
+
+export const uploadProfileImageApi = async (file) => {
+  const formData = new FormData();
+  formData.append('image', file);
+
+  const response = await privateApi.post('/user/profile/upload', formData, {
+    headers: {
+      'Content-Type': 'multipart/form-data',
+    },
+  });
+
   return response.data;
 };

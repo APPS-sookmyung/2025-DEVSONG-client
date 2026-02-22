@@ -19,23 +19,23 @@ export default function InterestModal({
     '웹 백엔드',
     '모바일 프로그래밍',
     'Android',
-    'IOS',
+    'iOS',
     '게임 개발',
     '데이터 분석',
     'AI / 머신러닝',
-    '임베디드 / IOT',
+    '임베디드 / IoT',
     '블록체인',
     '알고리즘 / 자료구조',
     '네트워크 / 보안',
     '시스템 프로그래밍',
     '풀스택',
-    '운영체제 / 컴파일러',
-    'DB',
-    '스타트업 창업 / 취업',
+    'OS / 컴파일러',
+    '데이터베이스',
+    '스타트업',
     '연구 / 대학원',
-    '해커톤 / 공모전',
-    '오픈소스 기여',
-    'UX/UI',
+    '해커톤',
+    '오픈소스',
+    'UX / UI',
   ];
 
   const toggleInterest = (interest) => {
@@ -67,6 +67,7 @@ export default function InterestModal({
             onClick={handleClose}
           />
         </div>
+
         <div className='flex flex-wrap gap-2'>
           {allInterests.map((interest) => {
             const isSelected = selectedInterests.includes(interest);

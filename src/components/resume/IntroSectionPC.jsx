@@ -60,7 +60,7 @@ export default function IntroSectionPC({user, onUpdate}) {
               onClick={(e) => e.stopPropagation()}>
               <ContentEditor
                 content={content}
-                handleContentChange={handleContentChange}
+                onContentChange={handleContentChange}
                 isModal={true}
               />
 
