@@ -1,4 +1,4 @@
-import {signUp} from '@apis/login';
+import {signUp} from '@apis/auth';
 import Step1 from '@components/signup/Step1';
 import Step2 from '@components/signup/Step2';
 import Step3 from '@components/signup/Step3';
@@ -46,7 +46,8 @@ const Signup = () => {
       const response = await signUp(signUpForm);
       console.log('회원가입 성공:', response.data);
     } catch (error) {
-      console.error('로그인 실패:', error);
+      console.error('회원가입 실패:', error);
+      throw error;
     }
   };
 
