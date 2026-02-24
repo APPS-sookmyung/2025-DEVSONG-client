@@ -26,7 +26,7 @@ const Step2 = ({handleNextStep, handleDataEnter, signUpForm}) => {
           placeholder={'BOJ 핸들'}
         />
       </div>
-      <ActionsButton handleNextStep={handleNextStep} isDisabled={isDisabled} />
+      <ActionsButton handleNextStep={handleNextStep} handleSkip={handleNextStep} isDisabled={isDisabled} />
     </section>
   );
 };

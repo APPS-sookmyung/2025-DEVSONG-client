@@ -3,10 +3,20 @@ import notification from '../assets/icons/notificationIcon.svg';
 import signout from '../assets/icons/signoutIcon.svg';
 import Icon from '../components/icon/Icon';
 import {menuItems} from '../components/common';
-import {useLocation, NavLink, matchPath} from 'react-router-dom';
+import {useLocation, NavLink, useNavigate} from 'react-router-dom';
+import {useAuth} from '../context/AuthContext';
 
 const Header = () => {
   const currentPath = useLocation().pathname;
+  const navigate = useNavigate();
+  const {logout} = useAuth();
+
+  const handleLogout = () => {
+    if (window.confirm('로그아웃 하시겠습니까?')) {
+      logout();
+      navigate('/');
+    }
+  };
 
   return (
     <header>
@@ -40,7 +50,9 @@ const Header = () => {
             <li>
               <img src={notification} alt='알림' />
             </li>
-            <li className='hidden md:flex'>
+            <li
+              onClick={handleLogout}
+              className='cursor-pointer hidden md:flex'>
               <img src={signout} alt='로그아웃' />
             </li>
           </ul>

@@ -5,6 +5,8 @@ import nextArrow from '@assets/icons/nextArrow.svg';
 import backArrow from '@assets/icons/back2.svg';
 import InputField from '@components/common/InputField';
 import Button from '@components/common/Button';
+import {useNavigate} from 'react-router-dom';
+import {useAuth} from '../../context/AuthContext';
 
 const MobileMyPage = ({
   activeTab,
@@ -15,8 +17,17 @@ const MobileMyPage = ({
   studentId = '2412345',
   major = '데이터사이언스전공',
 }) => {
+  const navigate = useNavigate();
+  const {logout} = useAuth();
   const [mobileSection, setMobileSection] = useState('info'); // 'info' 또는 'storage'
   const isDetailView = mobileSection === 'storage' && activeTab !== 'edit'; // 상세 목록 보기 모드인지 확인
+
+  const handleLogout = () => {
+    if (window.confirm('로그아웃 하시겠습니까?')) {
+      logout();
+      navigate('/');
+    }
+  };
 
   // 뒤로가기 핸들러
   const handleBack = () => {
@@ -132,7 +143,11 @@ const MobileMyPage = ({
             <Button variant='tertiary' size='md' className='w-26.5'>
               저장
             </Button>
-            <Button variant='tertiary' size='md' className='w-26.5'>
+            <Button
+              onClick={handleLogout}
+              variant='tertiary'
+              size='md'
+              className='w-26.5'>
               로그아웃
             </Button>
           </div>

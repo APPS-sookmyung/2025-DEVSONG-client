@@ -23,6 +23,8 @@
   --color-grey-01: #f9f9f9;
   --color-grey-02: #f2f2f2;
   --color-background: #f9fafc;
+  --color-green: oklch(72.3% 0.219 149.579);
+  --color-red: #fb2c36;
 
   --shadow-box: 0 4px 40px 0 rgba(94, 94, 99, 0.1);
 }
