@@ -57,8 +57,7 @@ const Step1 = ({handleNextStep, handleDataEnter, signUpForm}) => {
     }
   };
 
-  const emailInputDisabled =
-    signUpForm.email.trim().length === 0 || emailSent || isSending;
+  const emailInputDisabled = signUpForm.email.trim().length === 0 || isSending;
 
   return (
     <section className='flex flex-col'>
@@ -83,7 +82,7 @@ const Step1 = ({handleNextStep, handleDataEnter, signUpForm}) => {
             required={true}
             placeholder={'이메일 아이디'}
             suffix={'@sookmyung.ac.kr'}
-            disabled={verifyEmail} // 인증 완료 후 수정 방지
+            disabled={emailSent} // 이메일 발송 후 수정 방지
           />
 
           {/* 이메일 인증 버튼 및 입력 필드 */}
@@ -111,7 +110,7 @@ const Step1 = ({handleNextStep, handleDataEnter, signUpForm}) => {
                 className='w-21.5 md:w-34.5 h-11.5 md:h-12.5 shrink-0'
                 disabled={emailCode.trim().length === 0 || verifyEmail}
                 onClick={handleVerifyCode}>
-                {emailSent ? '인증' : '인증 완료'}
+                {verifyEmail ? '인증 완료' : '인증'}
               </Button>
             </div>
           )}

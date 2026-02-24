@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import {useState} from 'react';
 import {Link, useNavigate} from 'react-router-dom';
 import logo from '../assets/images/logo.svg';
 import {login} from '../apis/auth';
@@ -71,9 +71,9 @@ const LoginPage = () => {
                 회원가입
               </Link>
               <span className='mx-4'>|</span>
-              <a href='#' className='hover:text-black-60 pointer-events-none'>
+              <span className='text-black-40 cursor-not-allowed'>
                 비밀번호 초기화
-              </a>
+              </span>
             </div>
 
             {/* 모바일용 버튼 */}
