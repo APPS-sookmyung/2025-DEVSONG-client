@@ -6,10 +6,12 @@ import backArrow from '@assets/icons/back2.svg';
 import InputField from '@components/common/InputField';
 import Button from '@components/common/Button';
 import {getMyProfile, updateMyProfile} from '../../apis/mypage';
+import {useNavigate} from 'react-router-dom';
 
 const MobileMyPage = ({activeTab, setActiveTab, posts}) => {
   const [mobileSection, setMobileSection] = useState('info'); // 'info' 또는 'storage'
   const isDetailView = mobileSection === 'storage' && activeTab !== 'edit'; // 상세 목록 보기 모드인지 확인
+  const navigate = useNavigate();
 
   const [form, setForm] = useState({
     profileImageUrl: null,
@@ -74,6 +76,14 @@ const MobileMyPage = ({activeTab, setActiveTab, posts}) => {
     }
   };
 
+  const handleLogout = () => {
+    if (window.confirm('로그아웃 하시겠습니까?')) {
+      localStorage.removeItem('accessToken');
+      navigate('/');
+    }
+  };
+
+  // 뒤로가기 핸들러
   const handleBack = () => {
     setActiveTab('edit');
     setMobileSection('storage');
@@ -193,7 +203,11 @@ const MobileMyPage = ({activeTab, setActiveTab, posts}) => {
               onClick={handleSave}>
               저장
             </Button>
-            <Button variant='tertiary' size='md' className='w-26.5'>
+            <Button
+              variant='tertiary'
+              size='md'
+              className='w-26.5'
+              onClick={handleLogout}>
               로그아웃
             </Button>
           </div>
