@@ -3,13 +3,23 @@ import submit from '../../assets/icons/submitIcon.svg';
 
 const CommentBar = ({onAddComment}) => {
   const [comment, setComment] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const onSubmitHandler = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
-    if (!comment.trim()) return;
+    if (!comment.trim() || isSubmitting) return;
 
-    onAddComment(comment);
-    setComment('');
+    setIsSubmitting(true);
+    try {
+      const success = await onAddComment(comment);
+      if (success) {
+        setComment('');
+      }
+    } catch (error) {
+      console.error('댓글 추가 실패:', error);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -17,7 +27,7 @@ const CommentBar = ({onAddComment}) => {
       <form
         autoComplete='off'
         className='bg-grey-01 mt-2.5 mb-6.5 md:my-9 w-full flex gap-1 py-3 pl-3.5 rounded-lg'
-        onSubmit={onSubmitHandler}>
+        onSubmit={onSubmit}>
         <input
           className='flex-1 text-sm leading-[22.4px] focus:outline-none'
           name='comment'
@@ -26,7 +36,10 @@ const CommentBar = ({onAddComment}) => {
           value={comment}
           onChange={(e) => setComment(e.target.value)}
         />
-        <button type='submit' className='cursor-pointer'>
+        <button
+          type='submit'
+          className='cursor-pointer'
+          disabled={isSubmitting}>
           <img className='pr-2' src={submit} alt='제출' />
         </button>
       </form>

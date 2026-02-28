@@ -4,7 +4,7 @@ import PostContent from '@components/post/PostContent';
 import PostActions from '@components/post/PostActions';
 import CommentSection from '@components/post/CommentSection';
 import CommentBar from '@components/post/CommentBar';
-import {useEffect, useState} from 'react';
+import {useCallback, useEffect, useState} from 'react';
 import {createComment, getPostDetail} from '@apis/posts';
 import {useNavigate, useParams} from 'react-router-dom';
 import PostLayout from '@components/post/PostLayout';
@@ -15,20 +15,29 @@ const Post = () => {
 
   const [postData, setPostData] = useState({});
   const [comments, setComments] = useState([]);
+  const [activeCommentId, setActiveCommentId] = useState(null); // 선택된 댓글
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  // 선택된 댓글
-  const [activeCommentId, setActiveCommentId] = useState(null);
+  // 게시글 상세 정보 불러오기
+  const fetchPostDetail = useCallback(async () => {
+    setIsLoading(true);
+    setError(null);
 
-  const fetchPostDetail = async () => {
-    const response = await getPostDetail(id);
-
-    setPostData(response.data);
-    setComments(response.data.comments);
-  };
+    try {
+      const response = await getPostDetail(id);
+      setPostData(response.data);
+      setComments(response.data.comments ?? []);
+    } catch (error) {
+      setError('게시글 정보를 불러오는 데 실패했습니다.');
+    } finally {
+      setIsLoading(false);
+    }
+  }, [id]);
 
   useEffect(() => {
     fetchPostDetail();
-  }, []);
+  }, [fetchPostDetail]);
 
   // 댓글 선택/해제 토글 핸들러
   const handleActiveComment = (commentId) => {
@@ -45,7 +54,6 @@ const Post = () => {
     try {
       const response = await createComment(postData.id, content, parentId);
       const newComment = response.data;
-      console.log('댓글이 생성되었습니다:', response.data);
 
       setComments((prevComments) => {
         // 일반 댓글
@@ -69,13 +77,15 @@ const Post = () => {
         comment: (prev.comment || 0) + 1,
       }));
 
-      console.log('댓글이 생성되었습니다:', comments);
       setActiveCommentId(null);
+      return true;
     } catch (error) {
       console.error('댓글을 생성하지 못했습니다.', error);
+      return false;
     }
   };
 
+  // 좋아요 토글 핸들러
   const handleLikeToggle = (isLiked, nextCount) => {
     setPostData((prev) => ({
       ...prev,
@@ -84,56 +94,77 @@ const Post = () => {
     }));
   };
 
-  const handlePostUpdate = () => {
-    localStorage.setItem('isUpdate', true);
-    localStorage.setItem('id', postData.id);
-    localStorage.setItem('title', postData.title);
-    localStorage.setItem('content', postData.content);
-    localStorage.setItem('category', postData.category);
+  // 게시글 마감 핸들러
+  const handlePostClose = () => {
+    setPostData((prev) => ({
+      ...prev,
+      closed: true,
+    }));
+  };
 
-    navigate('/posts/write'); // 글쓰기 페이지로 이동
+  const handlePostApply = () => {
+    setPostData((prev) => ({
+      ...prev,
+      applied: true,
+    }));
+  };
+
+  // 게시글 수정 페이지로 이동
+  const handlePostUpdate = () => {
+    navigate('/posts/write', {
+      state: {
+        isUpdate: true,
+        id: postData.id,
+        title: postData.title,
+        content: postData.content,
+        category: postData.category,
+      },
+    });
   };
 
   return (
     <>
-      <PostResumeHeader isPost={true} />
+      <PostResumeHeader
+        isPost={true}
+        isAuthor={postData.author}
+        postId={postData.id}
+        handlePostUpdate={handlePostUpdate}
+        handlePostClose={handlePostClose}
+      />
       <PostLayout>
-        <div className='relative flex flex-col w-full h-screen *:px-6 *:md:px-11'>
-          <section className='flex flex-col flex-1 min-h-0 md:h-269.5 overflow-y-auto py-4 md:py-9 scroll-smooth'>
-            <div></div>
-            <PostHeader
-              postId={postData.id}
-              title={postData.title}
-              author={postData.username}
-              major={postData.major}
-              studentId={postData.studentId}
-              category={postData.category}
-              closed={postData.closed}
-              isAuthor={postData.author}
-              handlePostUpdate={handlePostUpdate}
-            />
-            <PostContent content={postData.content} />
-            <PostActions
-              postId={postData.id}
-              isAuthor={postData.author}
-              applied={postData.applied}
-              liked={postData.liked}
-              likeCount={postData.likeCount}
-              comment={postData.comment}
-              onLikeToggle={handleLikeToggle}
-            />
-            <section className='flex-1'>
-              <CommentSection
+        {isLoading && (
+          <p className='p-10 text-center text-black-40'>로딩 중...</p>
+        )}
+        {error && <p className='p-10 text-center text-red-500'>{error}</p>}
+        {!isLoading && !error && (
+          <div className='relative flex flex-col w-full h-screen *:px-6 *:md:px-11'>
+            <section className='flex flex-col flex-1 min-h-0 md:h-269.5 overflow-y-auto py-4 md:py-9 scroll-smooth'>
+              <PostHeader
+                {...postData}
                 isAuthor={postData.author}
-                comments={comments}
-                onToggle={handleActiveComment}
-                activeCommentId={activeCommentId}
+                handlePostUpdate={handlePostUpdate}
+                handlePostClose={handlePostClose}
               />
+              <PostContent content={postData.content} />
+              <PostActions
+                {...postData}
+                isAuthor={postData.author}
+                onLikeToggle={handleLikeToggle}
+                handlePostApply={handlePostApply}
+              />
+              <section className='flex-1'>
+                <CommentSection
+                  isAuthor={postData.author}
+                  comments={comments}
+                  onToggle={handleActiveComment}
+                  activeCommentId={activeCommentId}
+                />
+              </section>
             </section>
-          </section>
 
-          <CommentBar onAddComment={onAddComment} />
-        </div>
+            <CommentBar onAddComment={onAddComment} />
+          </div>
+        )}
       </PostLayout>
     </>
   );

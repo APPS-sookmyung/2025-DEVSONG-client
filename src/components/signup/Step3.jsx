@@ -27,6 +27,7 @@ const Step3 = ({handleNextStep, toggleOptionValue, signUpForm}) => {
         />
         <ActionsButton
           handleNextStep={isInterestStep ? handleNextStep : handleNextMobile}
+          handleSkip={isInterestStep ? handleNextStep : handleNextMobile}
           isDisabled={isInterestStep ? interestNotSelected : stackNotSelected}
         />
       </>
@@ -51,6 +52,7 @@ const Step3 = ({handleNextStep, toggleOptionValue, signUpForm}) => {
         />
         <ActionsButton
           handleNextStep={handleNextStep}
+          handleSkip={handleNextStep}
           isDisabled={interestNotSelected || stackNotSelected}
         />
       </div>
