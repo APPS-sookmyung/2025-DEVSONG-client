@@ -137,8 +137,8 @@ const Post = () => {
         )}
         {error && <p className='p-10 text-center text-red-500'>{error}</p>}
         {!isLoading && !error && (
-          <div className='relative flex flex-col w-full  *:px-6 *:md:px-11'>
-            <section className='flex flex-col flex-1 min-h-svh md:max-h-250 overflow-y-auto py-4 md:py-9 scroll-smooth'>
+          <div className='custom-scrollbar relative flex flex-col w-full *:px-6 *:md:px-11'>
+            <section className='flex flex-col flex-1 min-h-svh md:max-h-250 overflow-y-auto py-4 md:py-7 md:mt-5 md:mx-3 scroll-smooth'>
               <PostHeader
                 {...postData}
                 isAuthor={postData.author}

@@ -33,6 +33,21 @@
   @apply flex justify-center items-center;
 }
 
+@utility custom-scrollbar {
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: #d1d1d2;
+    border-radius: 5px;
+  }
+
+  ::-webkit-scrollbar-button {
+    display: none;
+  }
+}
+
 .label-style {
   @apply rounded-sm font-semibold px-2 py-[3px] text-[8px] md:text-xs;
 }
