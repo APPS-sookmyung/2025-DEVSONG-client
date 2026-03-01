@@ -1,14 +1,15 @@
 import React from 'react';
-// import profil from '../../assets/image/profil.svg';
 import whiteEditIcon from '../../assets/icons/whiteEditIcon.svg';
+import messageIcon from '../../assets/icons/messageIcon.svg';
 
 export default function ProfileCardMobile({
   setIsModalOpen,
   user,
   isApplicantResume,
+  onChatStart,
 }) {
   return (
-    <div className='flex justify-between items-center bg-white p-4 rounded-xl shadow m-4'>
+    <div className='relative flex justify-between items-center bg-white p-4 rounded-xl shadow m-4'>
       <div className='flex items-center'>
         <div className='relative w-14 h-14 rounded-full'>
           <img
@@ -43,6 +44,14 @@ export default function ProfileCardMobile({
           </div>
         </div>
       </div>
+      {isApplicantResume && (
+        <img
+          src={messageIcon}
+          alt='메시지'
+          onClick={onChatStart}
+          className='absolute w-7 h-7 cursor-pointer top-4 right-4'
+        />
+      )}
     </div>
   );
 }

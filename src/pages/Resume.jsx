@@ -13,16 +13,28 @@ import ProfileEditModal from '../components/resume/ProfileEditModal';
 import {resume as dummyResume} from '../components/resume/dummy';
 import {getResumeApi, updateResumeApi} from '../apis/resume.js';
 import PostResumeHeader from '../layout/PostResumeHeader';
-import {useParams} from 'react-router-dom';
+import {useNavigate, useParams} from 'react-router-dom';
 import {getApplicantResume} from '../apis/posts';
+import {createChatRoom} from '../apis/chat';
 
 export default function Resume() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isStackModalOpen, setIsStackModalOpen] = useState(false);
   const [isInterestModalOpen, setIsInterestModalOpen] = useState(false);
   const [user, setUser] = useState(dummyResume);
+  const navigate = useNavigate();
   const {postId, applicantId} = useParams();
   const isApplicantResume = !!applicantId;
+
+  const handleChatStart = async () => {
+    try {
+      const response = await createChatRoom(applicantId);
+      const {roomId} = response.data;
+      navigate(`/chat/${roomId}`);
+    } catch (error) {
+      console.error('채팅방 연결 실패:', error);
+    }
+  };
 
   const TECH_STACK_MAP = {
     FLUTTER: 'Flutter',
@@ -174,6 +186,7 @@ export default function Resume() {
           setIsModalOpen={setIsModalOpen}
           user={user}
           isApplicantResume={isApplicantResume}
+          onChatStart={handleChatStart}
         />
         <IntroSectionMobile
           user={user}
@@ -197,6 +210,7 @@ export default function Resume() {
           setIsModalOpen={setIsModalOpen}
           user={user}
           isApplicantResume={isApplicantResume}
+          onChatStart={handleChatStart}
         />
         <div className='flex-1 space-y-4 mt-15'>
           <IntroSectionPC
