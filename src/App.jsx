@@ -35,6 +35,7 @@ const App = () => {
             <Route path='githubRanking' element={<GithubRanking />} />
             <Route path='bojRanking' element={<BOJRanking />} />
             <Route path='resume' element={<Resume />} />
+            <Route path='/resume/:postId/:applicantId' element={<Resume />} />
           </Route>
         </Route>
 

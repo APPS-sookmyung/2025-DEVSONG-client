@@ -83,3 +83,11 @@ export const closeApply = async (postId) => {
 
   return response;
 };
+
+// 지원자 이력서 조회
+export const getApplicantResume = async (postId, applicantId) => {
+  const response = await privateApi.get(
+    `/post/${postId}/applicants/${applicantId}/resume`
+  );
+  return response.data;
+};

@@ -1,6 +1,7 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import editIcon from '@assets/icons/editIcon.svg';
 import Button from '@components/common/Button';
+import {getMyProfile, updateMyProfile} from '../../apis/mypage';
 
 const ProfileEdit = ({
   username = '김눈송',
@@ -8,6 +9,43 @@ const ProfileEdit = ({
   studentId = '2412345',
   major = '데이터사이언스전공',
 }) => {
+  const [form, setForm] = useState({
+    username,
+    email,
+    studentId,
+    major,
+  });
+
+  useEffect(() => {
+    const fetchProfile = async () => {
+      try {
+        const data = await getMyProfile();
+        setForm(data);
+      } catch (err) {
+        console.error('프로필 조회 실패:', err);
+      }
+    };
+
+    fetchProfile();
+  }, []);
+
+  const handleChange = (key, value) => {
+    setForm((prev) => ({
+      ...prev,
+      [key]: value,
+    }));
+  };
+
+  const handleSave = async () => {
+    try {
+      const updated = await updateMyProfile(form);
+      setForm(updated);
+      // alert('수정 완료되었습니다.');
+    } catch (err) {
+      console.error('프로필 수정 실패:', err);
+    }
+  };
+
   return (
     <div className='w-full max-w-133.5 h-fit bg-white rounded-3xl p-6 shadow-box'>
       {/* 제목과 아이콘 */}
@@ -18,14 +56,34 @@ const ProfileEdit = ({
 
       {/* 입력 필드 */}
       <div className='w-full flex flex-col gap-4'>
-        <InputGroup label='이름' value={username} />
-        <InputGroup label='이메일' value={email} />
-        <InputGroup label='학번' value={studentId} />
-        <InputGroup label='전공' value={major} />
+        <InputGroup
+          label='이름'
+          value={form.username}
+          onChange={(v) => handleChange('username', v)}
+        />
+        <InputGroup
+          label='이메일'
+          value={form.email}
+          onChange={(v) => handleChange('email', v)}
+        />
+        <InputGroup
+          label='학번'
+          value={form.studentId}
+          onChange={(v) => handleChange('studentId', v)}
+        />
+        <InputGroup
+          label='전공'
+          value={form.major}
+          onChange={(v) => handleChange('major', v)}
+        />
       </div>
 
       <div className='mt-8 flex justify-end'>
-        <Button variant='primary' size='md' className='w-30 shrink-0'>
+        <Button
+          variant='primary'
+          size='md'
+          className='w-30 shrink-0'
+          onClick={handleSave}>
           저장
         </Button>
       </div>
@@ -33,7 +91,7 @@ const ProfileEdit = ({
   );
 };
 
-const InputGroup = ({label, value}) => {
+const InputGroup = ({label, value, onChange}) => {
   const id = `field-${label}`;
 
   return (
@@ -46,7 +104,8 @@ const InputGroup = ({label, value}) => {
       <input
         id={id}
         type='text'
-        defaultValue={value}
+        value={value || ''}
+        onChange={(e) => onChange(e.target.value)}
         className='flex-1 bg-grey-01 rounded-lg px-4 py-3 text-sm outline-none focus:ring-1 focus:ring-main transition-shadow'
       />
     </div>
