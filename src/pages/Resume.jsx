@@ -13,12 +13,16 @@ import ProfileEditModal from '../components/resume/ProfileEditModal';
 import {resume as dummyResume} from '../components/resume/dummy';
 import {getResumeApi, updateResumeApi} from '../apis/resume.js';
 import PostResumeHeader from '../layout/PostResumeHeader';
+import {useParams} from 'react-router-dom';
+import {getApplicantResume} from '../apis/posts';
 
 export default function Resume() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isStackModalOpen, setIsStackModalOpen] = useState(false);
   const [isInterestModalOpen, setIsInterestModalOpen] = useState(false);
   const [user, setUser] = useState(dummyResume);
+  const {postId, applicantId} = useParams();
+  const isApplicantResume = !!applicantId;
 
   const TECH_STACK_MAP = {
     FLUTTER: 'Flutter',
@@ -89,7 +93,15 @@ export default function Resume() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const data = await getResumeApi();
+      let data;
+
+      if (postId && applicantId) {
+        // 지원자 이력서 조회
+        data = await getApplicantResume(postId, applicantId);
+      } else {
+        // 내 이력서 조회
+        data = await getResumeApi();
+      }
 
       const uiStackList = (data.techStack || []).map(
         (enumVal) => TECH_STACK_MAP[enumVal] || enumVal
@@ -118,7 +130,7 @@ export default function Resume() {
     };
 
     fetchData();
-  }, []);
+  }, [postId, applicantId]);
 
   const handleUpdate = async (updates) => {
     try {
@@ -158,29 +170,49 @@ export default function Resume() {
     <div className='p-0 space-y-4 max-w-6xl mx-auto'>
       <div className='block md:hidden'>
         <PostResumeHeader />
-        <ProfileCardMobile setIsModalOpen={setIsModalOpen} user={user} />
-        <IntroSectionMobile user={user} onUpdate={handleUpdate} />
+        <ProfileCardMobile
+          setIsModalOpen={setIsModalOpen}
+          user={user}
+          isApplicantResume={isApplicantResume}
+        />
+        <IntroSectionMobile
+          user={user}
+          onUpdate={handleUpdate}
+          isApplicantResume={isApplicantResume}
+        />
         <StackSectionMobile
           setIsStackModalOpen={setIsStackModalOpen}
           user={user}
+          isApplicantResume={isApplicantResume}
         />
         <InterestSectionMobile
           setIsInterestModalOpen={setIsInterestModalOpen}
           user={user}
+          isApplicantResume={isApplicantResume}
         />
       </div>
 
       <div className='hidden md:flex gap-6 mr-40 ml-40'>
-        <ProfileCardPC setIsModalOpen={setIsModalOpen} user={user} />
+        <ProfileCardPC
+          setIsModalOpen={setIsModalOpen}
+          user={user}
+          isApplicantResume={isApplicantResume}
+        />
         <div className='flex-1 space-y-4 mt-15'>
-          <IntroSectionPC user={user} onUpdate={handleUpdate} />
+          <IntroSectionPC
+            user={user}
+            onUpdate={handleUpdate}
+            isApplicantResume={isApplicantResume}
+          />
           <StackSectionPC
             setIsStackModalOpen={setIsStackModalOpen}
             user={user}
+            isApplicantResume={isApplicantResume}
           />
           <InterestSectionPC
             setIsInterestModalOpen={setIsInterestModalOpen}
             user={user}
+            isApplicantResume={isApplicantResume}
           />
         </div>
       </div>
