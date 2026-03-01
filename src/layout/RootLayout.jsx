@@ -25,7 +25,10 @@ const RootLayout = () => {
     pathname.startsWith(path)
   );
 
-  const noMobileNavbar = matchPath('/post/:id', pathname) !== null;
+  const noMobileNavbar =
+    matchPath('/post/:id', pathname) !== null ||
+    matchPath('/chat/:roomId', pathname) !== null ||
+    pathname === '/chat';
 
   if (hideLayout) {
     // 게시글 작성, 로그인 페이지: 헤더, 풋터, navbar X

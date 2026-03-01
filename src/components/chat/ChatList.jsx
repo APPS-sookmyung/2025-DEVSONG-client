@@ -2,12 +2,12 @@ import ChatBox from './ChatBox';
 
 const ChatList = ({selectedId, rooms, onSelect}) => {
   return (
-    <section className='flex flex-col gap-3 w-full overflow-y-auto md:pr-2'>
+    <section className='flex flex-col gap-3 w-full overflow-y-auto'>
       <h1 className='bg-white md:hidden text-center py-6 font-semibold text-base/normal'>
         채팅 목록
       </h1>
 
-      <div className='px-6 flex flex-col gap-3 md:w-full md:px-0'>
+      <div className='px-6 pb-28 md:pb-0 flex flex-col gap-3 md:w-full md:px-0'>
         {rooms.map((room) => (
           <ChatBox
             key={room.roomId}

@@ -9,10 +9,6 @@ const Chat = () => {
   const navigate = useNavigate();
   const [rooms, setRooms] = useState([]);
 
-  const containerHeight = roomId
-    ? 'h-dvh md:h-200'
-    : 'h-[calc(100dvh-3rem)] md:h-200';
-
   useEffect(() => {
     const fetchRooms = async () => {
       try {
@@ -30,7 +26,7 @@ const Chat = () => {
 
   return (
     <div
-      className={`bg-grey-01 w-full max-w-6xl mx-auto ${containerHeight} md:my-12 md:rounded-3xl shadow-box overflow-hidden`}>
+      className={`bg-grey-01 w-full lg:max-w-5xl md:max-w-3xl mx-auto h-svh md:h-200 md:my-12 md:rounded-3xl shadow-box overflow-hidden`}>
       <div className='flex gap-4 h-full md:p-6'>
         <section
           className={`${
