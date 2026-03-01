@@ -137,8 +137,8 @@ const Post = () => {
         )}
         {error && <p className='p-10 text-center text-red-500'>{error}</p>}
         {!isLoading && !error && (
-          <div className='relative flex flex-col w-full h-screen *:px-6 *:md:px-11'>
-            <section className='flex flex-col flex-1 min-h-0 md:h-269.5 overflow-y-auto py-4 md:py-9 scroll-smooth'>
+          <div className='relative flex flex-col w-full  *:px-6 *:md:px-11'>
+            <section className='flex flex-col flex-1 min-h-svh md:max-h-250 overflow-y-auto py-4 md:py-9 scroll-smooth'>
               <PostHeader
                 {...postData}
                 isAuthor={postData.author}
@@ -152,7 +152,7 @@ const Post = () => {
                 onLikeToggle={handleLikeToggle}
                 handlePostApply={handlePostApply}
               />
-              <section className='flex-1'>
+              <section className='flex flex-col flex-1 min-h-75'>
                 <CommentSection
                   isAuthor={postData.author}
                   comments={comments}
