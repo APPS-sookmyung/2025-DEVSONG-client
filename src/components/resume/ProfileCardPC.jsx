@@ -2,7 +2,11 @@ import React from 'react';
 // import profil from '../../assets/image/profil.svg';
 import messageIcon from '../../assets/icons/messageIcon.svg';
 
-export default function ProfileCardPC({setIsModalOpen, user}) {
+export default function ProfileCardPC({
+  setIsModalOpen,
+  user,
+  isApplicantResume,
+}) {
   return (
     <div className='bg-white p-6 rounded-3xl shadow w-full md:w-1/3 flex flex-col items-center mt-15 md:h-95 lg:h-90'>
       <img
@@ -32,11 +36,13 @@ export default function ProfileCardPC({setIsModalOpen, user}) {
           </span>
         </div>
       </div>
-      <button
-        onClick={() => setIsModalOpen(true)}
-        className='mt-4 sm:px-10 py-2 md:px-8 lg:px-20 text-white text-sm rounded-lg cursor-pointer bg-main whitespace-nowrap'>
-        프로필 수정
-      </button>
+      {!isApplicantResume && (
+        <button
+          onClick={() => setIsModalOpen(true)}
+          className='mt-4 sm:px-10 py-2 md:px-8 lg:px-20 text-white text-sm rounded-lg cursor-pointer bg-main whitespace-nowrap'>
+          프로필 수정
+        </button>
+      )}
     </div>
   );
 }

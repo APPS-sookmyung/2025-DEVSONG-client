@@ -1,14 +1,16 @@
 import {useEffect, useState} from 'react';
+import {useNavigate} from 'react-router-dom';
 import ModalLayout from '../common/ModalLayout';
 import {getApplicants} from '@apis/posts';
 
 const Applicants = ({postId}) => {
   const [applicants, setApplicants] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchApplicants = async () => {
       try {
-        const response = await getApplicants(postId); // API 호출
+        const response = await getApplicants(postId);
         setApplicants(response.data);
       } catch (error) {
         console.error('지원자 목록 불러오기 실패', error);
@@ -20,10 +22,15 @@ const Applicants = ({postId}) => {
 
   return (
     <ModalLayout width={'w-36.5'}>
-      {applicants?.map(({username, major, studentId}, index) => (
-        <div key={index}>
+      {applicants?.map(({userId, username, major, studentId}, index) => (
+        <div
+          key={index}
+          onClick={() => navigate(`/resume/${postId}/${userId}`)}
+          className='cursor-pointer'>
           <h3 className='text-sm font-semibold leading-[22.4px]'>{username}</h3>
-          <p className='text-[10px] font-medium text-black-60'>{`${major}전공 ${studentId}학번`}</p>
+          <p className='text-[10px] font-medium text-black-60'>
+            {`${major}전공 ${studentId}학번`}
+          </p>
         </div>
       ))}
     </ModalLayout>

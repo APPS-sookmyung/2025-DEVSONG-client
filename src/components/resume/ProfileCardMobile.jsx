@@ -2,7 +2,11 @@ import React from 'react';
 // import profil from '../../assets/image/profil.svg';
 import whiteEditIcon from '../../assets/icons/whiteEditIcon.svg';
 
-export default function ProfileCardMobile({setIsModalOpen, user}) {
+export default function ProfileCardMobile({
+  setIsModalOpen,
+  user,
+  isApplicantResume,
+}) {
   return (
     <div className='flex justify-between items-center bg-white p-4 rounded-xl shadow m-4'>
       <div className='flex items-center'>
@@ -12,12 +16,14 @@ export default function ProfileCardMobile({setIsModalOpen, user}) {
             alt='프로필'
             className='w-full h-full rounded-full object-cover'
           />
-          <img
-            src={whiteEditIcon}
-            alt='프로필 편집'
-            onClick={() => setIsModalOpen(true)}
-            className='absolute bottom-0 right-0 w-4 h-4 rounded-full cursor-pointer bg-main'
-          />
+          {!isApplicantResume && (
+            <img
+              src={whiteEditIcon}
+              alt='프로필 편집'
+              onClick={() => setIsModalOpen(true)}
+              className='absolute bottom-0 right-0 w-4 h-4 rounded-full cursor-pointer bg-main'
+            />
+          )}
         </div>
         <div className='ml-4'>
           <div className='font-semibold text-lg'>{user.username}</div>
