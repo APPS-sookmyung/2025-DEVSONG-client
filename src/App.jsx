@@ -31,6 +31,7 @@ const App = () => {
             <Route path='post/:id' element={<Post />} />
             <Route path='home' element={<Home />} />
             <Route path='chat' element={<Chat />} />
+            <Route path='chat/:roomId' element={<Chat />} />
             <Route path='my' element={<MyPage />} />
             <Route path='githubRanking' element={<GithubRanking />} />
             <Route path='bojRanking' element={<BOJRanking />} />

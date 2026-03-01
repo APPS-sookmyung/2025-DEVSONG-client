@@ -4,7 +4,9 @@ import {menuItems} from '../components/common';
 
 const Navbar = () => {
   const currentPath = useLocation().pathname;
-  const noNavBar = matchPath('/post/:id', currentPath) !== null; // 게시물 페이지인지 확인
+  const noNavBar =
+    matchPath('/post/:id', currentPath) !== null ||
+    matchPath('/chat/:chatId', currentPath) !== null;
 
   return (
     <div

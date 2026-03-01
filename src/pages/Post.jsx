@@ -3,11 +3,11 @@ import PostResumeHeader from '../layout/PostResumeHeader';
 import PostContent from '@components/post/PostContent';
 import PostActions from '@components/post/PostActions';
 import CommentSection from '@components/post/CommentSection';
+import MessageInput from '@components/common/MessageInput';
 import {useCallback, useEffect, useState} from 'react';
 import {createComment, getPostDetail} from '@apis/posts';
 import {useNavigate, useParams} from 'react-router-dom';
 import PostLayout from '@components/post/PostLayout';
-import MessageInput from '@components/common/MessageInput';
 
 const Post = () => {
   const {id} = useParams(); // post id 받아오기
@@ -161,6 +161,7 @@ const Post = () => {
                 />
               </section>
             </section>
+
             <MessageInput onSubmitMessage={onAddComment} />
           </div>
         )}
