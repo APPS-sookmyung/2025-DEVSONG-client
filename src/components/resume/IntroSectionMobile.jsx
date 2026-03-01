@@ -5,7 +5,11 @@ import ContentEditor from '../postForm/ContentEditor';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 
-export default function IntroSectionMobile({user, onUpdate}) {
+export default function IntroSectionMobile({
+  user,
+  onUpdate,
+  isApplicantResume,
+}) {
   const [isEditing, setIsEditing] = useState(false);
   const [content, setContent] = useState(user.introduction || '');
 
@@ -33,12 +37,14 @@ export default function IntroSectionMobile({user, onUpdate}) {
       <div className='bg-white p-4 rounded-xl shadow m-4 h-50 overflow-y-auto'>
         <div className='flex justify-between items-center mb-2'>
           <span className='font-semibold'>자기소개</span>
-          <img
-            src={editIcon}
-            alt='편집'
-            className='w-6 h-6 cursor-pointer'
-            onClick={handleEditClick}
-          />
+          {!isApplicantResume && (
+            <img
+              src={editIcon}
+              alt='편집'
+              className='w-6 h-6 cursor-pointer'
+              onClick={handleEditClick}
+            />
+          )}
         </div>
 
         <div className='prose text-sm'>
