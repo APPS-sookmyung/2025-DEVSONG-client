@@ -1,6 +1,7 @@
 import RecruitLabel from '../common/RecruitLabel';
 import CategoryLabel from '../common/CategoryLabel';
 import PostHeaderActions from './PostHeaderActions';
+import {NON_RECRUIT_CATEGORIES} from '../constants/categories';
 
 const PostHeader = ({
   id,
@@ -25,7 +26,9 @@ const PostHeader = ({
       />
       <div className='flex items-center justify-start gap-3 pb-2.25 md:pb-4'>
         <CategoryLabel category={category} />
-        <RecruitLabel closed={closed} />
+        {!NON_RECRUIT_CATEGORIES.includes(category) && (
+          <RecruitLabel closed={closed} />
+        )}
       </div>
       <h1 className='font-bold text-lg pb-3 leading-none md:text-2xl md:pb-3.25'>
         {title}
