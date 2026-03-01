@@ -6,14 +6,18 @@ export default function ProfileCardPC({
   setIsModalOpen,
   user,
   isApplicantResume,
+  onChatStart,
 }) {
   return (
     <div className='bg-white p-6 rounded-3xl shadow w-full md:w-1/3 flex flex-col items-center mt-15 md:h-95 lg:h-90'>
-      <img
-        src={messageIcon}
-        alt='메시지'
-        className='w-8 h-8 ml-50 md:ml-25 lg:ml-50'
-      />
+      {isApplicantResume && (
+        <img
+          src={messageIcon}
+          alt='메시지'
+          onClick={onChatStart}
+          className='w-8 h-8 ml-50 md:ml-25 lg:ml-50 cursor-pointer'
+        />
+      )}
       <div className='relative w-24 h-24 rounded-full'>
         <img
           src={user.profil}

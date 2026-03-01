@@ -1,9 +1,10 @@
 import React from 'react';
 import Navbar from './Navbar';
-import {Outlet, useLocation} from 'react-router-dom';
+import {Outlet, useLocation, matchPath} from 'react-router-dom';
 import Header from './Header';
 import Footer from './Footer';
 import ScrollToTop from '@components/common/ScrollToTop';
+
 // 모바일 헤더 레이아웃이 따로 있는 경우
 const NO_DEFAULT_MOBILE_HEADER_PATHS = [
   '/post',
@@ -23,6 +24,11 @@ const RootLayout = () => {
   const noMobileHeader = NO_DEFAULT_MOBILE_HEADER_PATHS.some((path) =>
     pathname.startsWith(path)
   );
+
+  const noMobileNavbar =
+    matchPath('/post/:id', pathname) !== null ||
+    matchPath('/chat/:roomId', pathname) !== null ||
+    pathname === '/chat';
 
   if (hideLayout) {
     // 게시글 작성, 로그인 페이지: 헤더, 풋터, navbar X
@@ -46,7 +52,7 @@ const RootLayout = () => {
           <Header />
         </header>
 
-        <main className='flex-1 mb-12'>
+        <main className={`flex-1 ${noMobileNavbar ? '' : 'mb-28'} md:mb-12`}>
           <Outlet />
         </main>
 

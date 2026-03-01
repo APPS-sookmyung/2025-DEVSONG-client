@@ -6,9 +6,11 @@ import Button from '../common/Button';
 import Applicants from './Applicants';
 import {applyToPost, likePost} from '@apis/posts';
 import useClickOutside from '@hooks/useClickOutside';
+import {NON_RECRUIT_CATEGORIES} from '../constants/categories';
 
 const PostActions = ({
   id,
+  category,
   isAuthor,
   applied,
   liked,
@@ -75,25 +77,27 @@ const PostActions = ({
           {comment}
         </span>
       </div>
-      <div ref={applicantsRef} className='relative'>
-        {isAuthor ? (
-          <Button
-            variant='primary'
-            disabled={applyCount === 0}
-            onClick={onCheckApplicantsClick}>
-            지원자 확인 ({applyCount})
-          </Button>
-        ) : (
-          <Button
-            variant='primary'
-            disabled={applied || closed}
-            className={`${applied ? 'bg-main/70' : ''}`}
-            onClick={onApplyClick}>
-            {applied ? '지원완료' : '지원하기'}
-          </Button>
-        )}
-        {isAuthor && isOpen && <Applicants postId={id} />}
-      </div>
+      {!NON_RECRUIT_CATEGORIES.includes(category) && (
+        <div ref={applicantsRef} className='relative'>
+          {isAuthor ? (
+            <Button
+              variant='primary'
+              disabled={applyCount === 0}
+              onClick={onCheckApplicantsClick}>
+              지원자 확인 ({applyCount})
+            </Button>
+          ) : (
+            <Button
+              variant='primary'
+              disabled={applied || closed}
+              className={`${applied ? 'bg-main/70' : ''}`}
+              onClick={onApplyClick}>
+              {applied ? '지원완료' : '지원하기'}
+            </Button>
+          )}
+          {isAuthor && isOpen && <Applicants postId={id} />}
+        </div>
+      )}
     </div>
   );
 };

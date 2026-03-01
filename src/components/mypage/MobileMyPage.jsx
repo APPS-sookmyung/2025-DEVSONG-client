@@ -7,11 +7,13 @@ import InputField from '@components/common/InputField';
 import Button from '@components/common/Button';
 import {getMyProfile, updateMyProfile} from '../../apis/mypage';
 import {useNavigate} from 'react-router-dom';
+import {useAuth} from '../../context/AuthContext';
 
 const MobileMyPage = ({activeTab, setActiveTab, posts}) => {
   const [mobileSection, setMobileSection] = useState('info'); // 'info' 또는 'storage'
   const isDetailView = mobileSection === 'storage' && activeTab !== 'edit'; // 상세 목록 보기 모드인지 확인
   const navigate = useNavigate();
+  const {logout} = useAuth();
 
   const [form, setForm] = useState({
     profileImageUrl: null,
@@ -78,7 +80,7 @@ const MobileMyPage = ({activeTab, setActiveTab, posts}) => {
 
   const handleLogout = () => {
     if (window.confirm('로그아웃 하시겠습니까?')) {
-      localStorage.removeItem('accessToken');
+      logout();
       navigate('/');
     }
   };
@@ -111,7 +113,7 @@ const MobileMyPage = ({activeTab, setActiveTab, posts}) => {
 
   /* 마이페이지 메인 */
   return (
-    <div className='w-full h-full bg-background flex flex-col gap-6 mb-20'>
+    <div className='w-full h-full bg-background flex flex-col gap-6'>
       <h1 className='bg-white py-6 text-center font-semibold text-base'>
         내 프로필
       </h1>
