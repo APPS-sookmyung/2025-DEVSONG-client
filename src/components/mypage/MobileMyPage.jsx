@@ -1,26 +1,87 @@
 import PostList from '@components/common/PostList';
 import {MENU_OPTIONS} from './constant';
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 import nextArrow from '@assets/icons/nextArrow.svg';
 import backArrow from '@assets/icons/back2.svg';
 import InputField from '@components/common/InputField';
 import Button from '@components/common/Button';
+import {getMyProfile, updateMyProfile} from '../../apis/mypage';
 import {useNavigate} from 'react-router-dom';
-import {useAuth} from '../../context/AuthContext';
 
-const MobileMyPage = ({
-  activeTab,
-  setActiveTab,
-  dummyPosts,
-  username = '김눈송',
-  email = 'snow@sookmyung.ac.kr',
-  studentId = '2412345',
-  major = '데이터사이언스전공',
-}) => {
-  const navigate = useNavigate();
-  const {logout} = useAuth();
+const MobileMyPage = ({activeTab, setActiveTab, posts}) => {
   const [mobileSection, setMobileSection] = useState('info'); // 'info' 또는 'storage'
   const isDetailView = mobileSection === 'storage' && activeTab !== 'edit'; // 상세 목록 보기 모드인지 확인
+  const navigate = useNavigate();
+
+  const [form, setForm] = useState({
+    profileImageUrl: null,
+    username: '김눈송',
+    studentId: '2412345',
+    major: '데이터사이언스전공',
+    email: 'snow@sookmyung.ac.kr',
+  });
+
+  /* 프로필 조회 */
+  useEffect(() => {
+    if (mobileSection !== 'info') return;
+
+    const fetchProfile = async () => {
+      try {
+        const data = await getMyProfile();
+
+        setForm({
+          profileImageUrl: data.profileImageUrl,
+          username: data.username ?? '',
+          studentId: String(data.studentId ?? ''),
+          major: data.major ?? '',
+          email: data.email ?? '',
+        });
+      } catch (err) {
+        console.error('프로필 조회 실패:', err);
+      }
+    };
+
+    fetchProfile();
+  }, [mobileSection]);
+
+  const handleChange = (key, value) => {
+    setForm((prev) => ({
+      ...prev,
+      [key]: value,
+    }));
+  };
+
+  const handleSave = async () => {
+    try {
+      const updated = await updateMyProfile({
+        profileImageUrl: form.profileImageUrl,
+        username: form.username,
+        studentId: Number(form.studentId),
+        major: form.major,
+        email: form.email,
+      });
+
+      setForm({
+        profileImageUrl: updated.profileImageUrl,
+        username: updated.username ?? '',
+        studentId: String(updated.studentId ?? ''),
+        major: updated.major ?? '',
+        email: updated.email ?? '',
+      });
+
+      // alert('수정이 완료되었습니다.');
+    } catch (err) {
+      console.error('프로필 수정 실패:', err);
+      // alert('수정에 실패했습니다.');
+    }
+  };
+
+  const handleLogout = () => {
+    if (window.confirm('로그아웃 하시겠습니까?')) {
+      localStorage.removeItem('accessToken');
+      navigate('/');
+    }
+  };
 
   const handleLogout = () => {
     if (window.confirm('로그아웃 하시겠습니까?')) {
@@ -48,11 +109,8 @@ const MobileMyPage = ({
           </h2>
         </div>
 
-        <div className='bg-background h-full py-4 px-6  mb-20'>
-          {activeTab === 'written' && <PostList posts={dummyPosts} />}
-          {activeTab === 'comments' && <PostList posts={dummyPosts} />}
-          {activeTab === 'liked' && <PostList posts={dummyPosts} />}
-          {activeTab === 'applied' && <PostList posts={dummyPosts} />}
+        <div className='bg-background h-full py-4 px-6 mb-20'>
+          <PostList posts={posts} />
         </div>
       </div>
     );
@@ -68,15 +126,20 @@ const MobileMyPage = ({
       {/* 상단 프로필 카드 */}
       <div className='px-6'>
         <div className='bg-white rounded-xl p-4 shadow-box flex items-center gap-4'>
-          <div className='w-14 h-14 bg-[#4cd918] rounded-full shrink-0'>
-            {/* Todo: 프로필 이미지 */}
-          </div>
-
+          {form.profileImageUrl ? (
+            <img
+              src={form.profileImageUrl}
+              alt='프로필 이미지'
+              className='w-14 h-14 rounded-full object-cover shrink-0'
+            />
+          ) : (
+            <div className='w-14 h-14 bg-[#4cd918] rounded-full shrink-0' />
+          )}{' '}
           {/* 이름, 학번, 전공 정보 */}
           <div className='flex flex-col gap-1'>
-            <h2 className='text-base/normal font-bold'>{username}</h2>
+            <h2 className='text-base font-bold'>{form.username}</h2>
             <p className='text-sm/[22.4px] font-medium'>
-              {major} {studentId.slice(0, 2)}학번
+              {form.major} {form.studentId.slice(0, 2)}학번
             </p>
           </div>
         </div>
@@ -101,7 +164,7 @@ const MobileMyPage = ({
           onClick={() => setMobileSection('storage')}
           className={`flex-1 py-1.25 text-center text-sm/[22.4px] font-medium transition-all ${
             mobileSection === 'storage'
-              ? 'bg-white '
+              ? 'bg-white'
               : 'bg-grey-02 text-black-60'
           }`}>
           보관함
@@ -115,32 +178,36 @@ const MobileMyPage = ({
           <div className='bg-white flex flex-col gap-6 p-4 rounded-xl shadow-box'>
             <InputField
               label='이름'
-              value={username}
-              onChange={() => {}}
+              value={form.username}
+              onChange={(e) => handleChange('username', e.target.value)}
               className='h-9 text-sm'
             />
             <InputField
               label='이메일'
-              value={email}
+              value={form.email}
+              onChange={(e) => handleChange('email', e.target.value)}
               className='h-9 text-sm'
-              readOnly
             />
             <InputField
               label='학번'
-              value={studentId}
-              onChange={() => {}}
+              value={form.studentId}
+              onChange={(e) => handleChange('studentId', e.target.value)}
               className='h-9 text-sm'
             />
             <InputField
               label='전공'
-              value={major}
-              onChange={() => {}}
+              value={form.major}
+              onChange={(e) => handleChange('major', e.target.value)}
               className='h-9 text-sm'
             />
           </div>
 
           <div className='flex justify-end gap-2'>
-            <Button variant='tertiary' size='md' className='w-26.5'>
+            <Button
+              variant='tertiary'
+              size='md'
+              className='w-26.5'
+              onClick={handleSave}>
               저장
             </Button>
             <Button
