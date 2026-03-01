@@ -113,7 +113,7 @@ const MobileMyPage = ({activeTab, setActiveTab, posts}) => {
 
   /* 마이페이지 메인 */
   return (
-    <div className='w-full h-full bg-background flex flex-col gap-6 mb-20'>
+    <div className='w-full h-full bg-background flex flex-col gap-6'>
       <h1 className='bg-white py-6 text-center font-semibold text-base'>
         내 프로필
       </h1>
