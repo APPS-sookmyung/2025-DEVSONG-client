@@ -36,7 +36,9 @@ const MainBoard = () => {
   // 카테고리 변경 핸들러
   const handleCategoryChange = (next) => {
     const category = !next || next === DEFAULT_CATEGORY ? undefined : next;
-    const closed = NON_RECRUIT_CATEGORIES.includes(next) ? undefined : searchParams.get('closed') ?? undefined;
+    const closed = NON_RECRUIT_CATEGORIES.includes(next)
+      ? undefined
+      : searchParams.get('closed') ?? undefined;
     updateParams({category, closed, page: 1});
   };
 
@@ -100,11 +102,16 @@ const MainBoard = () => {
 
       <section className='flex items-center gap-3 md:gap-7 mb-4 w-86 md:mb-6 lg:mb-8 md:w-149 lg:w-212'>
         <SortSelector handleSortChange={handleSortChange} />
-        {!NON_RECRUIT_CATEGORIES.includes(category) && (
+        <div
+          className={
+            NON_RECRUIT_CATEGORIES.includes(category)
+              ? 'invisible pointer-events-none'
+              : ''
+          }>
           <RecruitmentStatusFilter
             handleRecruitmentStatusChange={handleRecruitmentStatusChange}
           />
-        )}
+        </div>
         <WriteButton />
       </section>
 
