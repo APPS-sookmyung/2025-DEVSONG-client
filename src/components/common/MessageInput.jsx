@@ -4,7 +4,7 @@ import submit from '../../assets/icons/submitIcon.svg';
 const VARIANTS = {
   post: {
     wrapper:
-      'fixed bottom-0 md:static w-full bg-white md:bg-transparent shadow-box md:shadow-none',
+      'fixed bottom-0 md:static w-full bg-white md:bg-transparent shadow-box md:shadow-none md:border-t md:border-grey-02',
     form: 'bg-grey-01 mt-2.5 mb-6.5 md:my-9 w-full flex gap-1 py-3 pl-3.5 rounded-lg',
     placeholder: '댓글을 입력하세요.',
   },
