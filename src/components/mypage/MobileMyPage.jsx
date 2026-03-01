@@ -7,11 +7,13 @@ import InputField from '@components/common/InputField';
 import Button from '@components/common/Button';
 import {getMyProfile, updateMyProfile} from '../../apis/mypage';
 import {useNavigate} from 'react-router-dom';
+import {useAuth} from '../../context/AuthContext';
 
 const MobileMyPage = ({activeTab, setActiveTab, posts}) => {
   const [mobileSection, setMobileSection] = useState('info'); // 'info' 또는 'storage'
   const isDetailView = mobileSection === 'storage' && activeTab !== 'edit'; // 상세 목록 보기 모드인지 확인
   const navigate = useNavigate();
+  const {logout} = useAuth();
 
   const [form, setForm] = useState({
     profileImageUrl: null,
@@ -73,13 +75,6 @@ const MobileMyPage = ({activeTab, setActiveTab, posts}) => {
     } catch (err) {
       console.error('프로필 수정 실패:', err);
       // alert('수정에 실패했습니다.');
-    }
-  };
-
-  const handleLogout = () => {
-    if (window.confirm('로그아웃 하시겠습니까?')) {
-      localStorage.removeItem('accessToken');
-      navigate('/');
     }
   };
 
