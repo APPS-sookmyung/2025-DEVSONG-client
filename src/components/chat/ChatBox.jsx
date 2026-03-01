@@ -1,3 +1,5 @@
+import profile from '@assets/image/profil.svg';
+
 const ChatBox = ({
   username,
   latestMessage,
@@ -18,7 +20,7 @@ const ChatBox = ({
       <div className='flex-1 flex items-center gap-4 min-w-0'>
         <div className='w-12 h-12 md:w-15 md:h-15 rounded-full bg-grey-02 shrink-0 overflow-hidden'>
           <img
-            src={profileImg || 'src/assets/image/profil.svg'}
+            src={profileImg || profile}
             alt='profile'
             className='w-full h-full object-cover'
           />
