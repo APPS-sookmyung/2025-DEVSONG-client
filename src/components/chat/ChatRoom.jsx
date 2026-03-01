@@ -64,11 +64,13 @@ const ChatRoom = ({roomId, onBack, otherName, otherUserId}) => {
   return (
     <section className='flex-1 flex flex-col w-full rounded-[20px] bg-white overflow-hidden'>
       <header className='flex items-center justify-between p-5 border-b border-grey-01'>
-        <button onClick={onBack} className='md:hidden text-xl'>
+        <button onClick={onBack} className='cursor-pointer md:hidden text-xl'>
           <img src={back} alt='back' className='w-5 h-5' />
         </button>
         <div className='text-center flex-1 flex flex-col items-center gap-1'>
-          <h2 className='font-bold text-base md:text-xl'>{otherName ?? ''}</h2>
+          <h2 className='font-bold text-base md:text-lg lg:text-xl'>
+            {otherName ?? ''}
+          </h2>
         </div>
       </header>
 

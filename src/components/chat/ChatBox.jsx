@@ -9,11 +9,11 @@ const ChatBox = ({
   return (
     <div
       onClick={onClick}
-      className={`cursor-pointer transition-all flex w-full h-20 md:h-24 bg-white rounded-xl md:rounded-[20px] px-5 items-center border 
+      className={`cursor-pointer shadow-box md:shadow-none transition-all flex w-full h-20 md:h-22 lg:h-24 bg-white rounded-xl md:rounded-[20px] px-5 items-center border 
       ${
         isActive
           ? 'border-main-60 bg-main-5'
-          : 'border-transparent hover:bg-grey-01'
+          : 'border-transparent hover:border-grey-02'
       }`}>
       <div className='flex-1 flex items-center gap-4 min-w-0'>
         <div className='w-12 h-12 md:w-15 md:h-15 rounded-full bg-grey-02 shrink-0 overflow-hidden'>
@@ -25,10 +25,10 @@ const ChatBox = ({
         </div>
 
         <div className='flex flex-col flex-1 min-w-0'>
-          <h2 className='font-semibold text-sm md:text-lg truncate'>
+          <h2 className='font-semibold text-sm md:text-base lg:text-lg truncate'>
             {username}
           </h2>
-          <p className='text-black-60 text-xs md:text-base truncate'>
+          <p className='text-black-60 text-xs md:text-sm lg:text-base truncate'>
             {latestMessage}
           </p>
         </div>
