@@ -5,7 +5,7 @@ import React from 'react';
 
 const ContentPreview = ({children}) => {
   return (
-    <div className={`prose max-w-none overflow-y-scroll`}>
+    <div className={`prose max-w-none h-full overflow-y-scroll`}>
       <ReactMarkdown remarkPlugins={[remarkGfm, remarkBreaks]} breaks>
         {children}
       </ReactMarkdown>
