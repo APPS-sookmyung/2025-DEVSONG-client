@@ -83,13 +83,6 @@ const MobileMyPage = ({activeTab, setActiveTab, posts}) => {
     }
   };
 
-  const handleLogout = () => {
-    if (window.confirm('로그아웃 하시겠습니까?')) {
-      logout();
-      navigate('/');
-    }
-  };
-
   // 뒤로가기 핸들러
   const handleBack = () => {
     setActiveTab('edit');
