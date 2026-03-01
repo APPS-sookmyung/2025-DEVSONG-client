@@ -1,15 +1,27 @@
 import {useEffect, useState, useRef} from 'react';
 import MessageInput from '@components/common/MessageInput';
 import back from '@assets/icons/back.svg';
+import document from '@assets/icons/document.svg';
 import {Client} from '@stomp/stompjs';
 import SockJS from 'sockjs-client';
 import {getChatMessages} from '@apis/chat';
+import {useNavigate} from 'react-router-dom';
 
 const ChatRoom = ({roomId, onBack, otherName, otherUserId}) => {
   const [messages, setMessages] = useState([]);
   const client = useRef(null);
   const scrollRef = useRef();
   const token = localStorage.getItem('accessToken');
+  const navigate = useNavigate();
+
+  const roomCreatedDate =
+    messages.length > 0
+      ? new Date(messages[0].createdAt).toLocaleDateString('ko-KR', {
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric',
+        })
+      : null;
 
   // 과거 메세지 로드 및 웹소켓 연결
   useEffect(() => {
@@ -64,7 +76,7 @@ const ChatRoom = ({roomId, onBack, otherName, otherUserId}) => {
   return (
     <section className='flex-1 flex flex-col w-full rounded-[20px] bg-white overflow-hidden'>
       <header className='flex items-center justify-between p-5 border-b border-grey-01'>
-        <button onClick={onBack} className='cursor-pointer md:hidden text-xl'>
+        <button onClick={onBack} className='cursor-pointer md:hidden'>
           <img src={back} alt='back' className='w-5 h-5' />
         </button>
         <div className='text-center flex-1 flex flex-col items-center gap-1'>
@@ -72,11 +84,19 @@ const ChatRoom = ({roomId, onBack, otherName, otherUserId}) => {
             {otherName ?? ''}
           </h2>
         </div>
+        <button
+          className='flex-center w-7 h-7 rounded-sm cursor-pointer bg-grey-01'
+          onClick={() => navigate(`/resume/0/${otherUserId}`)}>
+          <img src={document} alt='이력서' className='w-6 h-6' />
+        </button>
       </header>
 
       <div
         className='flex-1 overflow-y-auto p-6 flex flex-col gap-4'
         ref={scrollRef}>
+        {roomCreatedDate && (
+          <p className='text-center text-xs text-black-40'>{roomCreatedDate}</p>
+        )}
         {messages.map((msg) => {
           const isMine = msg.senderId !== otherUserId;
           return (
