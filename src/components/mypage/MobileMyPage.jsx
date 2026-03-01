@@ -83,6 +83,13 @@ const MobileMyPage = ({activeTab, setActiveTab, posts}) => {
     }
   };
 
+  const handleLogout = () => {
+    if (window.confirm('로그아웃 하시겠습니까?')) {
+      logout();
+      navigate('/');
+    }
+  };
+
   // 뒤로가기 핸들러
   const handleBack = () => {
     setActiveTab('edit');
@@ -204,10 +211,10 @@ const MobileMyPage = ({activeTab, setActiveTab, posts}) => {
               저장
             </Button>
             <Button
+              onClick={handleLogout}
               variant='tertiary'
               size='md'
-              className='w-26.5'
-              onClick={handleLogout}>
+              className='w-26.5'>
               로그아웃
             </Button>
           </div>
